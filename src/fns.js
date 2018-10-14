@@ -44,15 +44,17 @@ const once = (fn: Function): Function => {
   }
 }
 
-const debounce = (fn, duration, isImmediate) => {
+const debounce = (fn: Function, duration: number = 0, isImmediate: boolean) => {
   let timerId = null
 
   const cancel = () => {
-    clearTimeout(timerId)
-    timerId = null
+    if (timerId !== null) {
+      clearTimeout(timerId)
+      timerId = null
+    }
   }
 
-  return function debounced (...args) {
+  return function debounced (...args: Array<*>) {
     const run = fn.bind(this, ...args)
 
     if (isImmediate && timerId === null) {
@@ -69,15 +71,17 @@ const debounce = (fn, duration, isImmediate) => {
   }
 }
 
-const throttle = (fn, duration, isImmediate) => {
+const throttle = (fn: Function, duration: number = 0, isImmediate: boolean) => {
   let timerId = null
 
   const cancel = () => {
-    clearTimeout(timerId)
-    timerId = null
+    if (timerId !== null) {
+      clearTimeout(timerId)
+      timerId = null
+    }
   }
 
-  return function throttled (...args) {
+  return function throttled (...args: Array<*>) {
     if (timerId !== null) return
 
     const run = fn.bind(this, ...args)
