@@ -1,0 +1,17 @@
+toc:
+  - name: Arrays
+    children:
+      - toArr
+      - flatten
+
+  - name: Checks
+    children:
+      - is
+      - isPlainObj
+      - isEmpty
+      - isNil
+      - isNum
+      - isStr
+      - isBool
+      - isFn
+      - isArr
