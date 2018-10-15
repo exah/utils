@@ -1,4 +1,4 @@
-# Utils
+# 🎒 Utils
 
 > Small set of function that helps me everyday
 
@@ -12,7 +12,7 @@ $ yarn add @exah/utils
 
 ## 📖 [API](./docs/api.md)
 
-## Related
+## 🔗 Related
 
 ---
 
