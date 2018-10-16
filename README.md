@@ -1,6 +1,6 @@
 # 🎒 Utils
 
-> Small set of function that helps me everyday
+> Small set of functions that helps me everyday
 
 
 ## 📦 Install
