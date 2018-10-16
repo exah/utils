@@ -37,6 +37,16 @@
     -   [isArr][33]
         -   [Parameters][34]
         -   [Examples][35]
+-   [Objects][36]
+    -   [toObj][37]
+        -   [Parameters][38]
+        -   [Examples][39]
+    -   [mapObj][40]
+        -   [Parameters][41]
+        -   [Examples][42]
+    -   [filterObj][43]
+        -   [Parameters][44]
+        -   [Examples][45]
 
 ## Arrays
 
@@ -62,7 +72,7 @@ toArr(null) // → []
 toArr([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
 ```
 
-Returns **[Array][36]&lt;any>** 
+Returns **[Array][46]&lt;any>** 
 
 ### flatten
 
@@ -70,7 +80,7 @@ Flattens multidimensional arrays.
 
 #### Parameters
 
--   `arr` **[Array][36]&lt;any>** 
+-   `arr` **[Array][46]&lt;any>** 
 
 #### Examples
 
@@ -81,7 +91,7 @@ flatten([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
 flatten([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]) // → [ 1, 2, 3, 4, 5, 6, 7 ]
 ```
 
-Returns **[Array][36]&lt;any>** 
+Returns **[Array][46]&lt;any>** 
 
 ## Checks
 
@@ -94,7 +104,7 @@ Checks if `val` has prototype of an `Object`. (Alternative to `instanceof`)
 
 #### Parameters
 
--   `obj` **[Object][37]** — Base `Object`
+-   `obj` **[Object][47]** — Base `Object`
 -   `val` **any** — Value to test
 
 #### Examples
@@ -127,7 +137,7 @@ const isNum = is(Number)
 isNum(1) // → true
 ```
 
-Returns **[boolean][38]** 
+Returns **[boolean][48]** 
 
 ### isPlainObj
 
@@ -152,7 +162,7 @@ function Fn () {}
 isPlainObj(new Fn()) // → false
 ```
 
-Returns **[boolean][38]** 
+Returns **[boolean][48]** 
 
 ### isEmpty
 
@@ -160,7 +170,7 @@ Check if `val` is empty. Works with `Array`, `Objects`, `Map`, `Set` and `null`
 
 #### Parameters
 
--   `val` **[Object][37]** 
+-   `val` **[Object][47]** 
 
 #### Examples
 
@@ -283,6 +293,80 @@ isArr([]) // → true
 isArr({ length: 3 }) // → false
 ```
 
+## Objects
+
+
+
+
+### toObj
+
+Convert an array to object, by default works like "merge".
+
+#### Parameters
+
+-   `arr` **[Array][46]&lt;any>** 
+-   `fn` **[Function][49]**  (optional, default `identity`)
+
+#### Examples
+
+```javascript
+import { toObj } from '@exah/utils'
+
+toObj([ { color: 'red' }, { size: 'big' } ])
+// → { color: 'red', size: 'big' }
+
+toObj({ a: 'b' })
+// → { a: 'b' }
+
+toObj([ [ 'a', 'b' ] ], ([ key, value ]) => ({ [key]: value }))
+// → { a: 'b' }
+```
+
+Returns **[Object][47]** 
+
+### mapObj
+
+Like `Array#map`, but for objects.
+Useful for renaming keys or converting values.
+
+#### Parameters
+
+-   `fn` **[Function][49]** 
+-   `obj` **[Object][47]** 
+
+#### Examples
+
+```javascript
+import { mapObj } from '@exah/utils'
+
+mapObj((key, value, index, obj) => [ value, key ], { a: 'b' })
+// → { b: 'a' }
+
+const swap = mapObj((key, value) => [ value, key ])
+swap({ a: 'b' })
+// → { b: 'a' }
+```
+
+### filterObj
+
+Filter object by key or value.
+
+#### Parameters
+
+-   `fn`  
+-   `obj`  
+
+#### Examples
+
+```javascript
+filterObj((key) => key !== 'a', { a: 'b' })
+// → {}
+
+const withoutZeros = filterObj((key, value) => value !== 0)
+withoutZeros({ a: 0, b: 1, c: 3, d: 4 })
+// → { b: 1, c: 3, d: 4 }
+```
+
 [1]: #arrays
 
 [2]: #toarr
@@ -353,8 +437,30 @@ isArr({ length: 3 }) // → false
 
 [35]: #examples-10
 
-[36]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[36]: #objects
 
-[37]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[37]: #toobj
 
-[38]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[38]: #parameters-11
+
+[39]: #examples-11
+
+[40]: #mapobj
+
+[41]: #parameters-12
+
+[42]: #examples-12
+
+[43]: #filterobj
+
+[44]: #parameters-13
+
+[45]: #examples-13
+
+[46]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[47]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+[48]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+
+[49]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function

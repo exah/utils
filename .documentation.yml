@@ -15,3 +15,9 @@ toc:
       - isBool
       - isFn
       - isArr
+
+  - name: Objects
+    children:
+      - toObj
+      - mapObj
+      - filterObj
