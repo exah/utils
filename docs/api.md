@@ -137,14 +137,9 @@ Convert an array to object, by default works like "merge".
 ```javascript
 import { toObj } from '@exah/utils'
 
-toObj([ { color: 'red' }, { size: 'big' } ])
-// → { color: 'red', size: 'big' }
-
-toObj({ a: 'b' })
-// → { a: 'b' }
-
-toObj([ [ 'a', 'b' ] ], ([ key, value ]) => ({ [key]: value }))
-// → { a: 'b' }
+toObj({ a: 'b' }) // → { a: 'b' }
+toObj([ { color: 'red' }, { size: 'big' } ]) // → { color: 'red', size: 'big' }
+toObj([ [ 'a', 'b' ] ], ([ key, value ]) => ({ [key]: value })) // → { a: 'b' }
 ```
 
 Returns **[Object][73]** 
@@ -164,12 +159,10 @@ Useful for renaming keys or converting values.
 ```javascript
 import { mapObj } from '@exah/utils'
 
-mapObj((key, value, index, obj) => [ value, key ], { a: 'b' })
-// → { b: 'a' }
+mapObj((key, value, index, obj) => [ value, key ], { a: 'b' }) // → { b: 'a' }
 
 const swap = mapObj((key, value) => [ value, key ])
-swap({ a: 'b' })
-// → { b: 'a' }
+swap({ a: 'b' }) // → { b: 'a' }
 ```
 
 ### filterObj
@@ -184,12 +177,12 @@ Filter object by key or value.
 #### Examples
 
 ```javascript
-filterObj((key) => key !== 'a', { a: 'b' })
-// → {}
+import { filterObj } from '@exah/utils'
+
+filterObj((key) => key !== 'a', { a: 'b' }) // → {}
 
 const withoutZeros = filterObj((key, value) => value !== 0)
-withoutZeros({ a: 0, b: 1, c: 3, d: 4 })
-// → { b: 1, c: 3, d: 4 }
+withoutZeros({ a: 0, b: 1, c: 3, d: 4 }) // → { b: 1, c: 3, d: 4 }
 ```
 
 ### path
@@ -204,6 +197,8 @@ Get object value by path (string or as argument list)
 #### Examples
 
 ```javascript
+import { path } from '@exah/utils'
+
 const target = {
   a: { b: { c: { d: 1 } } },
   e: [ 2 ]
@@ -233,6 +228,8 @@ Return function that always returns value
 #### Examples
 
 ```javascript
+import { always } from '@exah/utils'
+
 always(1)() // → 1
 always({})() // → {}
 
@@ -249,6 +246,8 @@ Function that always returns `true`
 #### Examples
 
 ```javascript
+import { T } from '@exah/utils'
+
 T() // → true
 ```
 
@@ -261,6 +260,8 @@ Function that always returns `false`
 #### Examples
 
 ```javascript
+import { F } from '@exah/utils'
+
 F() // → false
 ```
 
@@ -273,6 +274,8 @@ Function that do nothing
 #### Examples
 
 ```javascript
+import { noop } from '@exah/utils'
+
 noop() // → undefined
 ```
 
@@ -289,6 +292,8 @@ Function that returns its value
 #### Examples
 
 ```javascript
+import { identity } from '@exah/utils'
+
 identity(1) // → 1
 identity(state) // → state
 ```
@@ -306,6 +311,8 @@ Right-to-left function composition
 #### Examples
 
 ```javascript
+import { compose } from '@exah/utils'
+
 const a = (val) => val + 1
 const b = (val) => val / 2
 const c = (val) => val * 10
@@ -326,6 +333,8 @@ Left-to-right function composition
 #### Examples
 
 ```javascript
+import { pipe } from '@exah/utils'
+
 const a = (val) => val + 1
 const b = () => val / 2
 const c = (val) => val * 10

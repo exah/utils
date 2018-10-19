@@ -8,6 +8,7 @@ import { isArr } from './logic'
  * @example
  * import { toArr } from '@exah/utils'
  *
+ * @example
  * toArr(1) // → [ 1 ]
  * toArr(null) // → []
  * toArr([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
@@ -21,6 +22,7 @@ export const toArr = (value: any): Array<*> => value == null ? [] : [].concat(va
  * @example
  * import { flatten } from '@exah/utils'
  *
+ * @example
  * flatten([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
  * flatten([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]) // → [ 1, 2, 3, 4, 5, 6, 7 ]
  */

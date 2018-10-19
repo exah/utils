@@ -11,6 +11,7 @@ import { curryN } from './fns'
  * @example
  * import { is } from '@exah/utils'
  *
+ * @example
  * function Fn () {}
  * const Obj = {}
  *
@@ -51,6 +52,7 @@ export { curriedIs as is }
  * @example
  * import { isFn } from '@exah/utils'
  *
+ * @example
  * isFn(() => ()) // → true
  * isFn(1) // → false
  */
@@ -63,6 +65,7 @@ export const isFn = (val: *): %checks => typeof val === 'function'
  * @example
  * import { isBool } from '@exah/utils'
  *
+ * @example
  * isBool(true) // → true
  * isBool(false) // → true
  * isBool(0) // → false
@@ -82,6 +85,7 @@ export const isNaN = (val: *) => val !== val // eslint-disable-line no-self-comp
  * @example
  * import { isNum } from '@exah/utils'
  *
+ * @example
  * isNum(1) // → true
  * isNum(10) // → true
  * isNum(NaN) // → false
@@ -95,6 +99,7 @@ export const isNum = (val: *): %checks => !isNaN(val) && typeof val === 'number'
  * @example
  * import { isStr } from '@exah/utils'
  *
+ * @example
  * isStr('') // → true
  * isStr([]) // → false
  */
@@ -107,6 +112,7 @@ export const isStr = (val: *): %checks => typeof val === 'string'
  * @example
  * import { isArr } from '@exah/utils'
  *
+ * @example
  * isArr([]) // → true
  * isArr({ length: 3 }) // → false
  */
@@ -119,6 +125,7 @@ export const isArr = (val: *): %checks => Array.isArray(val)
  * @example
  * import { isNil } from '@exah/utils'
  *
+ * @example
  * isNil(null) // → true
  * isNil(undefined) // → true
  * isNil(0) // → false
@@ -132,6 +139,7 @@ export const isNil = (val: *): %checks => val == null
  * @example
  * import { isEmpty } from '@exah/utils'
  *
+ * @example
  * isEmpty({}) // → true
  * isEmpty([]) // → true
  * isEmpty('') // → true
@@ -155,6 +163,7 @@ export const isEmpty = (val: Object) => val == null || val === '' || (
  * @example
  * import { isPlainObj } from '@exah/utils'
  *
+ * @example
  * isPlainObj({}) // → true
  * isPlainObj([]) // → false
  * isPlainObj(new Map()) // → false
@@ -171,7 +180,10 @@ export const isPlainObj = (val: *): boolean => (
 )
 
 /**
- * Fallback to last value if previous resolves to `null` or `undefined`
+ * Return last value if some of arguments is `null` or `undefined`
+ *
+ * @example
+ * import { fallbackTo } from '@exah/utils'
  *
  * @example
  * const target = { a: { b: { c: 1 } }, d: 2, e: 3 }

@@ -4,6 +4,9 @@
  * Return function that always returns value
  *
  * @example
+ * import { always } from '@exah/utils'
+ *
+ * @example
  * always(1)() // → 1
  * always({})() // → {}
  *
@@ -19,6 +22,9 @@ export const always = (val: *): Function => () => val
  * @return {true}
  *
  * @example
+ * import { T } from '@exah/utils'
+ *
+ * @example
  * T() // → true
  */
 
@@ -28,6 +34,9 @@ export const T = always(true)
  * Function that always returns `false`
  *
  * @return {false}
+ *
+ * @example
+ * import { F } from '@exah/utils'
  *
  * @example
  * F() // → false
@@ -41,6 +50,9 @@ export const F = always(false)
  * @return {undefined}
  *
  * @example
+ * import { noop } from '@exah/utils'
+ *
+ * @example
  * noop() // → undefined
  */
 
@@ -48,6 +60,9 @@ export const noop = always()
 
 /**
  * Function that returns its value
+ *
+ * @example
+ * import { identity } from '@exah/utils'
  *
  * @example
  * identity(1) // → 1
@@ -66,6 +81,9 @@ const composeTwoFns = (a: Function, b: Function) => (...args: Array<*>) => a(b(.
  * Right-to-left function composition
  *
  * @example
+ * import { compose } from '@exah/utils'
+ *
+ * @example
  * const a = (val) => val + 1
  * const b = (val) => val / 2
  * const c = (val) => val * 10
@@ -78,6 +96,9 @@ export const compose = (...fns: Array<Function>): Function =>
 
 /**
  * Left-to-right function composition
+ *
+ * @example
+ * import { pipe } from '@exah/utils'
  *
  * @example
  * const a = (val) => val + 1

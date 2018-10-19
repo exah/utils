@@ -8,14 +8,10 @@ import { toArr } from './arr'
  * @example
  * import { toObj } from '@exah/utils'
  *
- * toObj([ { color: 'red' }, { size: 'big' } ])
- * // → { color: 'red', size: 'big' }
- *
- * toObj({ a: 'b' })
- * // → { a: 'b' }
- *
- * toObj([ [ 'a', 'b' ] ], ([ key, value ]) => ({ [key]: value }))
- * // → { a: 'b' }
+ * @example
+ * toObj({ a: 'b' }) // → { a: 'b' }
+ * toObj([ { color: 'red' }, { size: 'big' } ]) // → { color: 'red', size: 'big' }
+ * toObj([ [ 'a', 'b' ] ], ([ key, value ]) => ({ [key]: value })) // → { a: 'b' }
  */
 
 export const toObj = (arr: Array<*>, fn: Function = identity): Object =>
@@ -29,12 +25,11 @@ export const toObj = (arr: Array<*>, fn: Function = identity): Object =>
  * @example
  * import { mapObj } from '@exah/utils'
  *
- * mapObj((key, value, index, obj) => [ value, key ], { a: 'b' })
- * // → { b: 'a' }
+ * @example
+ * mapObj((key, value, index, obj) => [ value, key ], { a: 'b' }) // → { b: 'a' }
  *
  * const swap = mapObj((key, value) => [ value, key ])
- * swap({ a: 'b' })
- * // → { b: 'a' }
+ * swap({ a: 'b' }) // → { b: 'a' }
  */
 
 const mapObj = (fn: Function, obj: Object) =>
@@ -55,12 +50,13 @@ export { curriedMapObj as mapObj }
  * Filter object by key or value.
  *
  * @example
- * filterObj((key) => key !== 'a', { a: 'b' })
- * // → {}
+ * import { filterObj } from '@exah/utils'
+ *
+ * @example
+ * filterObj((key) => key !== 'a', { a: 'b' }) // → {}
  *
  * const withoutZeros = filterObj((key, value) => value !== 0)
- * withoutZeros({ a: 0, b: 1, c: 3, d: 4 })
- * // → { b: 1, c: 3, d: 4 }
+ * withoutZeros({ a: 0, b: 1, c: 3, d: 4 }) // → { b: 1, c: 3, d: 4 }
  */
 
 const filterObj = (fn, obj) => {
@@ -83,6 +79,9 @@ export { curriedFilterObj as filterObj }
 
 /**
  * Get object value by path (string or as argument list)
+ *
+ * @example
+ * import { path } from '@exah/utils'
  *
  * @example
  * const target = {
