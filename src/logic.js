@@ -43,6 +43,8 @@ const is = (obj: Object, val: *): boolean => (
 
 const curriedIs = curryN(2, is)
 
+export { curriedIs as is }
+
 /**
  * Check if `val` primitive type is `function`.
  *
@@ -53,7 +55,7 @@ const curriedIs = curryN(2, is)
  * isFn(1) // → false
  */
 
-const isFn = (val: *): %checks => typeof val === 'function'
+export const isFn = (val: *): %checks => typeof val === 'function'
 
 /**
  * Check if `val` primitive type is `boolean`.
@@ -66,13 +68,13 @@ const isFn = (val: *): %checks => typeof val === 'function'
  * isBool(0) // → false
  */
 
-const isBool = (val: *): %checks => typeof val === 'boolean'
+export const isBool = (val: *): %checks => typeof val === 'boolean'
 
 /**
  * @private
  */
 
-const isNaN = (val: *) => val !== val // eslint-disable-line no-self-compare
+export const isNaN = (val: *) => val !== val // eslint-disable-line no-self-compare
 
 /**
  * Check if `val` primitive type is `number`, but not `NaN`.
@@ -85,7 +87,7 @@ const isNaN = (val: *) => val !== val // eslint-disable-line no-self-compare
  * isNum(NaN) // → false
  */
 
-const isNum = (val: *): %checks => !isNaN(val) && typeof val === 'number'
+export const isNum = (val: *): %checks => !isNaN(val) && typeof val === 'number'
 
 /**
  * Check if `val` primitive type is `string`.
@@ -97,7 +99,7 @@ const isNum = (val: *): %checks => !isNaN(val) && typeof val === 'number'
  * isStr([]) // → false
  */
 
-const isStr = (val: *): %checks => typeof val === 'string'
+export const isStr = (val: *): %checks => typeof val === 'string'
 
 /**
  * Check if `val` is an `Array`.
@@ -109,7 +111,7 @@ const isStr = (val: *): %checks => typeof val === 'string'
  * isArr({ length: 3 }) // → false
  */
 
-const isArr = (val: *): %checks => Array.isArray(val)
+export const isArr = (val: *): %checks => Array.isArray(val)
 
 /**
  * Check if `val` is `null` or `undefined`.
@@ -122,7 +124,7 @@ const isArr = (val: *): %checks => Array.isArray(val)
  * isNil(0) // → false
  */
 
-const isNil = (val: *): %checks => val == null
+export const isNil = (val: *): %checks => val == null
 
 /**
  * Check if `val` is empty. Works with `Array`, `Objects`, `Map`, `Set` and `null`
@@ -141,7 +143,7 @@ const isNil = (val: *): %checks => val == null
  * isEmpty([ 1, 2, 3 ]) // → false
  */
 
-const isEmpty = (val: Object) => val == null || val === '' || (
+export const isEmpty = (val: Object) => val == null || val === '' || (
   (is(Map, val) || is(Set, val))
     ? val.size === 0
     : Object.keys(val).length === 0
@@ -163,20 +165,24 @@ const isEmpty = (val: Object) => val == null || val === '' || (
  * isPlainObj(new Fn()) // → false
  */
 
-const isPlainObj = (val: *): boolean => (
+export const isPlainObj = (val: *): boolean => (
   Object.prototype.toString.call(val) === '[object Object]' &&
   Object.getPrototypeOf(val) === Object.prototype
 )
 
-export {
-  curriedIs as is,
-  isFn,
-  isBool,
-  isNaN,
-  isNum,
-  isStr,
-  isArr,
-  isNil,
-  isEmpty,
-  isPlainObj
-}
+/**
+ * Fallback to last value if previous resolves to `null` or `undefined`
+ *
+ * @example
+ * const target = { a: { b: { c: 1 } }, d: 2, e: 3 }
+ *
+ * fallbackTo(target.a.b.c, 2) // → 1
+ * fallbackTo(target.a.b.c.d, 2) // → 2
+ * fallbackTo(target.nothing, null) // → null
+ * fallbackTo(target.nothing, target.d, target.e) // → 2
+ * fallbackTo(target.nothing, target.f, target.e) // → 3
+ * fallbackTo(target.nothing) // → undefined
+ */
+
+export const fallbackTo = (...args: Array<*>) =>
+  args.reduce((prev, val) => prev == null ? val : prev, null)

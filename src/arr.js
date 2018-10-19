@@ -1,5 +1,5 @@
 // @flow
-import { isArr } from './is'
+import { isArr } from './logic'
 
 /**
  * Wrap anything into array. <br />
@@ -13,7 +13,7 @@ import { isArr } from './is'
  * toArr([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
  */
 
-const toArr = (value: any): Array<*> => value == null ? [] : [].concat(value)
+export const toArr = (value: any): Array<*> => value == null ? [] : [].concat(value)
 
 /**
  * Flattens multidimensional arrays.
@@ -25,11 +25,6 @@ const toArr = (value: any): Array<*> => value == null ? [] : [].concat(value)
  * flatten([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]) // → [ 1, 2, 3, 4, 5, 6, 7 ]
  */
 
-function flatten (arr: Array<*>): Array<*> {
+export function flatten (arr: Array<*>): Array<*> {
   return arr.reduce((acc, val) => acc.concat(isArr(val) ? flatten(val) : val), [])
-}
-
-export {
-  toArr,
-  flatten
 }

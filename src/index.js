@@ -7,7 +7,6 @@ export {
   toObj,
   mapObj,
   filterObj,
-  fallbackTo,
   path
 } from './obj'
 
@@ -35,5 +34,6 @@ export {
   isArr,
   isNil,
   isEmpty,
-  isPlainObj
-} from './is'
+  isPlainObj,
+  fallbackTo
+} from './logic'

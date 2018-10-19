@@ -9,7 +9,8 @@ import {
   isArr,
   isNil,
   isEmpty,
-  isPlainObj
+  isPlainObj,
+  fallbackTo
 } from '../src'
 
 function Fn () {}
@@ -94,4 +95,15 @@ test('isPlainObj', t => {
   t.false(isPlainObj(new Map()))
   t.false(isPlainObj(Object.create(null)))
   t.false(isPlainObj(() => null))
+})
+
+test('fallbackTo', t => {
+  const target = { a: { b: { c: 1 } }, d: 2, e: 3 }
+
+  t.is(fallbackTo(target.a.b.c, 2), 1)
+  t.is(fallbackTo(target.a.b.c.d, 2), 2)
+  t.is(fallbackTo(target.nothing, null), null)
+  t.is(fallbackTo(target.nothing, target.d, target.e), 2)
+  t.is(fallbackTo(target.nothing, target.f, target.e), 3)
+  t.is(fallbackTo(target.nothing), undefined)
 })

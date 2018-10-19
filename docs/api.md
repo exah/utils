@@ -9,44 +9,50 @@
     -   [flatten][5]
         -   [Parameters][6]
         -   [Examples][7]
--   [Checks][8]
-    -   [is][9]
+-   [Objects][8]
+    -   [toObj][9]
         -   [Parameters][10]
         -   [Examples][11]
-    -   [isPlainObj][12]
+    -   [mapObj][12]
         -   [Parameters][13]
         -   [Examples][14]
-    -   [isEmpty][15]
+    -   [filterObj][15]
         -   [Parameters][16]
         -   [Examples][17]
-    -   [isNil][18]
+    -   [path][18]
         -   [Parameters][19]
         -   [Examples][20]
-    -   [isNum][21]
-        -   [Parameters][22]
-        -   [Examples][23]
-    -   [isStr][24]
-        -   [Parameters][25]
-        -   [Examples][26]
-    -   [isBool][27]
-        -   [Parameters][28]
-        -   [Examples][29]
-    -   [isFn][30]
-        -   [Parameters][31]
-        -   [Examples][32]
-    -   [isArr][33]
-        -   [Parameters][34]
-        -   [Examples][35]
--   [Objects][36]
-    -   [toObj][37]
+-   [Logic][21]
+    -   [is][22]
+        -   [Parameters][23]
+        -   [Examples][24]
+    -   [isPlainObj][25]
+        -   [Parameters][26]
+        -   [Examples][27]
+    -   [isEmpty][28]
+        -   [Parameters][29]
+        -   [Examples][30]
+    -   [isNil][31]
+        -   [Parameters][32]
+        -   [Examples][33]
+    -   [isNum][34]
+        -   [Parameters][35]
+        -   [Examples][36]
+    -   [isStr][37]
         -   [Parameters][38]
         -   [Examples][39]
-    -   [mapObj][40]
+    -   [isBool][40]
         -   [Parameters][41]
         -   [Examples][42]
-    -   [filterObj][43]
+    -   [isFn][43]
         -   [Parameters][44]
         -   [Examples][45]
+    -   [isArr][46]
+        -   [Parameters][47]
+        -   [Examples][48]
+    -   [fallbackTo][49]
+        -   [Parameters][50]
+        -   [Examples][51]
 
 ## Arrays
 
@@ -72,7 +78,7 @@ toArr(null) // → []
 toArr([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
 ```
 
-Returns **[Array][46]&lt;any>** 
+Returns **[Array][52]&lt;any>** 
 
 ### flatten
 
@@ -80,7 +86,7 @@ Flattens multidimensional arrays.
 
 #### Parameters
 
--   `arr` **[Array][46]&lt;any>** 
+-   `arr` **[Array][52]&lt;any>** 
 
 #### Examples
 
@@ -91,9 +97,108 @@ flatten([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
 flatten([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]) // → [ 1, 2, 3, 4, 5, 6, 7 ]
 ```
 
-Returns **[Array][46]&lt;any>** 
+Returns **[Array][52]&lt;any>** 
 
-## Checks
+## Objects
+
+
+
+
+### toObj
+
+Convert an array to object, by default works like "merge".
+
+#### Parameters
+
+-   `arr` **[Array][52]&lt;any>** 
+-   `fn` **[Function][53]**  (optional, default `identity`)
+
+#### Examples
+
+```javascript
+import { toObj } from '@exah/utils'
+
+toObj([ { color: 'red' }, { size: 'big' } ])
+// → { color: 'red', size: 'big' }
+
+toObj({ a: 'b' })
+// → { a: 'b' }
+
+toObj([ [ 'a', 'b' ] ], ([ key, value ]) => ({ [key]: value }))
+// → { a: 'b' }
+```
+
+Returns **[Object][54]** 
+
+### mapObj
+
+Like `Array#map`, but for objects.
+Useful for renaming keys or converting values.
+
+#### Parameters
+
+-   `fn` **[Function][53]** 
+-   `obj` **[Object][54]** 
+
+#### Examples
+
+```javascript
+import { mapObj } from '@exah/utils'
+
+mapObj((key, value, index, obj) => [ value, key ], { a: 'b' })
+// → { b: 'a' }
+
+const swap = mapObj((key, value) => [ value, key ])
+swap({ a: 'b' })
+// → { b: 'a' }
+```
+
+### filterObj
+
+Filter object by key or value.
+
+#### Parameters
+
+-   `fn`  
+-   `obj`  
+
+#### Examples
+
+```javascript
+filterObj((key) => key !== 'a', { a: 'b' })
+// → {}
+
+const withoutZeros = filterObj((key, value) => value !== 0)
+withoutZeros({ a: 0, b: 1, c: 3, d: 4 })
+// → { b: 1, c: 3, d: 4 }
+```
+
+### path
+
+Get object value by path (string or as argument list)
+
+#### Parameters
+
+-   `str` **[string][55]**  (optional, default `''`)
+-   `paths` **...[Array][52]&lt;[string][55]>** 
+
+#### Examples
+
+```javascript
+const target = {
+  a: { b: { c: { d: 1 } } },
+  e: [ 2 ]
+}
+
+path('a', 'b', 'c', 'd')(target) // → 1
+path('a.b.c.d')(target) // → 1
+path('e', 0)(target) // → 2
+path('e.0')(target) // → 2
+path('a', 'b', 'c', 'd', 'e')(target) // → undefined
+path('e.1')(target) // → undefined
+```
+
+## Logic
 
 
 
@@ -104,7 +209,7 @@ Checks if `val` has prototype of an `Object`. (Alternative to `instanceof`)
 
 #### Parameters
 
--   `obj` **[Object][47]** — Base `Object`
+-   `obj` **[Object][54]** — Base `Object`
 -   `val` **any** — Value to test
 
 #### Examples
@@ -137,7 +242,7 @@ const isNum = is(Number)
 isNum(1) // → true
 ```
 
-Returns **[boolean][48]** 
+Returns **[boolean][56]** 
 
 ### isPlainObj
 
@@ -162,7 +267,7 @@ function Fn () {}
 isPlainObj(new Fn()) // → false
 ```
 
-Returns **[boolean][48]** 
+Returns **[boolean][56]** 
 
 ### isEmpty
 
@@ -170,7 +275,7 @@ Check if `val` is empty. Works with `Array`, `Objects`, `Map`, `Set` and `null`
 
 #### Parameters
 
--   `val` **[Object][47]** 
+-   `val` **[Object][54]** 
 
 #### Examples
 
@@ -293,78 +398,25 @@ isArr([]) // → true
 isArr({ length: 3 }) // → false
 ```
 
-## Objects
+### fallbackTo
 
-
-
-
-### toObj
-
-Convert an array to object, by default works like "merge".
+Fallback to last value if previous resolves to `null` or `undefined`
 
 #### Parameters
 
--   `arr` **[Array][46]&lt;any>** 
--   `fn` **[Function][49]**  (optional, default `identity`)
+-   `args` **...[Array][52]&lt;any>** 
 
 #### Examples
 
 ```javascript
-import { toObj } from '@exah/utils'
+const target = { a: { b: { c: 1 } }, d: 2, e: 3 }
 
-toObj([ { color: 'red' }, { size: 'big' } ])
-// → { color: 'red', size: 'big' }
-
-toObj({ a: 'b' })
-// → { a: 'b' }
-
-toObj([ [ 'a', 'b' ] ], ([ key, value ]) => ({ [key]: value }))
-// → { a: 'b' }
-```
-
-Returns **[Object][47]** 
-
-### mapObj
-
-Like `Array#map`, but for objects.
-Useful for renaming keys or converting values.
-
-#### Parameters
-
--   `fn` **[Function][49]** 
--   `obj` **[Object][47]** 
-
-#### Examples
-
-```javascript
-import { mapObj } from '@exah/utils'
-
-mapObj((key, value, index, obj) => [ value, key ], { a: 'b' })
-// → { b: 'a' }
-
-const swap = mapObj((key, value) => [ value, key ])
-swap({ a: 'b' })
-// → { b: 'a' }
-```
-
-### filterObj
-
-Filter object by key or value.
-
-#### Parameters
-
--   `fn`  
--   `obj`  
-
-#### Examples
-
-```javascript
-filterObj((key) => key !== 'a', { a: 'b' })
-// → {}
-
-const withoutZeros = filterObj((key, value) => value !== 0)
-withoutZeros({ a: 0, b: 1, c: 3, d: 4 })
-// → { b: 1, c: 3, d: 4 }
+fallbackTo(target.a.b.c, 2) // → 1
+fallbackTo(target.a.b.c.d, 2) // → 2
+fallbackTo(target.nothing, null) // → null
+fallbackTo(target.nothing, target.d, target.e) // → 2
+fallbackTo(target.nothing, target.f, target.e) // → 3
+fallbackTo(target.nothing) // → undefined
 ```
 
 [1]: #arrays
@@ -381,86 +433,100 @@ withoutZeros({ a: 0, b: 1, c: 3, d: 4 })
 
 [7]: #examples-1
 
-[8]: #checks
+[8]: #objects
 
-[9]: #is
+[9]: #toobj
 
 [10]: #parameters-2
 
 [11]: #examples-2
 
-[12]: #isplainobj
+[12]: #mapobj
 
 [13]: #parameters-3
 
 [14]: #examples-3
 
-[15]: #isempty
+[15]: #filterobj
 
 [16]: #parameters-4
 
 [17]: #examples-4
 
-[18]: #isnil
+[18]: #path
 
 [19]: #parameters-5
 
 [20]: #examples-5
 
-[21]: #isnum
+[21]: #logic
 
-[22]: #parameters-6
+[22]: #is
 
-[23]: #examples-6
+[23]: #parameters-6
 
-[24]: #isstr
+[24]: #examples-6
 
-[25]: #parameters-7
+[25]: #isplainobj
 
-[26]: #examples-7
+[26]: #parameters-7
 
-[27]: #isbool
+[27]: #examples-7
 
-[28]: #parameters-8
+[28]: #isempty
 
-[29]: #examples-8
+[29]: #parameters-8
 
-[30]: #isfn
+[30]: #examples-8
 
-[31]: #parameters-9
+[31]: #isnil
 
-[32]: #examples-9
+[32]: #parameters-9
 
-[33]: #isarr
+[33]: #examples-9
 
-[34]: #parameters-10
+[34]: #isnum
 
-[35]: #examples-10
+[35]: #parameters-10
 
-[36]: #objects
+[36]: #examples-10
 
-[37]: #toobj
+[37]: #isstr
 
 [38]: #parameters-11
 
 [39]: #examples-11
 
-[40]: #mapobj
+[40]: #isbool
 
 [41]: #parameters-12
 
 [42]: #examples-12
 
-[43]: #filterobj
+[43]: #isfn
 
 [44]: #parameters-13
 
 [45]: #examples-13
 
-[46]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[46]: #isarr
 
-[47]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[47]: #parameters-14
 
-[48]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[48]: #examples-14
 
-[49]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[49]: #fallbackto
+
+[50]: #parameters-15
+
+[51]: #examples-15
+
+[52]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[53]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+
+[54]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+[55]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[56]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean

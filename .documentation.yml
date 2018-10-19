@@ -4,7 +4,14 @@ toc:
       - toArr
       - flatten
 
-  - name: Checks
+  - name: Objects
+    children:
+      - toObj
+      - mapObj
+      - filterObj
+      - path
+
+  - name: Logic
     children:
       - is
       - isPlainObj
@@ -15,9 +22,4 @@ toc:
       - isBool
       - isFn
       - isArr
-
-  - name: Objects
-    children:
-      - toObj
-      - mapObj
-      - filterObj
+      - fallbackTo

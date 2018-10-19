@@ -81,13 +81,24 @@ const filterObj = (fn, obj) => {
 const curriedFilterObj = curryN(2, filterObj)
 export { curriedFilterObj as filterObj }
 
-export const fallbackTo = (...args: Array<*>) =>
-  args.reduce((prev, val) => prev == null ? val : prev, null)
+/**
+ * Get object value by path (string or as argument list)
+ *
+ * @example
+ * const target = {
+ *   a: { b: { c: { d: 1 } } },
+ *   e: [ 2 ]
+ * }
+ *
+ * path('a', 'b', 'c', 'd')(target) // → 1
+ * path('a.b.c.d')(target) // → 1
+ * path('e', 0)(target) // → 2
+ * path('e.0')(target) // → 2
+ * path('a', 'b', 'c', 'd', 'e')(target) // → undefined
+ * path('e.1')(target) // → undefined
+ */
 
 export const path = (str: string = '', ...paths: Array<string>) => (obj: Object) =>
   str.split('.')
     .concat(paths)
     .reduce((a, c) => Object(a)[c], obj)
-
-export const pathOr = (fallback: *) => (...paths: Array<string>) => (obj: Object) =>
-  fallbackTo(path(...paths)(obj), fallback)
