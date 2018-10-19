@@ -11,6 +11,21 @@ toc:
       - filterObj
       - path
 
+  - name: Functions
+    children:
+      - always
+      - T
+      - F
+      - noop
+      - identity
+      - compose
+      - pipe
+      - curry
+      - curryN
+      - once
+      - debounce
+      - throttle
+
   - name: Logic
     children:
       - is

@@ -1,50 +1,122 @@
 // @flow
 
-const always = (val: *): Function => () => val
+/**
+ * Return function that always returns value
+ *
+ * @example
+ * always(1)() // → 1
+ * always({})() // → {}
+ *
+ * const noop = always()
+ * noop() // → undefined
+ */
 
-const T = always(true)
+export const always = (val: *): Function => () => val
 
-const F = always(false)
+/**
+ * Function that always returns `true`
+ *
+ * @return {true}
+ *
+ * @example
+ * T() // → true
+ */
 
-const noop = () => {}
+export const T = always(true)
 
-const identity = (val: *): * => val
+/**
+ * Function that always returns `false`
+ *
+ * @return {false}
+ *
+ * @example
+ * F() // → false
+ */
 
-const composeTwoFns = (a, b) => (...args) => a(b(...args))
+export const F = always(false)
 
-const compose = (...fns: Array<Function>): Function =>
+/**
+ * Function that do nothing
+ *
+ * @return {undefined}
+ *
+ * @example
+ * noop() // → undefined
+ */
+
+export const noop = always()
+
+/**
+ * Function that returns its value
+ *
+ * @example
+ * identity(1) // → 1
+ * identity(state) // → state
+ */
+
+export const identity = (val: *): * => val
+
+/**
+ * @private used for `compose` and `pipe`
+ */
+
+const composeTwoFns = (a: Function, b: Function) => (...args: Array<*>) => a(b(...args))
+
+/**
+ * Right-to-left function composition
+ *
+ * @example
+ * const a = (val) => val + 1
+ * const b = (val) => val / 2
+ * const c = (val) => val * 10
+ *
+ * compose(a, b, c)(1) // → a(b(c(1))) → (((1 * 10) / 2) + 1) → 6
+ */
+
+export const compose = (...fns: Array<Function>): Function =>
   fns.reduce(composeTwoFns)
 
-const pipe = (...fns: Array<Function>): Function =>
+/**
+ * Left-to-right function composition
+ *
+ * @example
+ * const a = (val) => val + 1
+ * const b = () => val / 2
+ * const c = (val) => val * 10
+ *
+ * pipe(a, b, c)(1) // → c(b(a(1))) → (((1 + 1) / 2) * 10) → 10
+ */
+
+export const pipe = (...fns: Array<Function>): Function =>
   fns.reduceRight(composeTwoFns)
 
-const curry = (fn: Function, ...args: Array<*>): Function => (
+export const curry = (fn: Function, ...args: Array<*>): Function => (
   args.length === fn.length
     ? fn(...args)
     : curry.bind(null, fn, ...args)
 )
 
-const curryN = (numOfArgs: number, fn: Function, ...args: Array<*>): Function => (
+export const curryN = (numOfArgs: number, fn: Function, ...args: Array<*>): Function => (
   args.length >= numOfArgs
     ? fn(...args)
     : curryN.bind(null, numOfArgs, fn, ...args)
 )
 
-const once = (fn: Function): Function => {
+export const once = (fn: Function): Function => {
   let isRunned = false
   let result = null
 
   return (...args) => {
     if (isRunned === false) {
-      result = fn(...args)
       isRunned = true
+      result = fn(...args)
     }
 
     return result
   }
 }
 
-const debounce = (fn: Function, duration: number = 0, isImmediate: boolean) => {
+export const debounce = (fn: Function, duration: number = 0, isImmediate: boolean) => {
   let timerId = null
 
   const cancel = () => {
@@ -71,7 +143,7 @@ const debounce = (fn: Function, duration: number = 0, isImmediate: boolean) => {
   }
 }
 
-const throttle = (fn: Function, duration: number = 0, isImmediate: boolean) => {
+export const throttle = (fn: Function, duration: number = 0, isImmediate: boolean) => {
   let timerId = null
 
   const cancel = () => {
@@ -97,19 +169,4 @@ const throttle = (fn: Function, duration: number = 0, isImmediate: boolean) => {
 
     return cancel
   }
-}
-
-export {
-  always,
-  T,
-  F,
-  noop,
-  identity,
-  compose,
-  pipe,
-  curry,
-  curryN,
-  once,
-  debounce,
-  throttle
 }

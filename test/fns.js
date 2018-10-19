@@ -56,11 +56,23 @@ test('curry', t => {
 })
 
 test('curryN', t => {
-  const fn = curryN(2, (one, two, three) => one + two + three)
-  t.is(typeof fn(1), 'function')
-  t.is(fn(1, 2), NaN)
-  t.is(fn(1, 2, 3), 1 + 2 + 3)
-  t.is(fn(1)(2, 3), 1 + 2 + 3)
+  const fn3 = curryN(2, (one, two, three) => one + two + three)
+  t.is(typeof fn3(1), 'function')
+  t.is(fn3(1, 2), NaN)
+  t.is(fn3(1, 2, 3), 1 + 2 + 3)
+  t.is(fn3(1)(2, 3), 1 + 2 + 3)
+
+  const fn4 = curryN(4, (one, two, three, four) => one + two + three + four)
+  t.is(typeof fn4(1), 'function')
+  t.is(typeof fn4(1, 2), 'function')
+  t.is(typeof fn4(1, 2, 3), 'function')
+  t.is(typeof fn4(1, 2)(3), 'function')
+  t.is(fn4(1, 2, 3, 4), 1 + 2 + 3 + 4)
+  t.is(fn4(1, 2, 3)(4), 1 + 2 + 3 + 4)
+  t.is(fn4(1, 2)(3)(4), 1 + 2 + 3 + 4)
+  t.is(fn4(1)(2)(3)(4), 1 + 2 + 3 + 4)
+  t.is(fn4(1, 2)(3, 4), 1 + 2 + 3 + 4)
+  t.is(fn4(1)(2, 3, 4), 1 + 2 + 3 + 4)
 })
 
 test('once', t => {

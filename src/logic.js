@@ -71,7 +71,7 @@ export const isFn = (val: *): %checks => typeof val === 'function'
 export const isBool = (val: *): %checks => typeof val === 'boolean'
 
 /**
- * @private
+ * @private used for `isNum`
  */
 
 export const isNaN = (val: *) => val !== val // eslint-disable-line no-self-compare

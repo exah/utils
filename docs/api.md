@@ -22,37 +22,56 @@
     -   [path][18]
         -   [Parameters][19]
         -   [Examples][20]
--   [Logic][21]
-    -   [is][22]
+-   [Functions][21]
+    -   [always][22]
         -   [Parameters][23]
         -   [Examples][24]
-    -   [isPlainObj][25]
-        -   [Parameters][26]
-        -   [Examples][27]
-    -   [isEmpty][28]
-        -   [Parameters][29]
+    -   [T][25]
+        -   [Examples][26]
+    -   [F][27]
+        -   [Examples][28]
+    -   [noop][29]
         -   [Examples][30]
-    -   [isNil][31]
+    -   [identity][31]
         -   [Parameters][32]
         -   [Examples][33]
-    -   [isNum][34]
+    -   [compose][34]
         -   [Parameters][35]
         -   [Examples][36]
-    -   [isStr][37]
+    -   [pipe][37]
         -   [Parameters][38]
         -   [Examples][39]
-    -   [isBool][40]
-        -   [Parameters][41]
-        -   [Examples][42]
-    -   [isFn][43]
-        -   [Parameters][44]
-        -   [Examples][45]
-    -   [isArr][46]
-        -   [Parameters][47]
-        -   [Examples][48]
-    -   [fallbackTo][49]
-        -   [Parameters][50]
-        -   [Examples][51]
+-   [Logic][40]
+    -   [is][41]
+        -   [Parameters][42]
+        -   [Examples][43]
+    -   [isPlainObj][44]
+        -   [Parameters][45]
+        -   [Examples][46]
+    -   [isEmpty][47]
+        -   [Parameters][48]
+        -   [Examples][49]
+    -   [isNil][50]
+        -   [Parameters][51]
+        -   [Examples][52]
+    -   [isNum][53]
+        -   [Parameters][54]
+        -   [Examples][55]
+    -   [isStr][56]
+        -   [Parameters][57]
+        -   [Examples][58]
+    -   [isBool][59]
+        -   [Parameters][60]
+        -   [Examples][61]
+    -   [isFn][62]
+        -   [Parameters][63]
+        -   [Examples][64]
+    -   [isArr][65]
+        -   [Parameters][66]
+        -   [Examples][67]
+    -   [fallbackTo][68]
+        -   [Parameters][69]
+        -   [Examples][70]
 
 ## Arrays
 
@@ -78,7 +97,7 @@ toArr(null) // → []
 toArr([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
 ```
 
-Returns **[Array][52]&lt;any>** 
+Returns **[Array][71]&lt;any>** 
 
 ### flatten
 
@@ -86,7 +105,7 @@ Flattens multidimensional arrays.
 
 #### Parameters
 
--   `arr` **[Array][52]&lt;any>** 
+-   `arr` **[Array][71]&lt;any>** 
 
 #### Examples
 
@@ -97,7 +116,7 @@ flatten([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
 flatten([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]) // → [ 1, 2, 3, 4, 5, 6, 7 ]
 ```
 
-Returns **[Array][52]&lt;any>** 
+Returns **[Array][71]&lt;any>** 
 
 ## Objects
 
@@ -110,8 +129,8 @@ Convert an array to object, by default works like "merge".
 
 #### Parameters
 
--   `arr` **[Array][52]&lt;any>** 
--   `fn` **[Function][53]**  (optional, default `identity`)
+-   `arr` **[Array][71]&lt;any>** 
+-   `fn` **[Function][72]**  (optional, default `identity`)
 
 #### Examples
 
@@ -128,7 +147,7 @@ toObj([ [ 'a', 'b' ] ], ([ key, value ]) => ({ [key]: value }))
 // → { a: 'b' }
 ```
 
-Returns **[Object][54]** 
+Returns **[Object][73]** 
 
 ### mapObj
 
@@ -137,8 +156,8 @@ Useful for renaming keys or converting values.
 
 #### Parameters
 
--   `fn` **[Function][53]** 
--   `obj` **[Object][54]** 
+-   `fn` **[Function][72]** 
+-   `obj` **[Object][73]** 
 
 #### Examples
 
@@ -179,8 +198,8 @@ Get object value by path (string or as argument list)
 
 #### Parameters
 
--   `str` **[string][55]**  (optional, default `''`)
--   `paths` **...[Array][52]&lt;[string][55]>** 
+-   `str` **[string][74]**  (optional, default `''`)
+-   `paths` **...[Array][71]&lt;[string][74]>** 
 
 #### Examples
 
@@ -198,6 +217,124 @@ path('a', 'b', 'c', 'd', 'e')(target) // → undefined
 path('e.1')(target) // → undefined
 ```
 
+## Functions
+
+
+
+
+### always
+
+Return function that always returns value
+
+#### Parameters
+
+-   `val` **any** 
+
+#### Examples
+
+```javascript
+always(1)() // → 1
+always({})() // → {}
+
+const noop = always()
+noop() // → undefined
+```
+
+Returns **[Function][72]** 
+
+### T
+
+Function that always returns `true`
+
+#### Examples
+
+```javascript
+T() // → true
+```
+
+Returns **`true`** 
+
+### F
+
+Function that always returns `false`
+
+#### Examples
+
+```javascript
+F() // → false
+```
+
+Returns **`false`** 
+
+### noop
+
+Function that do nothing
+
+#### Examples
+
+```javascript
+noop() // → undefined
+```
+
+Returns **[undefined][75]** 
+
+### identity
+
+Function that returns its value
+
+#### Parameters
+
+-   `val` **any** 
+
+#### Examples
+
+```javascript
+identity(1) // → 1
+identity(state) // → state
+```
+
+Returns **any** 
+
+### compose
+
+Right-to-left function composition
+
+#### Parameters
+
+-   `fns` **...[Array][71]&lt;[Function][72]>** 
+
+#### Examples
+
+```javascript
+const a = (val) => val + 1
+const b = (val) => val / 2
+const c = (val) => val * 10
+
+compose(a, b, c)(1) // → a(b(c(1))) → (((1 * 10) / 2) + 1) → 6
+```
+
+Returns **[Function][72]** 
+
+### pipe
+
+Left-to-right function composition
+
+#### Parameters
+
+-   `fns` **...[Array][71]&lt;[Function][72]>** 
+
+#### Examples
+
+```javascript
+const a = (val) => val + 1
+const b = () => val / 2
+const c = (val) => val * 10
+
+pipe(a, b, c)(1) // → c(b(a(1))) → (((1 + 1) / 2) * 10) → 10
+```
+
+Returns **[Function][72]** 
+
 ## Logic
 
 
@@ -209,7 +346,7 @@ Checks if `val` has prototype of an `Object`. (Alternative to `instanceof`)
 
 #### Parameters
 
--   `obj` **[Object][54]** — Base `Object`
+-   `obj` **[Object][73]** — Base `Object`
 -   `val` **any** — Value to test
 
 #### Examples
@@ -242,7 +379,7 @@ const isNum = is(Number)
 isNum(1) // → true
 ```
 
-Returns **[boolean][56]** 
+Returns **[boolean][76]** 
 
 ### isPlainObj
 
@@ -267,7 +404,7 @@ function Fn () {}
 isPlainObj(new Fn()) // → false
 ```
 
-Returns **[boolean][56]** 
+Returns **[boolean][76]** 
 
 ### isEmpty
 
@@ -275,7 +412,7 @@ Check if `val` is empty. Works with `Array`, `Objects`, `Map`, `Set` and `null`
 
 #### Parameters
 
--   `val` **[Object][54]** 
+-   `val` **[Object][73]** 
 
 #### Examples
 
@@ -404,7 +541,7 @@ Fallback to last value if previous resolves to `null` or `undefined`
 
 #### Parameters
 
--   `args` **...[Array][52]&lt;any>** 
+-   `args` **...[Array][71]&lt;any>** 
 
 #### Examples
 
@@ -459,74 +596,114 @@ fallbackTo(target.nothing) // → undefined
 
 [20]: #examples-5
 
-[21]: #logic
+[21]: #functions
 
-[22]: #is
+[22]: #always
 
 [23]: #parameters-6
 
 [24]: #examples-6
 
-[25]: #isplainobj
+[25]: #t
 
-[26]: #parameters-7
+[26]: #examples-7
 
-[27]: #examples-7
+[27]: #f
 
-[28]: #isempty
+[28]: #examples-8
 
-[29]: #parameters-8
+[29]: #noop
 
-[30]: #examples-8
+[30]: #examples-9
 
-[31]: #isnil
+[31]: #identity
 
-[32]: #parameters-9
+[32]: #parameters-7
 
-[33]: #examples-9
+[33]: #examples-10
 
-[34]: #isnum
+[34]: #compose
 
-[35]: #parameters-10
+[35]: #parameters-8
 
-[36]: #examples-10
+[36]: #examples-11
 
-[37]: #isstr
+[37]: #pipe
 
-[38]: #parameters-11
+[38]: #parameters-9
 
-[39]: #examples-11
+[39]: #examples-12
 
-[40]: #isbool
+[40]: #logic
 
-[41]: #parameters-12
+[41]: #is
 
-[42]: #examples-12
+[42]: #parameters-10
 
-[43]: #isfn
+[43]: #examples-13
 
-[44]: #parameters-13
+[44]: #isplainobj
 
-[45]: #examples-13
+[45]: #parameters-11
 
-[46]: #isarr
+[46]: #examples-14
 
-[47]: #parameters-14
+[47]: #isempty
 
-[48]: #examples-14
+[48]: #parameters-12
 
-[49]: #fallbackto
+[49]: #examples-15
 
-[50]: #parameters-15
+[50]: #isnil
 
-[51]: #examples-15
+[51]: #parameters-13
 
-[52]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[52]: #examples-16
 
-[53]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[53]: #isnum
 
-[54]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[54]: #parameters-14
 
-[55]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[55]: #examples-17
 
-[56]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[56]: #isstr
+
+[57]: #parameters-15
+
+[58]: #examples-18
+
+[59]: #isbool
+
+[60]: #parameters-16
+
+[61]: #examples-19
+
+[62]: #isfn
+
+[63]: #parameters-17
+
+[64]: #examples-20
+
+[65]: #isarr
+
+[66]: #parameters-18
+
+[67]: #examples-21
+
+[68]: #fallbackto
+
+[69]: #parameters-19
+
+[70]: #examples-22
+
+[71]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[72]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+
+[73]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+[74]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[75]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
+
+[76]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
