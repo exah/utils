@@ -41,37 +41,52 @@
     -   [pipe][37]
         -   [Parameters][38]
         -   [Examples][39]
--   [Logic][40]
-    -   [is][41]
-        -   [Parameters][42]
-        -   [Examples][43]
-    -   [isPlainObj][44]
-        -   [Parameters][45]
-        -   [Examples][46]
-    -   [isEmpty][47]
-        -   [Parameters][48]
-        -   [Examples][49]
-    -   [isNil][50]
-        -   [Parameters][51]
-        -   [Examples][52]
-    -   [isNum][53]
-        -   [Parameters][54]
-        -   [Examples][55]
-    -   [isStr][56]
+    -   [curry][40]
+        -   [Parameters][41]
+        -   [Examples][42]
+    -   [curryN][43]
+        -   [Parameters][44]
+        -   [Examples][45]
+    -   [once][46]
+        -   [Parameters][47]
+        -   [Examples][48]
+    -   [debounce][49]
+        -   [Parameters][50]
+        -   [Examples][51]
+    -   [throttle][52]
+        -   [Parameters][53]
+        -   [Examples][54]
+-   [Logic][55]
+    -   [is][56]
         -   [Parameters][57]
         -   [Examples][58]
-    -   [isBool][59]
+    -   [isPlainObj][59]
         -   [Parameters][60]
         -   [Examples][61]
-    -   [isFn][62]
+    -   [isEmpty][62]
         -   [Parameters][63]
         -   [Examples][64]
-    -   [isArr][65]
+    -   [isNil][65]
         -   [Parameters][66]
         -   [Examples][67]
-    -   [fallbackTo][68]
+    -   [isNum][68]
         -   [Parameters][69]
         -   [Examples][70]
+    -   [isStr][71]
+        -   [Parameters][72]
+        -   [Examples][73]
+    -   [isBool][74]
+        -   [Parameters][75]
+        -   [Examples][76]
+    -   [isFn][77]
+        -   [Parameters][78]
+        -   [Examples][79]
+    -   [isArr][80]
+        -   [Parameters][81]
+        -   [Examples][82]
+    -   [fallbackTo][83]
+        -   [Parameters][84]
+        -   [Examples][85]
 
 ## Arrays
 
@@ -91,13 +106,15 @@ If value is `null` or `undefined` returns empty array
 
 ```javascript
 import { toArr } from '@exah/utils'
+```
 
+```javascript
 toArr(1) // → [ 1 ]
 toArr(null) // → []
 toArr([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
 ```
 
-Returns **[Array][71]&lt;any>** 
+Returns **[Array][86]&lt;any>** 
 
 ### flatten
 
@@ -105,18 +122,20 @@ Flattens multidimensional arrays.
 
 #### Parameters
 
--   `arr` **[Array][71]&lt;any>** 
+-   `arr` **[Array][86]&lt;any>** 
 
 #### Examples
 
 ```javascript
 import { flatten } from '@exah/utils'
+```
 
+```javascript
 flatten([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
 flatten([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]) // → [ 1, 2, 3, 4, 5, 6, 7 ]
 ```
 
-Returns **[Array][71]&lt;any>** 
+Returns **[Array][86]&lt;any>** 
 
 ## Objects
 
@@ -129,20 +148,22 @@ Convert an array to object, by default works like "merge".
 
 #### Parameters
 
--   `arr` **[Array][71]&lt;any>** 
--   `fn` **[Function][72]**  (optional, default `identity`)
+-   `arr` **[Array][86]&lt;any>** 
+-   `fn` **[Function][87]**  (optional, default `identity`)
 
 #### Examples
 
 ```javascript
 import { toObj } from '@exah/utils'
+```
 
+```javascript
 toObj({ a: 'b' }) // → { a: 'b' }
 toObj([ { color: 'red' }, { size: 'big' } ]) // → { color: 'red', size: 'big' }
 toObj([ [ 'a', 'b' ] ], ([ key, value ]) => ({ [key]: value })) // → { a: 'b' }
 ```
 
-Returns **[Object][73]** 
+Returns **[Object][88]** 
 
 ### mapObj
 
@@ -151,14 +172,16 @@ Useful for renaming keys or converting values.
 
 #### Parameters
 
--   `fn` **[Function][72]** 
--   `obj` **[Object][73]** 
+-   `fn` **[Function][87]** 
+-   `obj` **[Object][88]** 
 
 #### Examples
 
 ```javascript
 import { mapObj } from '@exah/utils'
+```
 
+```javascript
 mapObj((key, value, index, obj) => [ value, key ], { a: 'b' }) // → { b: 'a' }
 
 const swap = mapObj((key, value) => [ value, key ])
@@ -178,7 +201,9 @@ Filter object by key or value.
 
 ```javascript
 import { filterObj } from '@exah/utils'
+```
 
+```javascript
 filterObj((key) => key !== 'a', { a: 'b' }) // → {}
 
 const withoutZeros = filterObj((key, value) => value !== 0)
@@ -191,14 +216,16 @@ Get object value by path (string or as argument list)
 
 #### Parameters
 
--   `str` **[string][74]**  (optional, default `''`)
--   `paths` **...[Array][71]&lt;[string][74]>** 
+-   `str` **[string][89]**  (optional, default `''`)
+-   `paths` **...[Array][86]&lt;[string][89]>** 
 
 #### Examples
 
 ```javascript
 import { path } from '@exah/utils'
+```
 
+```javascript
 const target = {
   a: { b: { c: { d: 1 } } },
   e: [ 2 ]
@@ -229,7 +256,9 @@ Return function that always returns value
 
 ```javascript
 import { always } from '@exah/utils'
+```
 
+```javascript
 always(1)() // → 1
 always({})() // → {}
 
@@ -237,7 +266,7 @@ const noop = always()
 noop() // → undefined
 ```
 
-Returns **[Function][72]** 
+Returns **[Function][87]** 
 
 ### T
 
@@ -247,7 +276,9 @@ Function that always returns `true`
 
 ```javascript
 import { T } from '@exah/utils'
+```
 
+```javascript
 T() // → true
 ```
 
@@ -261,7 +292,9 @@ Function that always returns `false`
 
 ```javascript
 import { F } from '@exah/utils'
+```
 
+```javascript
 F() // → false
 ```
 
@@ -275,11 +308,13 @@ Function that do nothing
 
 ```javascript
 import { noop } from '@exah/utils'
+```
 
+```javascript
 noop() // → undefined
 ```
 
-Returns **[undefined][75]** 
+Returns **[undefined][90]** 
 
 ### identity
 
@@ -293,7 +328,9 @@ Function that returns its value
 
 ```javascript
 import { identity } from '@exah/utils'
+```
 
+```javascript
 identity(1) // → 1
 identity(state) // → state
 ```
@@ -306,13 +343,15 @@ Right-to-left function composition
 
 #### Parameters
 
--   `fns` **...[Array][71]&lt;[Function][72]>** 
+-   `fns` **...[Array][86]&lt;[Function][87]>** 
 
 #### Examples
 
 ```javascript
 import { compose } from '@exah/utils'
+```
 
+```javascript
 const a = (val) => val + 1
 const b = (val) => val / 2
 const c = (val) => val * 10
@@ -320,7 +359,7 @@ const c = (val) => val * 10
 compose(a, b, c)(1) // → a(b(c(1))) → (((1 * 10) / 2) + 1) → 6
 ```
 
-Returns **[Function][72]** 
+Returns **[Function][87]** 
 
 ### pipe
 
@@ -328,13 +367,15 @@ Left-to-right function composition
 
 #### Parameters
 
--   `fns` **...[Array][71]&lt;[Function][72]>** 
+-   `fns` **...[Array][86]&lt;[Function][87]>** 
 
 #### Examples
 
 ```javascript
 import { pipe } from '@exah/utils'
+```
 
+```javascript
 const a = (val) => val + 1
 const b = () => val / 2
 const c = (val) => val * 10
@@ -342,7 +383,139 @@ const c = (val) => val * 10
 pipe(a, b, c)(1) // → c(b(a(1))) → (((1 + 1) / 2) * 10) → 10
 ```
 
-Returns **[Function][72]** 
+Returns **[Function][87]** 
+
+### curry
+
+Return curried equivalent of provided function.
+
+#### Parameters
+
+-   `fn` **[Function][87]** 
+-   `args` **...[Array][86]&lt;any>** 
+
+#### Examples
+
+```javascript
+import { curry } from '@exah/utils'
+```
+
+```javascript
+const fn = curry((one, two, three) => one + two + three)
+
+typeof fn(1) // → 'function'
+typeof fn(1)(2) // → 'function'
+typeof fn(1, 2) // → 'function'
+
+fn(1, 2, 3) // → 6
+fn(1, 2)(3) // → 6
+fn(1)(2, 3) // → 6
+fn(1)(2)(3) // → 6
+```
+
+Returns **[Function][87]** 
+
+### curryN
+
+Return curried function with specified number of arguments.
+
+#### Parameters
+
+-   `numOfArgs` **[number][91]** 
+-   `fn` **[Function][87]** 
+-   `args` **...[Array][86]&lt;any>** 
+
+#### Examples
+
+```javascript
+import { curryN } from '@exah/utils'
+```
+
+```javascript
+const fn = curryN(3, (one, two, three) => one + two + three)
+
+typeof fn(1) // → 'function'
+typeof fn(1)(2) // → 'function'
+typeof fn(1, 2) // → 'function'
+
+fn(1, 2, 3) // → 6
+fn(1, 2)(3) // → 6
+fn(1)(2, 3) // → 6
+fn(1)(2)(3) // → 6
+```
+
+Returns **[Function][87]** 
+
+### once
+
+Return function that always return result of first invocation, so function only called once.
+
+#### Parameters
+
+-   `fn` **[Function][87]** 
+
+#### Examples
+
+```javascript
+import { once } from '@exah/utils'
+```
+
+```javascript
+const fn = once((one, two, three) => one + two + three)
+
+fn(1, 2, 3) // → 1 + 2 + 3
+fn(10, 20, 30) // → 1 + 2 + 3
+```
+
+Returns **[Function][87]** 
+
+### debounce
+
+Return debounced function, that delays calling until `timeout` is elapsed. <br />
+If `isImmediate` is `true`, call function first, than delays next call. <br />
+Useful for preventing "double clicks" or updating metrics of screen after resize.
+
+#### Parameters
+
+-   `fn` **[Function][87]** 
+-   `timeout` **[number][91]**  (optional, default `0`)
+-   `isImmediate` **[boolean][92]** 
+
+#### Examples
+
+```javascript
+import { debounce } from '@exah/utils'
+```
+
+```javascript
+const fn = debounce(() => console.log(window.innerWidth), 100)
+
+window.addEventListener('resize', fn)
+```
+
+### throttle
+
+Return throttled function, that ensures that function runs once in specific time. <br />
+If `isImmediate` is `true`, call function first, than wait next call. <br />
+Useful for optimizing for constant event watching (like `change`, `scroll`, etc.).
+
+#### Parameters
+
+-   `fn` **[Function][87]** 
+-   `wait` **[number][91]**  (optional, default `0`)
+-   `isImmediate` **[boolean][92]** 
+
+#### Examples
+
+```javascript
+import { throttle } from '@exah/utils'
+```
+
+```javascript
+const fn = throttle(() => console.log(window.scrollY), 100)
+
+window.addEventListener('scroll', fn)
+```
 
 ## Logic
 
@@ -355,14 +528,16 @@ Checks if `val` has prototype of an `Object`. (Alternative to `instanceof`)
 
 #### Parameters
 
--   `obj` **[Object][73]** — Base `Object`
+-   `obj` **[Object][88]** — Base `Object`
 -   `val` **any** — Value to test
 
 #### Examples
 
 ```javascript
 import { is } from '@exah/utils'
+```
 
+```javascript
 function Fn () {}
 const Obj = {}
 
@@ -388,7 +563,7 @@ const isNum = is(Number)
 isNum(1) // → true
 ```
 
-Returns **[boolean][76]** 
+Returns **[boolean][92]** 
 
 ### isPlainObj
 
@@ -402,7 +577,9 @@ Check if `val` is "plain" `Object`.
 
 ```javascript
 import { isPlainObj } from '@exah/utils'
+```
 
+```javascript
 isPlainObj({}) // → true
 isPlainObj([]) // → false
 isPlainObj(new Map()) // → false
@@ -413,7 +590,7 @@ function Fn () {}
 isPlainObj(new Fn()) // → false
 ```
 
-Returns **[boolean][76]** 
+Returns **[boolean][92]** 
 
 ### isEmpty
 
@@ -421,13 +598,15 @@ Check if `val` is empty. Works with `Array`, `Objects`, `Map`, `Set` and `null`
 
 #### Parameters
 
--   `val` **[Object][73]** 
+-   `val` **[Object][88]** 
 
 #### Examples
 
 ```javascript
 import { isEmpty } from '@exah/utils'
+```
 
+```javascript
 isEmpty({}) // → true
 isEmpty([]) // → true
 isEmpty('') // → true
@@ -451,7 +630,9 @@ Check if `val` is `null` or `undefined`.
 
 ```javascript
 import { isNil } from '@exah/utils'
+```
 
+```javascript
 isNil(null) // → true
 isNil(undefined) // → true
 isNil(0) // → false
@@ -469,7 +650,9 @@ Check if `val` primitive type is `number`, but not `NaN`.
 
 ```javascript
 import { isNum } from '@exah/utils'
+```
 
+```javascript
 isNum(1) // → true
 isNum(10) // → true
 isNum(NaN) // → false
@@ -487,7 +670,9 @@ Check if `val` primitive type is `string`.
 
 ```javascript
 import { isStr } from '@exah/utils'
+```
 
+```javascript
 isStr('') // → true
 isStr([]) // → false
 ```
@@ -504,7 +689,9 @@ Check if `val` primitive type is `boolean`.
 
 ```javascript
 import { isBool } from '@exah/utils'
+```
 
+```javascript
 isBool(true) // → true
 isBool(false) // → true
 isBool(0) // → false
@@ -522,7 +709,9 @@ Check if `val` primitive type is `function`.
 
 ```javascript
 import { isFn } from '@exah/utils'
+```
 
+```javascript
 isFn(() => ()) // → true
 isFn(1) // → false
 ```
@@ -539,20 +728,26 @@ Check if `val` is an `Array`.
 
 ```javascript
 import { isArr } from '@exah/utils'
+```
 
+```javascript
 isArr([]) // → true
 isArr({ length: 3 }) // → false
 ```
 
 ### fallbackTo
 
-Fallback to last value if previous resolves to `null` or `undefined`
+Return last value if some of arguments is `null` or `undefined`
 
 #### Parameters
 
--   `args` **...[Array][71]&lt;any>** 
+-   `args` **...[Array][86]&lt;any>** 
 
 #### Examples
+
+```javascript
+import { fallbackTo } from '@exah/utils'
+```
 
 ```javascript
 const target = { a: { b: { c: 1 } }, d: 2, e: 3 }
@@ -643,76 +838,108 @@ fallbackTo(target.nothing) // → undefined
 
 [39]: #examples-12
 
-[40]: #logic
+[40]: #curry
 
-[41]: #is
+[41]: #parameters-10
 
-[42]: #parameters-10
+[42]: #examples-13
 
-[43]: #examples-13
+[43]: #curryn
 
-[44]: #isplainobj
+[44]: #parameters-11
 
-[45]: #parameters-11
+[45]: #examples-14
 
-[46]: #examples-14
+[46]: #once
 
-[47]: #isempty
+[47]: #parameters-12
 
-[48]: #parameters-12
+[48]: #examples-15
 
-[49]: #examples-15
+[49]: #debounce
 
-[50]: #isnil
+[50]: #parameters-13
 
-[51]: #parameters-13
+[51]: #examples-16
 
-[52]: #examples-16
+[52]: #throttle
 
-[53]: #isnum
+[53]: #parameters-14
 
-[54]: #parameters-14
+[54]: #examples-17
 
-[55]: #examples-17
+[55]: #logic
 
-[56]: #isstr
+[56]: #is
 
 [57]: #parameters-15
 
 [58]: #examples-18
 
-[59]: #isbool
+[59]: #isplainobj
 
 [60]: #parameters-16
 
 [61]: #examples-19
 
-[62]: #isfn
+[62]: #isempty
 
 [63]: #parameters-17
 
 [64]: #examples-20
 
-[65]: #isarr
+[65]: #isnil
 
 [66]: #parameters-18
 
 [67]: #examples-21
 
-[68]: #fallbackto
+[68]: #isnum
 
 [69]: #parameters-19
 
 [70]: #examples-22
 
-[71]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[71]: #isstr
 
-[72]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[72]: #parameters-20
 
-[73]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[73]: #examples-23
 
-[74]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[74]: #isbool
 
-[75]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
+[75]: #parameters-21
 
-[76]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[76]: #examples-24
+
+[77]: #isfn
+
+[78]: #parameters-22
+
+[79]: #examples-25
+
+[80]: #isarr
+
+[81]: #parameters-23
+
+[82]: #examples-26
+
+[83]: #fallbackto
+
+[84]: #parameters-24
+
+[85]: #examples-27
+
+[86]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[87]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+
+[88]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+[89]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[90]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
+
+[91]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+
+[92]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
