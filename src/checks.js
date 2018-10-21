@@ -134,7 +134,31 @@ export const isArr = (val: *): %checks => Array.isArray(val)
 export const isNil = (val: *): %checks => val == null
 
 /**
- * Check if `val` is empty. Works with `Array`, `Objects`, `Map`, `Set` and `null`
+ * Check if `val` is empty object. Tests `Array`, `Objects`, `Map`, `Set`
+ *
+ * @example
+ * import { isEmptyObj } from '@exah/utils'
+ *
+ * @example
+ * isEmptyObj({}) // → true
+ * isEmptyObj([]) // → true
+ * isEmptyObj('') // → false
+ * isEmptyObj(null) // → false
+ * isEmptyObj(new Map()) // → true
+ * isEmptyObj(new Set()) // → true
+ * isEmptyObj(new Set([ 1, 2, 3 ])) // → false
+ * isEmptyObj({ foo: 'bar' }) // → false
+ * isEmptyObj([ 1, 2, 3 ]) // → false
+ */
+
+export const isEmptyObj = (val: Object) => Boolean(val) && (
+  (is(Map, val) || is(Set, val))
+    ? val.size === 0
+    : Object.keys(val).length === 0
+)
+
+/**
+ * Check if `val` is empty. Tests `Array`, `Objects`, `Map`, `Set`, `String` and `null`
  *
  * @example
  * import { isEmpty } from '@exah/utils'
@@ -151,11 +175,8 @@ export const isNil = (val: *): %checks => val == null
  * isEmpty([ 1, 2, 3 ]) // → false
  */
 
-export const isEmpty = (val: Object) => val == null || val === '' || (
-  (is(Map, val) || is(Set, val))
-    ? val.size === 0
-    : Object.keys(val).length === 0
-)
+export const isEmpty = (val: Object) =>
+  val == null || val === '' || isEmptyObj(val)
 
 /**
  * Check if `val` is "plain" `Object`.
@@ -178,23 +199,3 @@ export const isPlainObj = (val: *): boolean => (
   Object.prototype.toString.call(val) === '[object Object]' &&
   Object.getPrototypeOf(val) === Object.prototype
 )
-
-/**
- * Return last value if some of arguments is `null` or `undefined`
- *
- * @example
- * import { fallbackTo } from '@exah/utils'
- *
- * @example
- * const target = { a: { b: { c: 1 } }, d: 2, e: 3 }
- *
- * fallbackTo(target.a.b.c, 2) // → 1
- * fallbackTo(target.a.b.c.d, 2) // → 2
- * fallbackTo(target.nothing, null) // → null
- * fallbackTo(target.nothing, target.d, target.e) // → 2
- * fallbackTo(target.nothing, target.f, target.e) // → 3
- * fallbackTo(target.nothing) // → undefined
- */
-
-export const fallbackTo = (...args: Array<*>) =>
-  args.reduce((prev, val) => prev == null ? val : prev, null)

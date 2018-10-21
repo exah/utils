@@ -10,7 +10,8 @@ export {
   mapObj,
   flattenObj,
   filterObj,
-  path
+  path,
+  fallbackTo
 } from './obj'
 
 export {
@@ -37,6 +38,6 @@ export {
   isArr,
   isNil,
   isEmpty,
-  isPlainObj,
-  fallbackTo
-} from './logic'
+  isEmptyObj,
+  isPlainObj
+} from './checks'

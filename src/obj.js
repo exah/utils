@@ -1,7 +1,7 @@
 // @flow
 import { curryN, identity } from './fns'
 import { toArr } from './arr'
-import { isPlainObj, isArr } from './logic'
+import { isPlainObj, isArr } from './checks'
 
 /**
  * Convert an array to object, by default works like "merge".
@@ -148,3 +148,23 @@ export const path = (str: string = '', ...paths: Array<string>) => (obj: Object)
   str.split('.')
     .concat(paths)
     .reduce((a, c) => Object(a)[c], obj)
+
+/**
+ * Return last value if some of arguments is `null` or `undefined`
+ *
+ * @example
+ * import { fallbackTo } from '@exah/utils'
+ *
+ * @example
+ * const target = { a: { b: { c: 1 } }, d: 2, e: 3 }
+ *
+ * fallbackTo(target.a.b.c, 2) // → 1
+ * fallbackTo(target.a.b.c.d, 2) // → 2
+ * fallbackTo(target.nothing, null) // → null
+ * fallbackTo(target.nothing, target.d, target.e) // → 2
+ * fallbackTo(target.nothing, target.f, target.e) // → 3
+ * fallbackTo(target.nothing) // → undefined
+ */
+
+export const fallbackTo = (...args: Array<*>) =>
+  args.reduce((prev, val) => prev == null ? val : prev, null)

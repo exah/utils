@@ -21,78 +21,81 @@
     -   [flattenObj][17]
         -   [Parameters][18]
         -   [Examples][19]
--   [Arrays][20]
-    -   [toArr][21]
-        -   [Parameters][22]
-        -   [Examples][23]
-    -   [flattenArr][24]
+    -   [fallbackTo][20]
+        -   [Parameters][21]
+        -   [Examples][22]
+-   [Arrays][23]
+    -   [toArr][24]
         -   [Parameters][25]
         -   [Examples][26]
--   [Functions][27]
-    -   [always][28]
-        -   [Parameters][29]
-        -   [Examples][30]
-    -   [T][31]
-        -   [Examples][32]
-    -   [F][33]
-        -   [Examples][34]
-    -   [noop][35]
-        -   [Examples][36]
-    -   [identity][37]
-        -   [Parameters][38]
+    -   [flattenArr][27]
+        -   [Parameters][28]
+        -   [Examples][29]
+-   [Functions][30]
+    -   [always][31]
+        -   [Parameters][32]
+        -   [Examples][33]
+    -   [T][34]
+        -   [Examples][35]
+    -   [F][36]
+        -   [Examples][37]
+    -   [noop][38]
         -   [Examples][39]
-    -   [compose][40]
+    -   [identity][40]
         -   [Parameters][41]
         -   [Examples][42]
-    -   [pipe][43]
+    -   [compose][43]
         -   [Parameters][44]
         -   [Examples][45]
-    -   [curry][46]
+    -   [pipe][46]
         -   [Parameters][47]
         -   [Examples][48]
-    -   [curryN][49]
+    -   [curry][49]
         -   [Parameters][50]
         -   [Examples][51]
-    -   [once][52]
+    -   [curryN][52]
         -   [Parameters][53]
         -   [Examples][54]
-    -   [debounce][55]
+    -   [once][55]
         -   [Parameters][56]
         -   [Examples][57]
-    -   [throttle][58]
+    -   [debounce][58]
         -   [Parameters][59]
         -   [Examples][60]
--   [Logic][61]
-    -   [is][62]
-        -   [Parameters][63]
-        -   [Examples][64]
-    -   [isPlainObj][65]
+    -   [throttle][61]
+        -   [Parameters][62]
+        -   [Examples][63]
+-   [Checks][64]
+    -   [is][65]
         -   [Parameters][66]
         -   [Examples][67]
     -   [isEmpty][68]
         -   [Parameters][69]
         -   [Examples][70]
-    -   [isNil][71]
+    -   [isEmptyObj][71]
         -   [Parameters][72]
         -   [Examples][73]
-    -   [isNum][74]
+    -   [isPlainObj][74]
         -   [Parameters][75]
         -   [Examples][76]
-    -   [isStr][77]
+    -   [isNil][77]
         -   [Parameters][78]
         -   [Examples][79]
-    -   [isBool][80]
+    -   [isNum][80]
         -   [Parameters][81]
         -   [Examples][82]
-    -   [isFn][83]
+    -   [isStr][83]
         -   [Parameters][84]
         -   [Examples][85]
-    -   [isArr][86]
+    -   [isBool][86]
         -   [Parameters][87]
         -   [Examples][88]
-    -   [fallbackTo][89]
+    -   [isFn][89]
         -   [Parameters][90]
         -   [Examples][91]
+    -   [isArr][92]
+        -   [Parameters][93]
+        -   [Examples][94]
 
 ## Objects
 
@@ -105,8 +108,8 @@ Get object value by path (string or as argument list)
 
 #### Parameters
 
--   `str` **[string][92]**  (optional, default `''`)
--   `paths` **...[Array][93]&lt;[string][92]>** 
+-   `str` **[string][95]**  (optional, default `''`)
+-   `paths` **...[Array][96]&lt;[string][95]>** 
 
 #### Examples
 
@@ -135,8 +138,8 @@ Useful for renaming keys or converting values.
 
 #### Parameters
 
--   `fn` **[Function][94]** 
--   `obj` **[Object][95]** 
+-   `fn` **[Function][97]** 
+-   `obj` **[Object][98]** 
 
 #### Examples
 
@@ -157,8 +160,8 @@ Filter object by key or value.
 
 #### Parameters
 
--   `fn` **[Function][94]** 
--   `obj` **[Object][95]** 
+-   `fn` **[Function][97]** 
+-   `obj` **[Object][98]** 
 
 #### Examples
 
@@ -179,8 +182,8 @@ Like `Array#reduce`, but for objects.
 
 #### Parameters
 
--   `fn` **[Function][94]** 
--   `obj` **[Object][95]** 
+-   `fn` **[Function][97]** 
+-   `obj` **[Object][98]** 
 -   `target` **any**  (optional, default `{}`)
 
 #### Examples
@@ -202,8 +205,8 @@ Convert an array to object, by default works like "merge".
 
 #### Parameters
 
--   `arr` **[Array][93]&lt;any>** 
--   `fn` **[Function][94]**  (optional, default `identity`)
+-   `arr` **[Array][96]&lt;any>** 
+-   `fn` **[Function][97]**  (optional, default `identity`)
 
 #### Examples
 
@@ -217,17 +220,17 @@ toObj([ { color: 'red' }, { size: 'big' } ]) // → { color: 'red', size: 'big' 
 toObj([ [ 'a', 'b' ] ], ([ key, value ]) => ({ [key]: value })) // → { a: 'b' }
 ```
 
-Returns **[Object][95]** 
+Returns **[Object][98]** 
 
 ### flattenObj
 
-Flatten an object by traveling deep inside [Object][96] or [Array][97] values.
+Flatten an object by traveling deep inside [Object][99] or [Array][100] values.
 
 #### Parameters
 
--   `obj` **[Object][95]** 
--   `joiner` **[string][92]**  (optional, default `'.'`)
--   `travelInside` **function (any): [boolean][98]**  (optional, default `isPlainObjectOrArray`)
+-   `obj` **[Object][98]** 
+-   `joiner` **[string][95]**  (optional, default `'.'`)
+-   `travelInside` **function (any): [boolean][101]**  (optional, default `isPlainObjectOrArray`)
 
 #### Examples
 
@@ -240,7 +243,32 @@ flattenObj({ a: { b: { c: { d: 1, e: [ 1, 2 ] } }, f: 0 })
 // → { 'a.b.c.d': 1, 'a.b.c.e.0': 1, 'a.b.c.e.1': 2, f: 0 }
 ```
 
-Returns **[Object][95]** 
+Returns **[Object][98]** 
+
+### fallbackTo
+
+Return last value if some of arguments is `null` or `undefined`
+
+#### Parameters
+
+-   `args` **...[Array][96]&lt;any>** 
+
+#### Examples
+
+```javascript
+import { fallbackTo } from '@exah/utils'
+```
+
+```javascript
+const target = { a: { b: { c: 1 } }, d: 2, e: 3 }
+
+fallbackTo(target.a.b.c, 2) // → 1
+fallbackTo(target.a.b.c.d, 2) // → 2
+fallbackTo(target.nothing, null) // → null
+fallbackTo(target.nothing, target.d, target.e) // → 2
+fallbackTo(target.nothing, target.f, target.e) // → 3
+fallbackTo(target.nothing) // → undefined
+```
 
 ## Arrays
 
@@ -268,7 +296,7 @@ toArr(null) // → []
 toArr([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
 ```
 
-Returns **[Array][93]&lt;any>** 
+Returns **[Array][96]&lt;any>** 
 
 ### flattenArr
 
@@ -278,7 +306,7 @@ Flattens multidimensional arrays.
 
 #### Parameters
 
--   `arr` **[Array][93]&lt;any>** 
+-   `arr` **[Array][96]&lt;any>** 
 
 #### Examples
 
@@ -291,7 +319,7 @@ flattenArr([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
 flattenArr([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]) // → [ 1, 2, 3, 4, 5, 6, 7 ]
 ```
 
-Returns **[Array][93]&lt;any>** 
+Returns **[Array][96]&lt;any>** 
 
 ## Functions
 
@@ -320,7 +348,7 @@ const noop = always()
 noop() // → undefined
 ```
 
-Returns **[Function][94]** 
+Returns **[Function][97]** 
 
 ### T
 
@@ -368,7 +396,7 @@ import { noop } from '@exah/utils'
 noop() // → undefined
 ```
 
-Returns **[undefined][99]** 
+Returns **[undefined][102]** 
 
 ### identity
 
@@ -397,7 +425,7 @@ Right-to-left function composition
 
 #### Parameters
 
--   `fns` **...[Array][93]&lt;[Function][94]>** 
+-   `fns` **...[Array][96]&lt;[Function][97]>** 
 
 #### Examples
 
@@ -413,7 +441,7 @@ const c = (val) => val * 10
 compose(a, b, c)(1) // → a(b(c(1))) → (((1 * 10) / 2) + 1) → 6
 ```
 
-Returns **[Function][94]** 
+Returns **[Function][97]** 
 
 ### pipe
 
@@ -421,7 +449,7 @@ Left-to-right function composition
 
 #### Parameters
 
--   `fns` **...[Array][93]&lt;[Function][94]>** 
+-   `fns` **...[Array][96]&lt;[Function][97]>** 
 
 #### Examples
 
@@ -437,7 +465,7 @@ const c = (val) => val * 10
 pipe(a, b, c)(1) // → c(b(a(1))) → (((1 + 1) / 2) * 10) → 10
 ```
 
-Returns **[Function][94]** 
+Returns **[Function][97]** 
 
 ### curry
 
@@ -445,8 +473,8 @@ Return curried equivalent of provided function.
 
 #### Parameters
 
--   `fn` **[Function][94]** 
--   `args` **...[Array][93]&lt;any>** 
+-   `fn` **[Function][97]** 
+-   `args` **...[Array][96]&lt;any>** 
 
 #### Examples
 
@@ -467,7 +495,7 @@ fn(1)(2, 3) // → 6
 fn(1)(2)(3) // → 6
 ```
 
-Returns **[Function][94]** 
+Returns **[Function][97]** 
 
 ### curryN
 
@@ -475,9 +503,9 @@ Return curried function with specified number of arguments.
 
 #### Parameters
 
--   `numOfArgs` **[number][100]** 
--   `fn` **[Function][94]** 
--   `args` **...[Array][93]&lt;any>** 
+-   `numOfArgs` **[number][103]** 
+-   `fn` **[Function][97]** 
+-   `args` **...[Array][96]&lt;any>** 
 
 #### Examples
 
@@ -498,7 +526,7 @@ fn(1)(2, 3) // → 6
 fn(1)(2)(3) // → 6
 ```
 
-Returns **[Function][94]** 
+Returns **[Function][97]** 
 
 ### once
 
@@ -506,7 +534,7 @@ Return function that always return result of first invocation, so function only 
 
 #### Parameters
 
--   `fn` **[Function][94]** 
+-   `fn` **[Function][97]** 
 
 #### Examples
 
@@ -521,7 +549,7 @@ fn(1, 2, 3) // → 1 + 2 + 3
 fn(10, 20, 30) // → 1 + 2 + 3
 ```
 
-Returns **[Function][94]** 
+Returns **[Function][97]** 
 
 ### debounce
 
@@ -531,9 +559,9 @@ Useful for preventing "double clicks" or updating metrics of screen after resize
 
 #### Parameters
 
--   `fn` **[Function][94]** 
--   `timeout` **[number][100]**  (optional, default `0`)
--   `isImmediate` **[boolean][98]** 
+-   `fn` **[Function][97]** 
+-   `timeout` **[number][103]**  (optional, default `0`)
+-   `isImmediate` **[boolean][101]** 
 
 #### Examples
 
@@ -555,9 +583,9 @@ Useful for optimizing for constant event watching (like `change`, `scroll`, etc.
 
 #### Parameters
 
--   `fn` **[Function][94]** 
--   `wait` **[number][100]**  (optional, default `0`)
--   `isImmediate` **[boolean][98]** 
+-   `fn` **[Function][97]** 
+-   `wait` **[number][103]**  (optional, default `0`)
+-   `isImmediate` **[boolean][101]** 
 
 #### Examples
 
@@ -571,7 +599,7 @@ const fn = throttle(() => console.log(window.scrollY), 100)
 window.addEventListener('scroll', fn)
 ```
 
-## Logic
+## Checks
 
 
 
@@ -582,7 +610,7 @@ Checks if `val` has prototype of an `Object`. (Alternative to `instanceof`)
 
 #### Parameters
 
--   `obj` **[Object][95]** — Base `Object`
+-   `obj` **[Object][98]** — Base `Object`
 -   `val` **any** — Value to test
 
 #### Examples
@@ -617,7 +645,59 @@ const isNum = is(Number)
 isNum(1) // → true
 ```
 
-Returns **[boolean][98]** 
+Returns **[boolean][101]** 
+
+### isEmpty
+
+Check if `val` is empty. Tests `Array`, `Objects`, `Map`, `Set`, `String` and `null`
+
+#### Parameters
+
+-   `val` **[Object][98]** 
+
+#### Examples
+
+```javascript
+import { isEmpty } from '@exah/utils'
+```
+
+```javascript
+isEmpty({}) // → true
+isEmpty([]) // → true
+isEmpty('') // → true
+isEmpty(null) // → true
+isEmpty(new Map()) // → true
+isEmpty(new Set()) // → true
+isEmpty(new Set([ 1, 2, 3 ])) // → false
+isEmpty({ foo: 'bar' }) // → false
+isEmpty([ 1, 2, 3 ]) // → false
+```
+
+### isEmptyObj
+
+Check if `val` is empty object. Tests `Array`, `Objects`, `Map`, `Set`
+
+#### Parameters
+
+-   `val` **[Object][98]** 
+
+#### Examples
+
+```javascript
+import { isEmptyObj } from '@exah/utils'
+```
+
+```javascript
+isEmptyObj({}) // → true
+isEmptyObj([]) // → true
+isEmptyObj('') // → false
+isEmptyObj(null) // → false
+isEmptyObj(new Map()) // → true
+isEmptyObj(new Set()) // → true
+isEmptyObj(new Set([ 1, 2, 3 ])) // → false
+isEmptyObj({ foo: 'bar' }) // → false
+isEmptyObj([ 1, 2, 3 ]) // → false
+```
 
 ### isPlainObj
 
@@ -644,33 +724,7 @@ function Fn () {}
 isPlainObj(new Fn()) // → false
 ```
 
-Returns **[boolean][98]** 
-
-### isEmpty
-
-Check if `val` is empty. Works with `Array`, `Objects`, `Map`, `Set` and `null`
-
-#### Parameters
-
--   `val` **[Object][95]** 
-
-#### Examples
-
-```javascript
-import { isEmpty } from '@exah/utils'
-```
-
-```javascript
-isEmpty({}) // → true
-isEmpty([]) // → true
-isEmpty('') // → true
-isEmpty(null) // → true
-isEmpty(new Map()) // → true
-isEmpty(new Set()) // → true
-isEmpty(new Set([ 1, 2, 3 ])) // → false
-isEmpty({ foo: 'bar' }) // → false
-isEmpty([ 1, 2, 3 ]) // → false
-```
+Returns **[boolean][101]** 
 
 ### isNil
 
@@ -789,31 +843,6 @@ isArr([]) // → true
 isArr({ length: 3 }) // → false
 ```
 
-### fallbackTo
-
-Return last value if some of arguments is `null` or `undefined`
-
-#### Parameters
-
--   `args` **...[Array][93]&lt;any>** 
-
-#### Examples
-
-```javascript
-import { fallbackTo } from '@exah/utils'
-```
-
-```javascript
-const target = { a: { b: { c: 1 } }, d: 2, e: 3 }
-
-fallbackTo(target.a.b.c, 2) // → 1
-fallbackTo(target.a.b.c.d, 2) // → 2
-fallbackTo(target.nothing, null) // → null
-fallbackTo(target.nothing, target.d, target.e) // → 2
-fallbackTo(target.nothing, target.f, target.e) // → 3
-fallbackTo(target.nothing) // → undefined
-```
-
 [1]: #objects
 
 [2]: #path
@@ -852,97 +881,97 @@ fallbackTo(target.nothing) // → undefined
 
 [19]: #examples-5
 
-[20]: #arrays
+[20]: #fallbackto
 
-[21]: #toarr
+[21]: #parameters-6
 
-[22]: #parameters-6
+[22]: #examples-6
 
-[23]: #examples-6
+[23]: #arrays
 
-[24]: #flattenarr
+[24]: #toarr
 
 [25]: #parameters-7
 
 [26]: #examples-7
 
-[27]: #functions
+[27]: #flattenarr
 
-[28]: #always
+[28]: #parameters-8
 
-[29]: #parameters-8
+[29]: #examples-8
 
-[30]: #examples-8
+[30]: #functions
 
-[31]: #t
+[31]: #always
 
-[32]: #examples-9
+[32]: #parameters-9
 
-[33]: #f
+[33]: #examples-9
 
-[34]: #examples-10
+[34]: #t
 
-[35]: #noop
+[35]: #examples-10
 
-[36]: #examples-11
+[36]: #f
 
-[37]: #identity
+[37]: #examples-11
 
-[38]: #parameters-9
+[38]: #noop
 
 [39]: #examples-12
 
-[40]: #compose
+[40]: #identity
 
 [41]: #parameters-10
 
 [42]: #examples-13
 
-[43]: #pipe
+[43]: #compose
 
 [44]: #parameters-11
 
 [45]: #examples-14
 
-[46]: #curry
+[46]: #pipe
 
 [47]: #parameters-12
 
 [48]: #examples-15
 
-[49]: #curryn
+[49]: #curry
 
 [50]: #parameters-13
 
 [51]: #examples-16
 
-[52]: #once
+[52]: #curryn
 
 [53]: #parameters-14
 
 [54]: #examples-17
 
-[55]: #debounce
+[55]: #once
 
 [56]: #parameters-15
 
 [57]: #examples-18
 
-[58]: #throttle
+[58]: #debounce
 
 [59]: #parameters-16
 
 [60]: #examples-19
 
-[61]: #logic
+[61]: #throttle
 
-[62]: #is
+[62]: #parameters-17
 
-[63]: #parameters-17
+[63]: #examples-20
 
-[64]: #examples-20
+[64]: #checks
 
-[65]: #isplainobj
+[65]: #is
 
 [66]: #parameters-18
 
@@ -954,62 +983,68 @@ fallbackTo(target.nothing) // → undefined
 
 [70]: #examples-22
 
-[71]: #isnil
+[71]: #isemptyobj
 
 [72]: #parameters-20
 
 [73]: #examples-23
 
-[74]: #isnum
+[74]: #isplainobj
 
 [75]: #parameters-21
 
 [76]: #examples-24
 
-[77]: #isstr
+[77]: #isnil
 
 [78]: #parameters-22
 
 [79]: #examples-25
 
-[80]: #isbool
+[80]: #isnum
 
 [81]: #parameters-23
 
 [82]: #examples-26
 
-[83]: #isfn
+[83]: #isstr
 
 [84]: #parameters-24
 
 [85]: #examples-27
 
-[86]: #isarr
+[86]: #isbool
 
 [87]: #parameters-25
 
 [88]: #examples-28
 
-[89]: #fallbackto
+[89]: #isfn
 
 [90]: #parameters-26
 
 [91]: #examples-29
 
-[92]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[92]: #isarr
 
-[93]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[93]: #parameters-27
 
-[94]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[94]: #examples-30
 
-[95]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[95]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[96]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[96]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[97]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[97]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
-[98]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[98]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[99]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
+[99]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[100]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[100]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[101]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+
+[102]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
+
+[103]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number

@@ -6,7 +6,8 @@ import {
   mapObj,
   flattenObj,
   filterObj,
-  path
+  path,
+  fallbackTo
 } from '../src'
 
 test('toObj', t => {
@@ -91,4 +92,15 @@ test('path', t => {
   t.is(path('a', 'b', 'c', 'd', 'e')(target), undefined)
   t.is(path('a.b.c.d.e.f.g')(target), undefined)
   t.is(path('e.1')(target), undefined)
+})
+
+test('fallbackTo', t => {
+  const target = { a: { b: { c: 1 } }, d: 2, e: 3 }
+
+  t.is(fallbackTo(target.a.b.c, 2), 1)
+  t.is(fallbackTo(target.a.b.c.d, 2), 2)
+  t.is(fallbackTo(target.nothing, null), null)
+  t.is(fallbackTo(target.nothing, target.d, target.e), 2)
+  t.is(fallbackTo(target.nothing, target.f, target.e), 3)
+  t.is(fallbackTo(target.nothing), undefined)
 })

@@ -7,6 +7,7 @@ toc:
       - reduceObj
       - toObj
       - flattenObj
+      - fallbackTo
 
   - name: Arrays
     children:
@@ -28,15 +29,15 @@ toc:
       - debounce
       - throttle
 
-  - name: Logic
+  - name: Checks
     children:
       - is
-      - isPlainObj
       - isEmpty
+      - isEmptyObj
+      - isPlainObj
       - isNil
       - isNum
       - isStr
       - isBool
       - isFn
       - isArr
-      - fallbackTo

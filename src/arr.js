@@ -1,5 +1,5 @@
 // @flow
-import { isArr } from './logic'
+import { isArr } from './checks'
 
 /**
  * Wrap anything into array. <br />

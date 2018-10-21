@@ -9,8 +9,8 @@ import {
   isArr,
   isNil,
   isEmpty,
-  isPlainObj,
-  fallbackTo
+  isEmptyObj,
+  isPlainObj
 } from '../src'
 
 function Fn () {}
@@ -76,6 +76,8 @@ test('isNil', t => {
 })
 
 test('isEmpty', t => {
+  t.true(isEmpty(null))
+  t.true(isEmpty(''))
   t.true(isEmpty([]))
   t.true(isEmpty({}))
   t.true(isEmpty(new Map()))
@@ -83,6 +85,18 @@ test('isEmpty', t => {
   t.false(isEmpty([ 1, 2, 3 ]))
   t.false(isEmpty({ foo: 'bar' }))
   t.false(isEmpty(new Set([ 1, 2, 3 ])))
+})
+
+test('isEmptyObj', t => {
+  t.true(isEmptyObj([]))
+  t.true(isEmptyObj({}))
+  t.true(isEmptyObj(new Map()))
+  t.true(isEmptyObj(new Set()))
+  t.false(isEmptyObj(''))
+  t.false(isEmptyObj(null))
+  t.false(isEmptyObj([ 1, 2, 3 ]))
+  t.false(isEmptyObj({ foo: 'bar' }))
+  t.false(isEmptyObj(new Set([ 1, 2, 3 ])))
 })
 
 test('isPlainObj', t => {
@@ -95,15 +109,4 @@ test('isPlainObj', t => {
   t.false(isPlainObj(new Map()))
   t.false(isPlainObj(Object.create(null)))
   t.false(isPlainObj(() => null))
-})
-
-test('fallbackTo', t => {
-  const target = { a: { b: { c: 1 } }, d: 2, e: 3 }
-
-  t.is(fallbackTo(target.a.b.c, 2), 1)
-  t.is(fallbackTo(target.a.b.c.d, 2), 2)
-  t.is(fallbackTo(target.nothing, null), null)
-  t.is(fallbackTo(target.nothing, target.d, target.e), 2)
-  t.is(fallbackTo(target.nothing, target.f, target.e), 3)
-  t.is(fallbackTo(target.nothing), undefined)
 })
