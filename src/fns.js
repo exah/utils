@@ -210,11 +210,12 @@ export const debounce = (fn: Function, timeout: number = 0, isImmediate: boolean
     }
   }
 
-  return function debounced (...args: Array<*>) {
+  function debounced (...args: Array<*>) {
+    let result
     const run = fn.bind(this, ...args)
 
     if (isImmediate && timerId === null) {
-      run()
+      result = run()
     }
 
     cancel()
@@ -223,8 +224,10 @@ export const debounce = (fn: Function, timeout: number = 0, isImmediate: boolean
       timerId = null
     }, timeout)
 
-    return cancel
+    return result
   }
+
+  return Object.assign(debounced, { cancel })
 }
 
 /**
@@ -251,9 +254,8 @@ export const throttle = (fn: Function, wait: number = 0, isImmediate: boolean) =
     }
   }
 
-  return function throttled (...args: Array<*>) {
+  function throttled (...args: Array<*>) {
     if (timerId !== null) return
-
     const run = fn.bind(this, ...args)
 
     if (isImmediate) {
@@ -264,7 +266,7 @@ export const throttle = (fn: Function, wait: number = 0, isImmediate: boolean) =
       if (!isImmediate) run()
       timerId = null
     }, wait)
-
-    return cancel
   }
+
+  return Object.assign(throttled, { cancel })
 }
