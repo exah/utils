@@ -187,9 +187,14 @@ export const once = (fn: Function): Function => {
 }
 
 /**
- * Return debounced function, that delays calling until `timeout` is elapsed. <br />
+ * Return debounced function, that delays call until `timeout` is elapsed. <br />
  * If `isImmediate` is `true`, call function first, than delays next call. <br />
- * Useful for preventing "double clicks" or updating metrics of screen after resize.
+ * Useful for preventing "double clicks" or updating metrics after scroll / resize.
+ *
+ * - 🔗 [The Difference Between Throttling and Debouncing](https://css-tricks.com/the-difference-between-throttling-and-debouncing).
+ * - 🔗 [Debouncing and Throttling Explained Through Examples](https://css-tricks.com/debouncing-throttling-explained-examples).
+ *
+ * See {@link throttle}, {@link debouncePromise}.
  *
  * @example
  * import { debounce } from '@exah/utils'
@@ -200,7 +205,7 @@ export const once = (fn: Function): Function => {
  * window.addEventListener('resize', fn)
  */
 
-export const debounce = (fn: Function, timeout: number = 0, isImmediate: boolean) => {
+export const debounce = (fn: Function, time: number = 0, isImmediate: boolean) => {
   let timerId = null
 
   const cancel = () => {
@@ -222,7 +227,7 @@ export const debounce = (fn: Function, timeout: number = 0, isImmediate: boolean
     timerId = setTimeout(() => {
       if (!isImmediate) run()
       timerId = null
-    }, timeout)
+    }, time)
 
     return result
   }
@@ -235,6 +240,11 @@ export const debounce = (fn: Function, timeout: number = 0, isImmediate: boolean
  * If `isImmediate` is `true`, call function first, than wait next call. <br />
  * Useful for optimizing for constant event watching (like `change`, `scroll`, etc.).
  *
+ * - 🔗 [The Difference Between Throttling and Debouncing](https://css-tricks.com/the-difference-between-throttling-and-debouncing).
+ * - 🔗 [Debouncing and Throttling Explained Through Examples](https://css-tricks.com/debouncing-throttling-explained-examples).
+ *
+ * See {@link debounce}, {@link debouncePromise}.
+ *
  * @example
  * import { throttle } from '@exah/utils'
  *
@@ -244,7 +254,7 @@ export const debounce = (fn: Function, timeout: number = 0, isImmediate: boolean
  * window.addEventListener('scroll', fn)
  */
 
-export const throttle = (fn: Function, wait: number = 0, isImmediate: boolean) => {
+export const throttle = (fn: Function, time: number = 0, isImmediate: boolean) => {
   let timerId = null
 
   const cancel = () => {
@@ -265,7 +275,7 @@ export const throttle = (fn: Function, wait: number = 0, isImmediate: boolean) =
     timerId = setTimeout(() => {
       if (!isImmediate) run()
       timerId = null
-    }, wait)
+    }, time)
   }
 
   return Object.assign(throttled, { cancel })

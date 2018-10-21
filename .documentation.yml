@@ -29,6 +29,18 @@ toc:
       - debounce
       - throttle
 
+  - name: Promises
+    children:
+      - wait
+      - settle
+      - reflect
+      - alwaysResolve
+      - neverResolve
+      - queue
+      - timeout
+      - deferredPromise
+      - debouncePromise
+
   - name: Checks
     children:
       - is
