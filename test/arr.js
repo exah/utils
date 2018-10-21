@@ -2,12 +2,12 @@ import test from 'ava'
 
 import {
   toArr,
-  flatten
+  flattenArr
 } from '../src'
 
-test('flatten', t => {
+test('flattenArr', t => {
   t.deepEqual(
-    flatten([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]),
+    flattenArr([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]),
     [ 1, 2, 3, 4, 5, 6, 7 ]
   )
 })

@@ -2,91 +2,245 @@
 
 ### Table of Contents
 
--   [Arrays][1]
-    -   [toArr][2]
+-   [Objects][1]
+    -   [path][2]
         -   [Parameters][3]
         -   [Examples][4]
-    -   [flatten][5]
+    -   [mapObj][5]
         -   [Parameters][6]
         -   [Examples][7]
--   [Objects][8]
-    -   [toObj][9]
-        -   [Parameters][10]
-        -   [Examples][11]
-    -   [mapObj][12]
-        -   [Parameters][13]
-        -   [Examples][14]
-    -   [filterObj][15]
-        -   [Parameters][16]
-        -   [Examples][17]
-    -   [path][18]
-        -   [Parameters][19]
-        -   [Examples][20]
--   [Functions][21]
-    -   [always][22]
-        -   [Parameters][23]
-        -   [Examples][24]
-    -   [T][25]
+    -   [filterObj][8]
+        -   [Parameters][9]
+        -   [Examples][10]
+    -   [reduceObj][11]
+        -   [Parameters][12]
+        -   [Examples][13]
+    -   [toObj][14]
+        -   [Parameters][15]
+        -   [Examples][16]
+    -   [flattenObj][17]
+        -   [Parameters][18]
+        -   [Examples][19]
+-   [Arrays][20]
+    -   [toArr][21]
+        -   [Parameters][22]
+        -   [Examples][23]
+    -   [flattenArr][24]
+        -   [Parameters][25]
         -   [Examples][26]
-    -   [F][27]
-        -   [Examples][28]
-    -   [noop][29]
+-   [Functions][27]
+    -   [always][28]
+        -   [Parameters][29]
         -   [Examples][30]
-    -   [identity][31]
-        -   [Parameters][32]
-        -   [Examples][33]
-    -   [compose][34]
-        -   [Parameters][35]
+    -   [T][31]
+        -   [Examples][32]
+    -   [F][33]
+        -   [Examples][34]
+    -   [noop][35]
         -   [Examples][36]
-    -   [pipe][37]
+    -   [identity][37]
         -   [Parameters][38]
         -   [Examples][39]
-    -   [curry][40]
+    -   [compose][40]
         -   [Parameters][41]
         -   [Examples][42]
-    -   [curryN][43]
+    -   [pipe][43]
         -   [Parameters][44]
         -   [Examples][45]
-    -   [once][46]
+    -   [curry][46]
         -   [Parameters][47]
         -   [Examples][48]
-    -   [debounce][49]
+    -   [curryN][49]
         -   [Parameters][50]
         -   [Examples][51]
-    -   [throttle][52]
+    -   [once][52]
         -   [Parameters][53]
         -   [Examples][54]
--   [Logic][55]
-    -   [is][56]
-        -   [Parameters][57]
-        -   [Examples][58]
-    -   [isPlainObj][59]
-        -   [Parameters][60]
-        -   [Examples][61]
-    -   [isEmpty][62]
+    -   [debounce][55]
+        -   [Parameters][56]
+        -   [Examples][57]
+    -   [throttle][58]
+        -   [Parameters][59]
+        -   [Examples][60]
+-   [Logic][61]
+    -   [is][62]
         -   [Parameters][63]
         -   [Examples][64]
-    -   [isNil][65]
+    -   [isPlainObj][65]
         -   [Parameters][66]
         -   [Examples][67]
-    -   [isNum][68]
+    -   [isEmpty][68]
         -   [Parameters][69]
         -   [Examples][70]
-    -   [isStr][71]
+    -   [isNil][71]
         -   [Parameters][72]
         -   [Examples][73]
-    -   [isBool][74]
+    -   [isNum][74]
         -   [Parameters][75]
         -   [Examples][76]
-    -   [isFn][77]
+    -   [isStr][77]
         -   [Parameters][78]
         -   [Examples][79]
-    -   [isArr][80]
+    -   [isBool][80]
         -   [Parameters][81]
         -   [Examples][82]
-    -   [fallbackTo][83]
+    -   [isFn][83]
         -   [Parameters][84]
         -   [Examples][85]
+    -   [isArr][86]
+        -   [Parameters][87]
+        -   [Examples][88]
+    -   [fallbackTo][89]
+        -   [Parameters][90]
+        -   [Examples][91]
+
+## Objects
+
+
+
+
+### path
+
+Get object value by path (string or as argument list)
+
+#### Parameters
+
+-   `str` **[string][92]**  (optional, default `''`)
+-   `paths` **...[Array][93]&lt;[string][92]>** 
+
+#### Examples
+
+```javascript
+import { path } from '@exah/utils'
+```
+
+```javascript
+const target = {
+  a: { b: { c: { d: 1 } } },
+  e: [ 2 ]
+}
+
+path('a', 'b', 'c', 'd')(target) // → 1
+path('a.b.c.d')(target) // → 1
+path('e', 0)(target) // → 2
+path('e.0')(target) // → 2
+path('a', 'b', 'c', 'd', 'e')(target) // → undefined
+path('e.1')(target) // → undefined
+```
+
+### mapObj
+
+Like `Array#map`, but for objects.
+Useful for renaming keys or converting values.
+
+#### Parameters
+
+-   `fn` **[Function][94]** 
+-   `obj` **[Object][95]** 
+
+#### Examples
+
+```javascript
+import { mapObj } from '@exah/utils'
+```
+
+```javascript
+mapObj((key, value, index, obj) => [ value, key ], { a: 'b' }) // → { b: 'a' }
+
+const swap = mapObj((key, value) => [ value, key ])
+swap({ a: 'b' }) // → { b: 'a' }
+```
+
+### filterObj
+
+Filter object by key or value.
+
+#### Parameters
+
+-   `fn` **[Function][94]** 
+-   `obj` **[Object][95]** 
+
+#### Examples
+
+```javascript
+import { filterObj } from '@exah/utils'
+```
+
+```javascript
+filterObj((key) => key !== 'a', { a: 'b' }) // → {}
+
+const withoutZeros = filterObj((key, value) => value !== 0)
+withoutZeros({ a: 0, b: 1, c: 3, d: 4 }) // → { b: 1, c: 3, d: 4 }
+```
+
+### reduceObj
+
+Like `Array#reduce`, but for objects.
+
+#### Parameters
+
+-   `fn` **[Function][94]** 
+-   `obj` **[Object][95]** 
+-   `target` **any**  (optional, default `{}`)
+
+#### Examples
+
+```javascript
+import { reduceObj } from '@exah/utils'
+```
+
+```javascript
+const target = { john: 100, jack: 150, joseph: 170 }
+const countValues = (acc, key, value) => acc + value
+
+reduceObj(countValues, target, 0) // → 420
+```
+
+### toObj
+
+Convert an array to object, by default works like "merge".
+
+#### Parameters
+
+-   `arr` **[Array][93]&lt;any>** 
+-   `fn` **[Function][94]**  (optional, default `identity`)
+
+#### Examples
+
+```javascript
+import { toObj } from '@exah/utils'
+```
+
+```javascript
+toObj({ a: 'b' }) // → { a: 'b' }
+toObj([ { color: 'red' }, { size: 'big' } ]) // → { color: 'red', size: 'big' }
+toObj([ [ 'a', 'b' ] ], ([ key, value ]) => ({ [key]: value })) // → { a: 'b' }
+```
+
+Returns **[Object][95]** 
+
+### flattenObj
+
+Flatten an object by traveling deep inside [Object][96] or [Array][97] values.
+
+#### Parameters
+
+-   `obj` **[Object][95]** 
+-   `joiner` **[string][92]**  (optional, default `'.'`)
+-   `travelInside` **function (any): [boolean][98]**  (optional, default `isPlainObjectOrArray`)
+
+#### Examples
+
+```javascript
+import { flattenObj } from '@exah/utils'
+```
+
+```javascript
+flattenObj({ a: { b: { c: { d: 1, e: [ 1, 2 ] } }, f: 0 })
+// → { 'a.b.c.d': 1, 'a.b.c.e.0': 1, 'a.b.c.e.1': 2, f: 0 }
+```
+
+Returns **[Object][95]** 
 
 ## Arrays
 
@@ -114,130 +268,30 @@ toArr(null) // → []
 toArr([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
 ```
 
-Returns **[Array][86]&lt;any>** 
+Returns **[Array][93]&lt;any>** 
 
-### flatten
+### flattenArr
+
+Alias: `flatten`
 
 Flattens multidimensional arrays.
 
 #### Parameters
 
--   `arr` **[Array][86]&lt;any>** 
+-   `arr` **[Array][93]&lt;any>** 
 
 #### Examples
 
 ```javascript
-import { flatten } from '@exah/utils'
+import { flattenArr } from '@exah/utils'
 ```
 
 ```javascript
-flatten([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
-flatten([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]) // → [ 1, 2, 3, 4, 5, 6, 7 ]
+flattenArr([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
+flattenArr([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]) // → [ 1, 2, 3, 4, 5, 6, 7 ]
 ```
 
-Returns **[Array][86]&lt;any>** 
-
-## Objects
-
-
-
-
-### toObj
-
-Convert an array to object, by default works like "merge".
-
-#### Parameters
-
--   `arr` **[Array][86]&lt;any>** 
--   `fn` **[Function][87]**  (optional, default `identity`)
-
-#### Examples
-
-```javascript
-import { toObj } from '@exah/utils'
-```
-
-```javascript
-toObj({ a: 'b' }) // → { a: 'b' }
-toObj([ { color: 'red' }, { size: 'big' } ]) // → { color: 'red', size: 'big' }
-toObj([ [ 'a', 'b' ] ], ([ key, value ]) => ({ [key]: value })) // → { a: 'b' }
-```
-
-Returns **[Object][88]** 
-
-### mapObj
-
-Like `Array#map`, but for objects.
-Useful for renaming keys or converting values.
-
-#### Parameters
-
--   `fn` **[Function][87]** 
--   `obj` **[Object][88]** 
-
-#### Examples
-
-```javascript
-import { mapObj } from '@exah/utils'
-```
-
-```javascript
-mapObj((key, value, index, obj) => [ value, key ], { a: 'b' }) // → { b: 'a' }
-
-const swap = mapObj((key, value) => [ value, key ])
-swap({ a: 'b' }) // → { b: 'a' }
-```
-
-### filterObj
-
-Filter object by key or value.
-
-#### Parameters
-
--   `fn`  
--   `obj`  
-
-#### Examples
-
-```javascript
-import { filterObj } from '@exah/utils'
-```
-
-```javascript
-filterObj((key) => key !== 'a', { a: 'b' }) // → {}
-
-const withoutZeros = filterObj((key, value) => value !== 0)
-withoutZeros({ a: 0, b: 1, c: 3, d: 4 }) // → { b: 1, c: 3, d: 4 }
-```
-
-### path
-
-Get object value by path (string or as argument list)
-
-#### Parameters
-
--   `str` **[string][89]**  (optional, default `''`)
--   `paths` **...[Array][86]&lt;[string][89]>** 
-
-#### Examples
-
-```javascript
-import { path } from '@exah/utils'
-```
-
-```javascript
-const target = {
-  a: { b: { c: { d: 1 } } },
-  e: [ 2 ]
-}
-
-path('a', 'b', 'c', 'd')(target) // → 1
-path('a.b.c.d')(target) // → 1
-path('e', 0)(target) // → 2
-path('e.0')(target) // → 2
-path('a', 'b', 'c', 'd', 'e')(target) // → undefined
-path('e.1')(target) // → undefined
-```
+Returns **[Array][93]&lt;any>** 
 
 ## Functions
 
@@ -266,7 +320,7 @@ const noop = always()
 noop() // → undefined
 ```
 
-Returns **[Function][87]** 
+Returns **[Function][94]** 
 
 ### T
 
@@ -314,7 +368,7 @@ import { noop } from '@exah/utils'
 noop() // → undefined
 ```
 
-Returns **[undefined][90]** 
+Returns **[undefined][99]** 
 
 ### identity
 
@@ -343,7 +397,7 @@ Right-to-left function composition
 
 #### Parameters
 
--   `fns` **...[Array][86]&lt;[Function][87]>** 
+-   `fns` **...[Array][93]&lt;[Function][94]>** 
 
 #### Examples
 
@@ -359,7 +413,7 @@ const c = (val) => val * 10
 compose(a, b, c)(1) // → a(b(c(1))) → (((1 * 10) / 2) + 1) → 6
 ```
 
-Returns **[Function][87]** 
+Returns **[Function][94]** 
 
 ### pipe
 
@@ -367,7 +421,7 @@ Left-to-right function composition
 
 #### Parameters
 
--   `fns` **...[Array][86]&lt;[Function][87]>** 
+-   `fns` **...[Array][93]&lt;[Function][94]>** 
 
 #### Examples
 
@@ -383,7 +437,7 @@ const c = (val) => val * 10
 pipe(a, b, c)(1) // → c(b(a(1))) → (((1 + 1) / 2) * 10) → 10
 ```
 
-Returns **[Function][87]** 
+Returns **[Function][94]** 
 
 ### curry
 
@@ -391,8 +445,8 @@ Return curried equivalent of provided function.
 
 #### Parameters
 
--   `fn` **[Function][87]** 
--   `args` **...[Array][86]&lt;any>** 
+-   `fn` **[Function][94]** 
+-   `args` **...[Array][93]&lt;any>** 
 
 #### Examples
 
@@ -413,7 +467,7 @@ fn(1)(2, 3) // → 6
 fn(1)(2)(3) // → 6
 ```
 
-Returns **[Function][87]** 
+Returns **[Function][94]** 
 
 ### curryN
 
@@ -421,9 +475,9 @@ Return curried function with specified number of arguments.
 
 #### Parameters
 
--   `numOfArgs` **[number][91]** 
--   `fn` **[Function][87]** 
--   `args` **...[Array][86]&lt;any>** 
+-   `numOfArgs` **[number][100]** 
+-   `fn` **[Function][94]** 
+-   `args` **...[Array][93]&lt;any>** 
 
 #### Examples
 
@@ -444,7 +498,7 @@ fn(1)(2, 3) // → 6
 fn(1)(2)(3) // → 6
 ```
 
-Returns **[Function][87]** 
+Returns **[Function][94]** 
 
 ### once
 
@@ -452,7 +506,7 @@ Return function that always return result of first invocation, so function only 
 
 #### Parameters
 
--   `fn` **[Function][87]** 
+-   `fn` **[Function][94]** 
 
 #### Examples
 
@@ -467,7 +521,7 @@ fn(1, 2, 3) // → 1 + 2 + 3
 fn(10, 20, 30) // → 1 + 2 + 3
 ```
 
-Returns **[Function][87]** 
+Returns **[Function][94]** 
 
 ### debounce
 
@@ -477,9 +531,9 @@ Useful for preventing "double clicks" or updating metrics of screen after resize
 
 #### Parameters
 
--   `fn` **[Function][87]** 
--   `timeout` **[number][91]**  (optional, default `0`)
--   `isImmediate` **[boolean][92]** 
+-   `fn` **[Function][94]** 
+-   `timeout` **[number][100]**  (optional, default `0`)
+-   `isImmediate` **[boolean][98]** 
 
 #### Examples
 
@@ -501,9 +555,9 @@ Useful for optimizing for constant event watching (like `change`, `scroll`, etc.
 
 #### Parameters
 
--   `fn` **[Function][87]** 
--   `wait` **[number][91]**  (optional, default `0`)
--   `isImmediate` **[boolean][92]** 
+-   `fn` **[Function][94]** 
+-   `wait` **[number][100]**  (optional, default `0`)
+-   `isImmediate` **[boolean][98]** 
 
 #### Examples
 
@@ -528,7 +582,7 @@ Checks if `val` has prototype of an `Object`. (Alternative to `instanceof`)
 
 #### Parameters
 
--   `obj` **[Object][88]** — Base `Object`
+-   `obj` **[Object][95]** — Base `Object`
 -   `val` **any** — Value to test
 
 #### Examples
@@ -563,7 +617,7 @@ const isNum = is(Number)
 isNum(1) // → true
 ```
 
-Returns **[boolean][92]** 
+Returns **[boolean][98]** 
 
 ### isPlainObj
 
@@ -590,7 +644,7 @@ function Fn () {}
 isPlainObj(new Fn()) // → false
 ```
 
-Returns **[boolean][92]** 
+Returns **[boolean][98]** 
 
 ### isEmpty
 
@@ -598,7 +652,7 @@ Check if `val` is empty. Works with `Array`, `Objects`, `Map`, `Set` and `null`
 
 #### Parameters
 
--   `val` **[Object][88]** 
+-   `val` **[Object][95]** 
 
 #### Examples
 
@@ -741,7 +795,7 @@ Return last value if some of arguments is `null` or `undefined`
 
 #### Parameters
 
--   `args` **...[Array][86]&lt;any>** 
+-   `args` **...[Array][93]&lt;any>** 
 
 #### Examples
 
@@ -760,186 +814,202 @@ fallbackTo(target.nothing, target.f, target.e) // → 3
 fallbackTo(target.nothing) // → undefined
 ```
 
-[1]: #arrays
+[1]: #objects
 
-[2]: #toarr
+[2]: #path
 
 [3]: #parameters
 
 [4]: #examples
 
-[5]: #flatten
+[5]: #mapobj
 
 [6]: #parameters-1
 
 [7]: #examples-1
 
-[8]: #objects
+[8]: #filterobj
 
-[9]: #toobj
+[9]: #parameters-2
 
-[10]: #parameters-2
+[10]: #examples-2
 
-[11]: #examples-2
+[11]: #reduceobj
 
-[12]: #mapobj
+[12]: #parameters-3
 
-[13]: #parameters-3
+[13]: #examples-3
 
-[14]: #examples-3
+[14]: #toobj
 
-[15]: #filterobj
+[15]: #parameters-4
 
-[16]: #parameters-4
+[16]: #examples-4
 
-[17]: #examples-4
+[17]: #flattenobj
 
-[18]: #path
+[18]: #parameters-5
 
-[19]: #parameters-5
+[19]: #examples-5
 
-[20]: #examples-5
+[20]: #arrays
 
-[21]: #functions
+[21]: #toarr
 
-[22]: #always
+[22]: #parameters-6
 
-[23]: #parameters-6
+[23]: #examples-6
 
-[24]: #examples-6
+[24]: #flattenarr
 
-[25]: #t
+[25]: #parameters-7
 
 [26]: #examples-7
 
-[27]: #f
+[27]: #functions
 
-[28]: #examples-8
+[28]: #always
 
-[29]: #noop
+[29]: #parameters-8
 
-[30]: #examples-9
+[30]: #examples-8
 
-[31]: #identity
+[31]: #t
 
-[32]: #parameters-7
+[32]: #examples-9
 
-[33]: #examples-10
+[33]: #f
 
-[34]: #compose
+[34]: #examples-10
 
-[35]: #parameters-8
+[35]: #noop
 
 [36]: #examples-11
 
-[37]: #pipe
+[37]: #identity
 
 [38]: #parameters-9
 
 [39]: #examples-12
 
-[40]: #curry
+[40]: #compose
 
 [41]: #parameters-10
 
 [42]: #examples-13
 
-[43]: #curryn
+[43]: #pipe
 
 [44]: #parameters-11
 
 [45]: #examples-14
 
-[46]: #once
+[46]: #curry
 
 [47]: #parameters-12
 
 [48]: #examples-15
 
-[49]: #debounce
+[49]: #curryn
 
 [50]: #parameters-13
 
 [51]: #examples-16
 
-[52]: #throttle
+[52]: #once
 
 [53]: #parameters-14
 
 [54]: #examples-17
 
-[55]: #logic
+[55]: #debounce
 
-[56]: #is
+[56]: #parameters-15
 
-[57]: #parameters-15
+[57]: #examples-18
 
-[58]: #examples-18
+[58]: #throttle
 
-[59]: #isplainobj
+[59]: #parameters-16
 
-[60]: #parameters-16
+[60]: #examples-19
 
-[61]: #examples-19
+[61]: #logic
 
-[62]: #isempty
+[62]: #is
 
 [63]: #parameters-17
 
 [64]: #examples-20
 
-[65]: #isnil
+[65]: #isplainobj
 
 [66]: #parameters-18
 
 [67]: #examples-21
 
-[68]: #isnum
+[68]: #isempty
 
 [69]: #parameters-19
 
 [70]: #examples-22
 
-[71]: #isstr
+[71]: #isnil
 
 [72]: #parameters-20
 
 [73]: #examples-23
 
-[74]: #isbool
+[74]: #isnum
 
 [75]: #parameters-21
 
 [76]: #examples-24
 
-[77]: #isfn
+[77]: #isstr
 
 [78]: #parameters-22
 
 [79]: #examples-25
 
-[80]: #isarr
+[80]: #isbool
 
 [81]: #parameters-23
 
 [82]: #examples-26
 
-[83]: #fallbackto
+[83]: #isfn
 
 [84]: #parameters-24
 
 [85]: #examples-27
 
-[86]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[86]: #isarr
 
-[87]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[87]: #parameters-25
 
-[88]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[88]: #examples-28
 
-[89]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[89]: #fallbackto
 
-[90]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
+[90]: #parameters-26
 
-[91]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[91]: #examples-29
 
-[92]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[92]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[93]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[94]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+
+[95]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+[96]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+[97]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[98]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+
+[99]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
+
+[100]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number

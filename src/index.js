@@ -1,11 +1,14 @@
 export {
   toArr,
-  flatten
+  flattenArr as flatten,
+  flattenArr
 } from './arr'
 
 export {
   toObj,
+  reduceObj,
   mapObj,
+  flattenObj,
   filterObj,
   path
 } from './obj'

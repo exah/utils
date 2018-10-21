@@ -1,15 +1,17 @@
 toc:
+  - name: Objects
+    children:
+      - path
+      - mapObj
+      - filterObj
+      - reduceObj
+      - toObj
+      - flattenObj
+
   - name: Arrays
     children:
       - toArr
-      - flatten
-
-  - name: Objects
-    children:
-      - toObj
-      - mapObj
-      - filterObj
-      - path
+      - flattenArr
 
   - name: Functions
     children:

@@ -2,7 +2,9 @@ import test from 'ava'
 
 import {
   toObj,
+  reduceObj,
   mapObj,
+  flattenObj,
   filterObj,
   path
 } from '../src'
@@ -27,11 +29,38 @@ test('toObj', t => {
   )
 })
 
+test('reduceObj', t => {
+  t.is(reduceObj((acc, key, value) => acc + value, { a: 1, b: 2, c: 3 }, 0), 6)
+})
+
 test('mapObj', t => {
   t.deepEqual(
     mapObj((key, value) => [ value, key ], { a: 'b' }),
     { b: 'a' }
   )
+})
+
+test('flattenObj', t => {
+  const target = {
+    a: { b: { c: { d: 1, e: 'string' }, d: false } },
+    e: [ 2, 'string', { a: { b: 2 }, c: 3 } ],
+    f: null,
+    g: 'string',
+    h: 100
+  }
+
+  t.deepEqual(flattenObj(target), {
+    'a.b.c.d': 1,
+    'a.b.c.e': 'string',
+    'a.b.d': false,
+    'e.0': 2,
+    'e.1': 'string',
+    'e.2.a.b': 2,
+    'e.2.c': 3,
+    f: null,
+    g: 'string',
+    h: 100
+  })
 })
 
 test('filterObj', t => {

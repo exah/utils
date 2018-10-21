@@ -1,6 +1,7 @@
 // @flow
 import { curryN, identity } from './fns'
 import { toArr } from './arr'
+import { isPlainObj, isArr } from './logic'
 
 /**
  * Convert an array to object, by default works like "merge".
@@ -19,6 +20,27 @@ export const toObj = (arr: Array<*>, fn: Function = identity): Object =>
     .reduce((acc, ...rest) => ({ ...acc, ...fn(...rest) }), {})
 
 /**
+ * Like `Array#reduce`, but for objects.
+ *
+ * @example
+ * import { reduceObj } from '@exah/utils'
+ *
+ * @example
+ * const target = { john: 100, jack: 150, joseph: 170 }
+ * const countValues = (acc, key, value) => acc + value
+ *
+ * reduceObj(countValues, target, 0) // → 420
+ */
+
+const reduceObj = (fn: Function, obj: Object, target: * = {}) =>
+  Object
+    .keys(obj)
+    .reduce((acc, key, index) => fn(acc, key, obj[key], index, obj), target)
+
+const curriedReduceObj = curryN(2, reduceObj)
+export { curriedReduceObj as reduceObj }
+
+/**
  * Like `Array#map`, but for objects.
  * Useful for renaming keys or converting values.
  *
@@ -33,15 +55,10 @@ export const toObj = (arr: Array<*>, fn: Function = identity): Object =>
  */
 
 const mapObj = (fn: Function, obj: Object) =>
-  Object
-    .keys(obj)
-    .reduce((acc, key, index) => {
-      const [ nextKey, nextVal ] = fn(key, obj[key], index, obj)
-      return {
-        ...acc,
-        [nextKey]: nextVal
-      }
-    }, {})
+  reduceObj((acc, key, value, index, src) => {
+    const [ nextKey, nextVal ] = fn(key, value, index, obj)
+    return { ...acc, [nextKey]: nextVal }
+  }, obj)
 
 const curriedMapObj = curryN(2, mapObj)
 export { curriedMapObj as mapObj }
@@ -59,23 +76,53 @@ export { curriedMapObj as mapObj }
  * withoutZeros({ a: 0, b: 1, c: 3, d: 4 }) // → { b: 1, c: 3, d: 4 }
  */
 
-const filterObj = (fn, obj) => {
-  const target = {}
-
-  for (let key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      const value = obj[key]
-      if (fn(key, value)) {
-        target[key] = value
-      }
-    }
-  }
-
-  return target
-}
+const filterObj = (fn: Function, obj: Object) => reduceObj(
+  (acc, key, value) => fn(key, value) ? { ...acc, [key]: value } : acc,
+  obj
+)
 
 const curriedFilterObj = curryN(2, filterObj)
 export { curriedFilterObj as filterObj }
+
+/**
+ * @private For `flattenObj`
+ */
+
+const isPlainObjectOrArray = (val: *): boolean => isPlainObj(val) || isArr(val)
+
+/**
+ * Flatten an object by traveling deep inside {@link Object} or {@link Array} values.
+ *
+ * @example
+ * import { flattenObj } from '@exah/utils'
+ *
+ * @example
+ * flattenObj({ a: { b: { c: { d: 1, e: [ 1, 2 ] } }, f: 0 })
+ * // → { 'a.b.c.d': 1, 'a.b.c.e.0': 1, 'a.b.c.e.1': 2, f: 0 }
+ */
+
+export function flattenObj (
+  obj: Object,
+  joiner: string = '.',
+  travelInside: (*) => boolean = isPlainObjectOrArray
+): Object {
+  return reduceObj((acc, key, value) => {
+    if (travelInside(value)) {
+      return {
+        ...acc,
+        ...mapObj(
+          (subKey, subValue) => [ [ key, subKey ].join(joiner), subValue ],
+          flattenObj(value, joiner)
+        )
+      }
+    }
+
+    return {
+      ...acc,
+      [key]: value
+    }
+  }, obj)
+}
 
 /**
  * Get object value by path (string or as argument list)

@@ -17,16 +17,18 @@ import { isArr } from './logic'
 export const toArr = (value: any): Array<*> => value == null ? [] : [].concat(value)
 
 /**
+ * Alias: `flatten`
+ *
  * Flattens multidimensional arrays.
  *
  * @example
- * import { flatten } from '@exah/utils'
+ * import { flattenArr } from '@exah/utils'
  *
  * @example
- * flatten([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
- * flatten([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]) // → [ 1, 2, 3, 4, 5, 6, 7 ]
+ * flattenArr([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
+ * flattenArr([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]) // → [ 1, 2, 3, 4, 5, 6, 7 ]
  */
 
-export function flatten (arr: Array<*>): Array<*> {
-  return arr.reduce((acc, val) => acc.concat(isArr(val) ? flatten(val) : val), [])
+export function flattenArr (arr: Array<*>): Array<*> {
+  return arr.reduce((acc, val) => acc.concat(isArr(val) ? flattenArr(val) : val), [])
 }
