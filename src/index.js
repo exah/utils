@@ -41,3 +41,10 @@ export {
   isEmptyObj,
   isPlainObj
 } from './checks'
+
+export {
+  alwaysResolve,
+  deferredPromise,
+  debouncePromise,
+  wait
+} from './promises'

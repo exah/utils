@@ -12,10 +12,9 @@ import {
   curryN,
   once,
   debounce,
-  throttle
+  throttle,
+  wait
 } from '../src'
-
-const sleep = (duration) => new Promise((resolve) => setTimeout(resolve, duration))
 
 test('always', t => {
   t.is(always(1)(), 1)
@@ -91,32 +90,32 @@ test('debounce', async t => {
 
   t.is(count, 0)
 
-  await sleep(25)
+  await wait(25)
 
   t.is(count, 1)
 
   fn()
   fn()
   fn()
-  await sleep(30)
+  await wait(30)
 
   fn()
   fn()
   fn()
-  await sleep(30)
-
-  t.is(count, 3)
-
-  fn()
-  await sleep(10)
-  fn()
-  await sleep(10)
-  fn()
-  await sleep(10)
+  await wait(30)
 
   t.is(count, 3)
 
-  await sleep(25)
+  fn()
+  await wait(10)
+  fn()
+  await wait(10)
+  fn()
+  await wait(10)
+
+  t.is(count, 3)
+
+  await wait(25)
   t.is(count, 4)
 })
 
@@ -129,14 +128,14 @@ test('debounce immediate', async t => {
   fn()
   t.is(count, 1)
 
-  await sleep(30)
+  await wait(30)
   fn()
   fn()
   fn()
 
   t.is(count, 2)
 
-  await sleep(30)
+  await wait(30)
   t.is(count, 2)
 })
 
@@ -150,32 +149,32 @@ test('throttle', async t => {
 
   t.is(count, 0)
 
-  await sleep(25)
+  await wait(25)
 
   t.is(count, 1)
 
   fn()
   fn()
   fn()
-  await sleep(30)
+  await wait(30)
 
   fn()
   fn()
   fn()
-  await sleep(30)
+  await wait(30)
 
   t.is(count, 3)
 
   fn()
-  await sleep(10)
+  await wait(10)
   fn()
-  await sleep(10)
+  await wait(10)
   fn()
-  await sleep(10)
+  await wait(10)
 
   t.is(count, 4)
 
-  await sleep(25)
+  await wait(25)
   t.is(count, 5)
 })
 
@@ -188,13 +187,13 @@ test('throttle immediate', async t => {
   fn()
   t.is(count, 1)
 
-  await sleep(30)
+  await wait(30)
   fn()
   fn()
   fn()
 
   t.is(count, 2)
 
-  await sleep(30)
+  await wait(30)
   t.is(count, 2)
 })
