@@ -1,10 +1,19 @@
 // @flow
 import { noop } from './fns'
 
-export const wait = (duration: number, handler: Function = noop): Promise<*> =>
+export const wait = (duration: number, handler: Function = noop): Promise<void> =>
   new Promise((resolve) => handler(setTimeout(resolve, duration)))
 
+export const settle = (promise: Promise<*>) =>
+  promise.catch(noop)
+
+export const reflect = (promise: Promise<*>) =>
+  promise
+    .then((result) => ({ success: true, result }))
+    .catch((error) => ({ success: false, error }))
+
 export const alwaysResolve = (val: *) => () => Promise.resolve(val)
+export const neverPromise = (): Promise<void> => new Promise(() => null)
 
 export const deferredPromise = (fn: Function = noop): Promise<*> => {
   const methods = {}

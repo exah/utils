@@ -2,6 +2,8 @@ import test from 'ava'
 
 import {
   wait,
+  settle,
+  reflect,
   alwaysResolve,
   deferredPromise,
   debouncePromise
@@ -15,6 +17,25 @@ test('wait', async t => {
   const end = Date.now()
 
   t.true((end - start) >= duration)
+})
+
+test('settle', async t => {
+  const error = new Error('error')
+  t.is(await settle(Promise.reject(error)), undefined)
+})
+
+test('reflect', async t => {
+  const error = new Error('error')
+  t.deepEqual(await reflect(Promise.reject(error)), {
+    success: false,
+    error
+  })
+
+  const result = 'ok'
+  t.deepEqual(await reflect(Promise.resolve(result)), {
+    success: true,
+    result
+  })
 })
 
 test('alwaysResolve', async t => {

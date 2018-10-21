@@ -43,7 +43,10 @@ export {
 } from './checks'
 
 export {
+  settle,
+  reflect,
   alwaysResolve,
+  neverPromise,
   deferredPromise,
   debouncePromise,
   wait
