@@ -132,8 +132,8 @@ Get object value by path (string or as argument list)
 
 #### Parameters
 
--   `str` **[string][119]**  (optional, default `''`)
--   `paths` **...[Array][120]&lt;[string][119]>** 
+-   `first` **([string][119] \| [Array][120]&lt;[string][119]>)**  (optional, default `''`)
+-   `rest` **...[Array][120]&lt;[string][119]>** 
 
 #### Examples
 
@@ -148,12 +148,15 @@ const target = {
 }
 
 path('a', 'b', 'c', 'd')(target) // → 1
+path([ 'a', 'b', 'c', 'd' ])(target) // → 1
 path('a.b.c.d')(target) // → 1
 path('e', 0)(target) // → 2
 path('e.0')(target) // → 2
 path('a', 'b', 'c', 'd', 'e')(target) // → undefined
 path('e.1')(target) // → undefined
 ```
+
+Returns **[Function][121]** 
 
 ### mapObj
 

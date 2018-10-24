@@ -137,6 +137,7 @@ export function flattenObj (
  * }
  *
  * path('a', 'b', 'c', 'd')(target) // → 1
+ * path([ 'a', 'b', 'c', 'd' ])(target) // → 1
  * path('a.b.c.d')(target) // → 1
  * path('e', 0)(target) // → 2
  * path('e.0')(target) // → 2
@@ -144,9 +145,12 @@ export function flattenObj (
  * path('e.1')(target) // → undefined
  */
 
-export const path = (str: string = '', ...paths: Array<string>) => (obj: Object) =>
-  str.split('.')
-    .concat(paths)
+export const path = (
+  first: string | Array<string> = '',
+  ...rest: Array<string>
+): Function => (obj: Object) =>
+  []
+    .concat(...toArr(first).map(s => s.split('.')), rest)
     .reduce((a, c) => Object(a)[c], obj)
 
 /**

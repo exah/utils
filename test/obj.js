@@ -84,8 +84,12 @@ test('path', t => {
     e: [ 2 ]
   }
 
+  t.is(path([ 'a', 'b', 'c', 'd' ])(target), 1)
   t.is(path('a', 'b', 'c', 'd')(target), 1)
   t.is(path('a.b.c.d')(target), 1)
+  t.is(path([ 'a.b.c.d' ])(target), 1)
+  t.is(path([ 'a.b.c', 'd' ])(target), 1)
+  t.is(path([ 'a.b.c' ], 'd')(target), 1)
   t.is(path('e', 0)(target), 2)
   t.is(path('e.0')(target), 2)
 
