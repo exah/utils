@@ -982,6 +982,8 @@ isNil(undefined) // → true
 isNil(0) // → false
 ```
 
+Returns **[boolean][125]** 
+
 ### isNum
 
 Check if `val` primitive type is `number`, but not `NaN`.
@@ -1002,6 +1004,8 @@ isNum(10) // → true
 isNum(NaN) // → false
 ```
 
+Returns **[boolean][125]** 
+
 ### isStr
 
 Check if `val` primitive type is `string`.
@@ -1020,6 +1024,8 @@ import { isStr } from '@exah/utils'
 isStr('') // → true
 isStr([]) // → false
 ```
+
+Returns **[boolean][125]** 
 
 ### isBool
 
@@ -1041,6 +1047,8 @@ isBool(false) // → true
 isBool(0) // → false
 ```
 
+Returns **[boolean][125]** 
+
 ### isFn
 
 Check if `val` primitive type is `function`.
@@ -1060,6 +1068,8 @@ isFn(() => ()) // → true
 isFn(1) // → false
 ```
 
+Returns **[boolean][125]** 
+
 ### isArr
 
 Check if `val` is an `Array`.
@@ -1078,6 +1088,8 @@ import { isArr } from '@exah/utils'
 isArr([]) // → true
 isArr({ length: 3 }) // → false
 ```
+
+Returns **[boolean][125]** 
 
 [1]: #objects
 
