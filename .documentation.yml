@@ -32,7 +32,6 @@ toc:
   - name: Promises
     children:
       - wait
-      - settle
       - reflect
       - alwaysResolve
       - neverResolve
