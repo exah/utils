@@ -47,6 +47,7 @@ export {
   queue,
   reflect,
   timeout,
+  promisify,
   alwaysResolve,
   neverResolve,
   deferredPromise,

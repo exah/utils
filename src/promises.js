@@ -111,6 +111,27 @@ export const timeout = (
 ])
 
 /**
+ * Promisify callback-style async function
+ *
+ * @example
+ * import { promisify } from '@exah/utils'
+ *
+ * @example
+ * (async () => {
+ *   const fs = require('fs')
+ *   const { promisify } = require('@exah/utils')
+ *
+ *   await promisify(fs.readFile)(__dirname + '/sample.txt', 'utf8')
+ *   // → 'Hello World\n'
+ * })()
+ */
+
+export const promisify = (fn: Function): Function => (input, ...options) =>
+  new Promise((resolve, reject) =>
+    fn(input, ...options, (error, res) => (error && reject(error)) || resolve(res))
+  )
+
+/**
  * Create "deferred" promise.
  * It like regular {@link Promise}, but with exposed `resolve`, `reject` methods.
  *

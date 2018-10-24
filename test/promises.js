@@ -1,10 +1,13 @@
 import test from 'ava'
+import fs from 'fs'
+import path from 'path'
 
 import {
   wait,
   queue,
   reflect,
   timeout,
+  promisify,
   alwaysResolve,
   deferredPromise,
   debouncePromise
@@ -101,4 +104,9 @@ test('queue', async t => {
 test('timeout', async t => {
   t.is((await t.throwsAsync(timeout(wait(50), 10))).message, 'Timeout error')
   t.true(await timeout(wait(50).then(() => true), 100))
+})
+
+test('promisify', async t => {
+  const result = await promisify(fs.readFile)(path.join(__dirname, 'sample.txt'), 'utf8')
+  t.is(result, 'Hello World\n')
 })

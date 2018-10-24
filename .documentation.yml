@@ -37,6 +37,7 @@ toc:
       - neverResolve
       - queue
       - timeout
+      - promisify
       - deferredPromise
       - debouncePromise
 
