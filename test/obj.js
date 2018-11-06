@@ -96,6 +96,9 @@ test('path', t => {
   t.is(path('a', 'b', 'c', 'd', 'e')(target), undefined)
   t.is(path('a.b.c.d.e.f.g')(target), undefined)
   t.is(path('e.1')(target), undefined)
+
+  t.is(path()(target), target)
+  t.is(path([])(target), target)
 })
 
 test('fallbackTo', t => {

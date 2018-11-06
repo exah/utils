@@ -146,7 +146,7 @@ export function flattenObj (
  */
 
 export const path = (
-  first: string | Array<string> = '',
+  first: string | Array<string> = [],
   ...rest: Array<string>
 ): Function => (obj: Object) =>
   []
