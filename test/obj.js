@@ -21,11 +21,15 @@ test('toObj', t => {
     { a: 'b' }
   )
 
+  const objFromEntries = ([ key, value ]) => ({ [key]: value })
+
   t.deepEqual(
-    toObj(
-      [ [ 'a', 'b' ] ],
-      ([ key, value ]) => ({ [key]: value })
-    ),
+    toObj([ [ 'a', 'b' ] ], objFromEntries),
+    { a: 'b' }
+  )
+
+  t.deepEqual(
+    toObj(objFromEntries)([ [ 'a', 'b' ] ]),
     { a: 'b' }
   )
 })

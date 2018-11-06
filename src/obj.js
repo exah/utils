@@ -1,7 +1,7 @@
 // @flow
 import { curryN, identity } from './fns'
 import { toArr } from './arr'
-import { isPlainObj, isArr } from './checks'
+import { isPlainObj, isArr, isFn } from './checks'
 
 /**
  * Convert an array to object, by default works like "merge".
@@ -12,12 +12,29 @@ import { isPlainObj, isArr } from './checks'
  * @example
  * toObj({ a: 'b' }) // → { a: 'b' }
  * toObj([ { color: 'red' }, { size: 'big' } ]) // → { color: 'red', size: 'big' }
- * toObj([ [ 'a', 'b' ] ], ([ key, value ]) => ({ [key]: value })) // → { a: 'b' }
+ * toObj(([ key, value ]) => ({ [key]: value }), [ [ 'a', 'b' ] ]) // → { a: 'b' }
+ *
+ * const objFromEntries = toObj(([ key, value ]) => ({ [key]: value }))
+ * objFromEntries([ [ 'a', 'b' ] ]) // → { a: 'b' }
  */
 
-export const toObj = (arr: Array<*>, fn: Function = identity): Object =>
-  toArr(arr)
+const toObj = (input: *, fn: Function = identity): Object =>
+  toArr(input)
     .reduce((acc, ...rest) => ({ ...acc, ...fn(...rest) }), {})
+
+const curriedToObj = (inputOrFn: * | Function, fnOrInput: Function | *) => {
+  const inputIsFn = isFn(inputOrFn)
+  const fn = inputIsFn ? inputOrFn : fnOrInput
+
+  if (inputIsFn) {
+    if (fnOrInput === undefined) return (input: *) => toObj(input, fn)
+    return toObj(inputOrFn, fn)
+  }
+
+  return toObj(inputOrFn, fn)
+}
+
+export { curriedToObj as toObj }
 
 /**
  * Like `Array#reduce`, but for objects.

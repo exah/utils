@@ -123,9 +123,9 @@
     -   [isArr][119]
         -   [Parameters][120]
         -   [Examples][121]
--   [isObj][122]
-    -   [Parameters][123]
-    -   [Examples][124]
+    -   [isObj][122]
+        -   [Parameters][123]
+        -   [Examples][124]
 
 ## Objects
 
@@ -138,7 +138,7 @@ Get object value by path (string or as argument list)
 
 #### Parameters
 
--   `first` **([string][125] \| [Array][126]&lt;[string][125]>)**  (optional, default `''`)
+-   `first` **([string][125] \| [Array][126]&lt;[string][125]>)**  (optional, default `[]`)
 -   `rest` **...[Array][126]&lt;[string][125]>** 
 
 #### Examples
@@ -238,7 +238,7 @@ Convert an array to object, by default works like "merge".
 
 #### Parameters
 
--   `arr` **[Array][126]&lt;any>** 
+-   `input` **any** 
 -   `fn` **[Function][127]**  (optional, default `identity`)
 
 #### Examples
@@ -250,7 +250,10 @@ import { toObj } from '@exah/utils'
 ```javascript
 toObj({ a: 'b' }) // → { a: 'b' }
 toObj([ { color: 'red' }, { size: 'big' } ]) // → { color: 'red', size: 'big' }
-toObj([ [ 'a', 'b' ] ], ([ key, value ]) => ({ [key]: value })) // → { a: 'b' }
+toObj(([ key, value ]) => ({ [key]: value }), [ [ 'a', 'b' ] ]) // → { a: 'b' }
+
+const objFromEntries = toObj(([ key, value ]) => ({ [key]: value }))
+objFromEntries([ [ 'a', 'b' ] ]) // → { a: 'b' }
 ```
 
 Returns **[Object][128]** 
@@ -1128,15 +1131,15 @@ isArr({ length: 3 }) // → false
 
 Returns **[boolean][131]** 
 
-## isObj
+### isObj
 
 Check if `val` primitive type is `object`.
 
-### Parameters
+#### Parameters
 
 -   `val` **any** 
 
-### Examples
+#### Examples
 
 ```javascript
 import { isObj } from '@exah/utils'
