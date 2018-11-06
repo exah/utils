@@ -57,7 +57,7 @@ export { curriedIs as is }
  * isFn(1) // → false
  */
 
-export const isFn = (val: *): boolean /*:: %checks */ => typeof val === 'function'
+export const isFn = (val: *)/*:: : boolean %checks */ => typeof val === 'function'
 
 /**
  * Check if `val` primitive type is `boolean`.
@@ -71,7 +71,7 @@ export const isFn = (val: *): boolean /*:: %checks */ => typeof val === 'functio
  * isBool(0) // → false
  */
 
-export const isBool = (val: *): boolean /*:: %checks */ => typeof val === 'boolean'
+export const isBool = (val: *)/*:: : boolean %checks */ => typeof val === 'boolean'
 
 /**
  * @private used for `isNum`
@@ -91,7 +91,7 @@ export const isNaN = (val: *) => val !== val // eslint-disable-line no-self-comp
  * isNum(NaN) // → false
  */
 
-export const isNum = (val: *): boolean /*:: %checks */ => !isNaN(val) && typeof val === 'number'
+export const isNum = (val: *)/*:: : boolean %checks */ => !isNaN(val) && typeof val === 'number'
 
 /**
  * Check if `val` primitive type is `string`.
@@ -104,7 +104,7 @@ export const isNum = (val: *): boolean /*:: %checks */ => !isNaN(val) && typeof 
  * isStr([]) // → false
  */
 
-export const isStr = (val: *): boolean /*:: %checks */ => typeof val === 'string'
+export const isStr = (val: *)/*:: : boolean %checks */ => typeof val === 'string'
 
 /**
  * Check if `val` is an `Array`.
@@ -117,7 +117,7 @@ export const isStr = (val: *): boolean /*:: %checks */ => typeof val === 'string
  * isArr({ length: 3 }) // → false
  */
 
-export const isArr = (val: *): boolean /*:: %checks */ => Array.isArray(val)
+export const isArr = (val: *)/*:: : boolean %checks */ => Array.isArray(val)
 
 /**
  * Check if `val` is `null` or `undefined`.
@@ -131,7 +131,7 @@ export const isArr = (val: *): boolean /*:: %checks */ => Array.isArray(val)
  * isNil(0) // → false
  */
 
-export const isNil = (val: *): boolean /*:: %checks */ => val == null
+export const isNil = (val: *)/*:: : boolean %checks */ => val == null
 
 /**
  * Check if `val` is empty object. Tests `Array`, `Objects`, `Map`, `Set`
@@ -175,7 +175,7 @@ export const isEmptyObj = (val: Object) => Boolean(val) && (
  * isEmpty([ 1, 2, 3 ]) // → false
  */
 
-export const isEmpty = (val: Object) =>
+export const isEmpty = (val: any) =>
   val == null || val === '' || isEmptyObj(val)
 
 /**

@@ -29,6 +29,9 @@ export const toArr = (value: any): Array<*> => value == null ? [] : [].concat(va
  * flattenArr([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]) // → [ 1, 2, 3, 4, 5, 6, 7 ]
  */
 
-export function flattenArr (arr: Array<*>): Array<*> {
-  return arr.reduce((acc, val) => acc.concat(isArr(val) ? flattenArr(val) : val), [])
+export function flattenArr (arr: any): Array<*> {
+  return arr.reduce(
+    (acc: Array<*>, val: any): Array<*> => acc.concat(isArr(val) ? flattenArr(val) : val),
+    []
+  )
 }

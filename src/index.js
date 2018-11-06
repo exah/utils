@@ -1,3 +1,5 @@
+// @flow
+
 export {
   toArr,
   flattenArr as flatten,

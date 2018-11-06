@@ -12,7 +12,7 @@ module.exports = {
     ]
   ],
   'plugins': [
-    IS_TEST ? '@babel/plugin-transform-flow-strip-types' : '@babel/plugin-transform-flow-comments',
+    '@babel/plugin-transform-flow-strip-types',
     [ '@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true, loose: true } ]
   ]
 }

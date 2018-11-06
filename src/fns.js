@@ -14,7 +14,7 @@
  * noop() // → undefined
  */
 
-export const always = (val: *): Function => () => val
+export const always = (val: *, ...rest: *): Function => () => val
 
 /**
  * Function that always returns `true`
@@ -69,7 +69,7 @@ export const noop = always()
  * identity(state) // → state
  */
 
-export const identity = (val: *): * => val
+export const identity = (val: *, ...rest: *): * => val
 
 /**
  * @private used for `compose` and `pipe`

@@ -336,7 +336,7 @@ Flattens multidimensional arrays.
 
 #### Parameters
 
--   `arr` **[Array][123]&lt;any>** 
+-   `arr` **any** 
 
 #### Examples
 
@@ -363,6 +363,7 @@ Return function that always returns value
 #### Parameters
 
 -   `val` **any** 
+-   `rest` **...any** 
 
 #### Examples
 
@@ -435,6 +436,7 @@ Function that returns its value
 #### Parameters
 
 -   `val` **any** 
+-   `rest` **...any** 
 
 #### Examples
 
@@ -921,7 +923,7 @@ Check if `val` is empty. Tests `Array`, `Objects`, `Map`, `Set`, `String` and `n
 
 #### Parameters
 
--   `val` **[Object][125]** 
+-   `val` **any** 
 
 #### Examples
 
