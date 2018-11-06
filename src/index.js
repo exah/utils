@@ -37,6 +37,7 @@ export {
   isBool,
   isNum,
   isStr,
+  isObj,
   isArr,
   isNil,
   isEmpty,

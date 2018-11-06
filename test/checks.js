@@ -6,6 +6,7 @@ import {
   isBool,
   isNum,
   isStr,
+  isObj,
   isArr,
   isNil,
   isEmpty,
@@ -59,6 +60,13 @@ test('isStr', t => {
   t.true(isStr(''))
   t.true(isStr('1'))
   t.false(isStr(1))
+})
+
+test('isObj', t => {
+  t.true(isObj([]))
+  t.true(isObj({}))
+  t.true(isObj(new Map()))
+  t.false(isObj(null))
 })
 
 test('isArr', t => {

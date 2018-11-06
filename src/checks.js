@@ -107,6 +107,21 @@ export const isNum = (val: *)/*:: : boolean %checks */ => !isNaN(val) && typeof 
 export const isStr = (val: *)/*:: : boolean %checks */ => typeof val === 'string'
 
 /**
+ * Check if `val` primitive type is `object`.
+ *
+ * @example
+ * import { isObj } from '@exah/utils'
+ *
+ * @example
+ * isObj({}) // → true
+ * isObj([]) // → true
+ * isObj(new Map())
+ * isObj(null) // → false
+ */
+
+export const isObj = (val: *)/*:: : boolean %checks */ => val !== null && typeof val === 'object'
+
+/**
  * Check if `val` is an `Array`.
  *
  * @example
