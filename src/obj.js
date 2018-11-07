@@ -22,16 +22,15 @@ const toObj = (input: *, fn: Function = identity): Object =>
   toArr(input)
     .reduce((acc, ...rest) => ({ ...acc, ...fn(...rest) }), {})
 
-const curriedToObj = (inputOrFn: * | Function, fnOrInput: Function | *) => {
-  const inputIsFn = isFn(inputOrFn)
-  const fn = inputIsFn ? inputOrFn : fnOrInput
+const curriedToObj = (first: *, second: *) => {
+  const fn = isFn(first) ? first : isFn(second) ? second : undefined
 
-  if (inputIsFn) {
-    if (fnOrInput === undefined) return (input: *) => toObj(input, fn)
-    return toObj(inputOrFn, fn)
+  if (isFn(first)) {
+    if (second === undefined) return (input: *) => toObj(input, fn)
+    return toObj(second, fn)
   }
 
-  return toObj(inputOrFn, fn)
+  return toObj(first, fn)
 }
 
 export { curriedToObj as toObj }
