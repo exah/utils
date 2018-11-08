@@ -287,7 +287,7 @@ Return last value if some of arguments is `null` or `undefined`
 
 #### Parameters
 
--   `args` **...[Array][126]&lt;any>** 
+-   `args` **...any** 
 
 #### Examples
 
@@ -332,7 +332,7 @@ toArr(null) // → []
 toArr([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
 ```
 
-Returns **[Array][126]&lt;any>** 
+Returns **any** 
 
 ### flattenArr
 
@@ -355,7 +355,7 @@ flattenArr([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
 flattenArr([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]) // → [ 1, 2, 3, 4, 5, 6, 7 ]
 ```
 
-Returns **[Array][126]&lt;any>** 
+Returns **any** 
 
 ## Functions
 
@@ -364,12 +364,11 @@ Returns **[Array][126]&lt;any>**
 
 ### always
 
-Return function that always returns value
+Return function that always returns provided value
 
 #### Parameters
 
--   `val` **any** 
--   `rest` **...any** 
+-   `args` **...any** 
 
 #### Examples
 
@@ -385,7 +384,7 @@ const noop = always()
 noop() // → undefined
 ```
 
-Returns **[Function][127]** 
+Returns **[function][127]** `() => value`
 
 ### T
 
@@ -441,8 +440,7 @@ Function that returns its value
 
 #### Parameters
 
--   `val` **any** 
--   `rest` **...any** 
+-   `args` **...any** 
 
 #### Examples
 
@@ -455,7 +453,7 @@ identity(1) // → 1
 identity(state) // → state
 ```
 
-Returns **any** 
+Returns **any** `value`
 
 ### compose
 
@@ -512,7 +510,7 @@ Return curried equivalent of provided function.
 #### Parameters
 
 -   `fn` **[Function][127]** 
--   `args` **...[Array][126]&lt;any>** 
+-   `args` **...any** 
 
 #### Examples
 
@@ -543,7 +541,7 @@ Return curried function with specified number of arguments.
 
 -   `numOfArgs` **[number][133]** 
 -   `fn` **[Function][127]** 
--   `args` **...[Array][126]&lt;any>** 
+-   `args` **...any** 
 
 #### Examples
 
@@ -1148,7 +1146,7 @@ import { isObj } from '@exah/utils'
 ```javascript
 isObj({}) // → true
 isObj([]) // → true
-isObj(new Map())
+isObj(new Map()) // → true
 isObj(null) // → false
 ```
 

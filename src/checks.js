@@ -115,7 +115,7 @@ export const isStr = (val: *)/*:: : boolean %checks */ => typeof val === 'string
  * @example
  * isObj({}) // → true
  * isObj([]) // → true
- * isObj(new Map())
+ * isObj(new Map()) // → true
  * isObj(null) // → false
  */
 
@@ -190,7 +190,7 @@ export const isEmptyObj = (val: Object) => Boolean(val) && (
  * isEmpty([ 1, 2, 3 ]) // → false
  */
 
-export const isEmpty = (val: any) =>
+export const isEmpty = (val: *) =>
   val == null || val === '' || isEmptyObj(val)
 
 /**

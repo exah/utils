@@ -14,7 +14,7 @@ import { isArr } from './checks'
  * toArr([ 1, 2, 3 ]) // → [ 1, 2, 3 ]
  */
 
-export const toArr = (value: any): Array<*> => value == null ? [] : [].concat(value)
+export const toArr = (value: *): * => value == null ? [] : [].concat(value)
 
 /**
  * Alias: `flatten`
@@ -29,9 +29,9 @@ export const toArr = (value: any): Array<*> => value == null ? [] : [].concat(va
  * flattenArr([ 1, 2, 3, [ 4, 5, 6, [ 7 ] ] ]) // → [ 1, 2, 3, 4, 5, 6, 7 ]
  */
 
-export function flattenArr (arr: any): Array<*> {
+export function flattenArr (arr: *): * {
   return arr.reduce(
-    (acc: Array<*>, val: any): Array<*> => acc.concat(isArr(val) ? flattenArr(val) : val),
+    (acc: *, val: *): * => acc.concat(isArr(val) ? flattenArr(val) : val),
     []
   )
 }

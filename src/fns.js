@@ -1,7 +1,9 @@
 // @flow
 
 /**
- * Return function that always returns value
+ * Return function that always returns provided value
+ *
+ * @return {function} `() => value`
  *
  * @example
  * import { always } from '@exah/utils'
@@ -14,7 +16,7 @@
  * noop() // → undefined
  */
 
-export const always = (val: *, ...rest: *): Function => () => val
+export const always = (...args: *): Function => () => args[0]
 
 /**
  * Function that always returns `true`
@@ -61,6 +63,8 @@ export const noop = always()
 /**
  * Function that returns its value
  *
+ * @return {any} `value`
+ *
  * @example
  * import { identity } from '@exah/utils'
  *
@@ -69,13 +73,13 @@ export const noop = always()
  * identity(state) // → state
  */
 
-export const identity = (val: *, ...rest: *): * => val
+export const identity = (...args: *): * => args[0]
 
 /**
  * @private used for `compose` and `pipe`
  */
 
-const composeTwoFns = (a: Function, b: Function) => (...args: Array<*>) => a(b(...args))
+const composeTwoFns = (a: Function, b: Function) => (...args: *) => a(b(...args))
 
 /**
  * Right-to-left function composition
@@ -130,7 +134,7 @@ export const pipe = (...fns: Array<Function>): Function =>
  * fn(1)(2)(3) // → 6
  */
 
-export function curryN (numOfArgs: number, fn: Function, ...args: Array<*>): Function {
+export function curryN (numOfArgs: number, fn: Function, ...args: *): Function {
   return args.length >= numOfArgs
     ? fn(...args)
     : curryN.bind(null, numOfArgs, fn, ...args)
@@ -155,7 +159,7 @@ export function curryN (numOfArgs: number, fn: Function, ...args: Array<*>): Fun
  * fn(1)(2)(3) // → 6
  */
 
-export const curry = (fn: Function, ...args: Array<*>): Function =>
+export const curry = (fn: Function, ...args: *): Function =>
   curryN(fn.length, fn, ...args)
 
 /**
@@ -215,7 +219,7 @@ export const debounce = (fn: Function, time: number = 0, isImmediate: boolean) =
     }
   }
 
-  function debounced (...args: Array<*>) {
+  function debounced (...args: *) {
     let result
     const run = fn.bind(this, ...args)
 
@@ -264,7 +268,7 @@ export const throttle = (fn: Function, time: number = 0, isImmediate: boolean) =
     }
   }
 
-  function throttled (...args: Array<*>) {
+  function throttled (...args: *) {
     if (timerId !== null) return
     const run = fn.bind(this, ...args)
 

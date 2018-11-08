@@ -186,5 +186,5 @@ export const path = (
  * fallbackTo(target.nothing) // → undefined
  */
 
-export const fallbackTo = (...args: Array<*>) =>
+export const fallbackTo = (...args: *) =>
   args.reduce((prev, val) => prev == null ? val : prev, null)

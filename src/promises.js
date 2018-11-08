@@ -62,7 +62,7 @@ export const neverResolve = (): Promise<void> => new Promise(() => null)
 export const queue = (
   first: Function = noop,
   ...rest: Array<Function>
-): (...args: Array<*>) => Promise<*> => (...args) =>
+): (...args: *) => Promise<*> => (...args) =>
   rest.reduce((a, b) => a.then(b), Promise.resolve(first(...args)))
 
 /**
@@ -200,7 +200,7 @@ export const debouncePromise = (
     }
   }
 
-  return function debounced (...args: Array<*>): Promise<*> {
+  return function debounced (...args: *): Promise<*> {
     const run = fn.bind(this, ...args)
 
     return new Promise((resolve) => {
