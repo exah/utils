@@ -105,20 +105,20 @@ test('queue', async t => {
 })
 
 test('concurrentN', async t => {
-  const checkDelay = async (duration, time, min) => {
-    await wait(duration)
-    t.true((Date.now() - time) >= min)
-  }
+  const time = Date.now()
+  const checkDelay = (delayPromise, min) => delayPromise.then(() => {
+    t.true((Date.now() - time) > min)
+  })
 
   const run = concurrentN(2)(
-    (a, time) => checkDelay(20, time, 20).then(() => a + 1),
-    (a, time) => checkDelay(20, time, 20).then(() => a + 2),
-    (a, time) => checkDelay(20, time, 40).then(() => a + 3),
+    (a) => checkDelay(wait(20), 20).then(() => a + 1),
+    (a) => checkDelay(wait(20), 20).then(() => a + 2),
+    (a) => checkDelay(wait(20), 40).then(() => a + 3),
     (a) => a + 4,
     (a) => Promise.resolve(a)
   )
 
-  const result = run(0, Date.now())
+  const result = run(0)
 
   t.true(is(Promise, result))
   t.deepEqual(await result, [ 1, 2, 3, 4, 0 ])
