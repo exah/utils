@@ -36,10 +36,12 @@ toc:
       - alwaysResolve
       - neverResolve
       - queue
+      - concurrentN
       - timeout
       - promisify
       - deferredPromise
       - debouncePromise
+      - toPromise
 
   - name: Checks
     children:
@@ -52,5 +54,6 @@ toc:
       - isStr
       - isBool
       - isFn
+      - isThenable
       - isArr
       - isObj

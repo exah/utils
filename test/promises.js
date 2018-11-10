@@ -3,11 +3,14 @@ import fs from 'fs'
 import path from 'path'
 
 import {
+  is,
   wait,
   queue,
   reflect,
   timeout,
   promisify,
+  toPromise,
+  concurrentN,
   alwaysResolve,
   deferredPromise,
   debouncePromise
@@ -101,12 +104,67 @@ test('queue', async t => {
   t.is(result, 3)
 })
 
+test('concurrentN', async t => {
+  const checkDelay = async (duration, time, min) => {
+    await wait(duration)
+    t.true((Date.now() - time) >= min)
+  }
+
+  const run = concurrentN(2)(
+    (a, time) => checkDelay(20, time, 20).then(() => a + 1),
+    (a, time) => checkDelay(20, time, 20).then(() => a + 2),
+    (a, time) => checkDelay(20, time, 40).then(() => a + 3),
+    (a) => a + 4,
+    (a) => Promise.resolve(a)
+  )
+
+  const result = run(0, Date.now())
+
+  t.true(is(Promise, result))
+  t.deepEqual(await result, [ 1, 2, 3, 4, 0 ])
+})
+
+test('concurrentN (fail)', async t => {
+  const run = concurrentN(3)(
+    (a) => wait(20).then(() => a + 1),
+    (a) => { throw new Error('Ooops') },
+    (a) => Promise.resolve(a)
+  )
+
+  try {
+    await run(0)
+  } catch (error) {
+    t.is(error.message, 'Ooops')
+  }
+})
+
+test('concurrentN and queue', async t => {
+  const run = concurrentN(2)(
+    queue(
+      (a) => a + 1,
+      (b) => b + 2,
+      (c) => wait(20).then(() => c * 14)
+    ),
+    (a) => wait(20).then(() => a + 42)
+  )
+
+  t.deepEqual(await run(0), [ 42, 42 ])
+})
+
 test('timeout', async t => {
   t.is((await t.throwsAsync(timeout(wait(50), 10))).message, 'Timeout error')
   t.true(await timeout(wait(50).then(() => true), 100))
 })
 
 test('promisify', async t => {
-  const result = await promisify(fs.readFile)(path.join(__dirname, 'sample.txt'), 'utf8')
-  t.is(result, 'Hello World\n')
+  t.is(
+    await promisify(fs.readFile)(path.join(__dirname, 'sample.txt'), 'utf8'),
+    'Hello World\n'
+  )
+})
+
+test('toPromise', async t => {
+  t.is(await toPromise(1), 1)
+  t.is(await toPromise(Promise.resolve(1)), 1)
+  t.is(await toPromise({ then (fn) { fn(1) } }), 1)
 })

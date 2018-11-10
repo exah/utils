@@ -40,6 +40,7 @@ export {
   isObj,
   isArr,
   isNil,
+  isThenable,
   isEmpty,
   isEmptyObj,
   isPlainObj
@@ -51,6 +52,8 @@ export {
   reflect,
   timeout,
   promisify,
+  toPromise,
+  concurrentN,
   alwaysResolve,
   neverResolve,
   deferredPromise,

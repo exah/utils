@@ -9,6 +9,7 @@ import {
   isObj,
   isArr,
   isNil,
+  isThenable,
   isEmpty,
   isEmptyObj,
   isPlainObj
@@ -117,4 +118,10 @@ test('isPlainObj', t => {
   t.false(isPlainObj(new Map()))
   t.false(isPlainObj(Object.create(null)))
   t.false(isPlainObj(() => null))
+})
+
+test('isThenable', t => {
+  t.true(isThenable(Promise.resolve()))
+  t.true(isThenable({ then () {} }))
+  t.false(isThenable({}))
 })

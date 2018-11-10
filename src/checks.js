@@ -149,6 +149,20 @@ export const isArr = (val: *)/*:: : boolean %checks */ => Array.isArray(val)
 export const isNil = (val: *)/*:: : boolean %checks */ => val == null
 
 /**
+ * Check if `val` is thenable
+ *
+ * @example
+ * import { isThenable } from '@exah/utils'
+ *
+ * @example
+ * isThenable(Promise.resolve()) // → true
+ * isThenable({ then () {} }) // → true
+ * isThenable({}) // → false
+ */
+
+export const isThenable = (val: *): boolean => isObj(val) && isFn(val.then)
+
+/**
  * Check if `val` is empty object. Tests `Array`, `Objects`, `Map`, `Set`
  *
  * @example

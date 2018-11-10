@@ -1,5 +1,5 @@
 // @flow
-import { noop } from './fns'
+import { noop, curryN } from './fns'
 
 /**
  * Waites for `duration` than resolves promise.
@@ -51,11 +51,13 @@ export const neverResolve = (): Promise<void> => new Promise(() => null)
  *
  * @example
  * (async () => {
- *   await queue(
+ *   const run = queue(
  *     (a, b, c, d) => a + b + c + d,
  *     (val) => wait(200).then(() => val),
  *     (val) => val * val
- *   )(1, 2, 3, 4) // → 100
+ *   )
+ *
+ *   await run(1, 2, 3, 4) // → 100
  * })()
  */
 
@@ -64,6 +66,68 @@ export const queue = (
   ...rest: Array<Function>
 ): (...args: *) => Promise<*> => (...args) =>
   rest.reduce((a, b) => a.then(b), Promise.resolve(first(...args)))
+
+/**
+ * Run functions concurrently (with concurrency limit).
+ *
+ * @example
+ * import { concurrentN } from '@exah/utils'
+ *
+ * @example
+ * (async () => {
+ *   const run = concurrentN(2)(
+ *     (a, b, c, d) => wait(200).then(() => a),
+ *     (a, b, c, d) => wait(200).then(() => b),
+ *     (a, b, c, d) => wait(200).then(() => c),
+ *     (a, b, c, d) => wait(200).then(() => d),
+ *     (a, b, c, d) => a + b + c + d
+ *   )
+ *
+ *   await run(1, 2, 3, 4) // → [ 1, 2, 3, 4, 10 ]
+ * })()
+ */
+
+const concurrentN = (
+  concurrency: number,
+  ...fns: Array<Function>
+): (...args: *) => Promise<Array<*>> => (...args) => new Promise((resolve, reject) => {
+  const promises = []
+
+  let lastIndex = 0
+  let running = 0
+
+  function run (currentIndex) {
+    if (promises.length === fns.length) {
+      resolve(Promise.all(promises))
+      return
+    }
+
+    const promise = toPromise(fns[currentIndex](...args))
+    promises.push(promise)
+
+    lastIndex = currentIndex
+    running++
+
+    next()
+    promise
+      .then(() => {
+        running--
+        next()
+      })
+      .catch(reject)
+  }
+
+  function next () {
+    if (running < concurrency) {
+      run(lastIndex + 1)
+    }
+  }
+
+  return run(lastIndex)
+})
+
+const carriedConcurrentN = curryN(2, concurrentN)
+export { carriedConcurrentN as concurrentN }
 
 /**
  * Resolves every promise by returing `{ success: true, result }` in `then`
@@ -224,3 +288,22 @@ export const debouncePromise = (
     })
   }
 }
+
+/**
+ * Convert value to trustable {@link Promise} (basically `Promise.resolve(val)`)
+ *
+ * @example
+ * import { toPromise } from '@exah/utils'
+ *
+ * @example
+ * toPromise(1)
+ *   .then((val) => console.log(val)) // → 1
+ *
+ * toPromise(Promise.resolve(1))
+ *   .then((val) => console.log(val)) // → 1
+ *
+ * toPromise({ then(fn) { fn(1) } })
+ *   .then((val) => console.log(val)) // → 1
+ */
+
+export const toPromise = (val: *): Promise<*> => Promise.resolve(val)
