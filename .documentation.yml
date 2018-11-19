@@ -28,6 +28,7 @@ toc:
       - once
       - debounce
       - throttle
+      - memoize
 
   - name: Promises
     children:

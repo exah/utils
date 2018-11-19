@@ -13,6 +13,7 @@ import {
   once,
   debounce,
   throttle,
+  memoize,
   wait
 } from '../src'
 
@@ -196,4 +197,12 @@ test('throttle immediate', async t => {
 
   await wait(30)
   t.is(count, 2)
+})
+
+test('memoize', t => {
+  const memoized = memoize((a, b) => ({ val: a + b }))
+  const result = memoized(1, 2)
+
+  t.is(result.val, 3)
+  t.true(result === memoized(1, 2))
 })

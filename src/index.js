@@ -27,6 +27,7 @@ export {
   curry,
   curryN,
   once,
+  memoize,
   debounce,
   throttle
 } from './fns'

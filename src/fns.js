@@ -284,3 +284,30 @@ export const throttle = (fn: Function, time: number = 0, isImmediate: boolean) =
 
   return Object.assign(throttled, { cancel })
 }
+
+/**
+ * Simple memoize function
+ *
+ * @example
+ * import { memoize } from '@exah/utils'
+ *
+ * const expensiveFn = (a, b) => ({ val: a + b })
+ * const memoized = memoize(expensiveFn)
+ *
+ * const result = memoized(1, 2) // → { val: 3 }
+ * result === memoized(1, 2) // → true
+ */
+
+export function memoize (fn: Function, toString: (*) => string = String, keyJoiner: string = '-') {
+  const cache = {}
+
+  return function memoized (...args: *) {
+    const key = args.map(toString).join(keyJoiner)
+
+    if (cache.hasOwnProperty(key) === false) {
+      cache[key] = fn.call(this, ...args)
+    }
+
+    return cache[key]
+  }
+}
