@@ -152,21 +152,17 @@ export function flattenObj (
  *   e: [ 2 ]
  * }
  *
- * path('a', 'b', 'c', 'd')(target) // → 1
  * path([ 'a', 'b', 'c', 'd' ])(target) // → 1
  * path('a.b.c.d')(target) // → 1
- * path('e', 0)(target) // → 2
  * path('e.0')(target) // → 2
- * path('a', 'b', 'c', 'd', 'e')(target) // → undefined
  * path('e.1')(target) // → undefined
+ * path([ 'e', '0' ])(target) // → 2
  */
 
 export const path = (
-  first: string | Array<string> = [],
-  ...rest: Array<string>
+  input: string | Array<string> = []
 ): Function => (obj: Object) =>
-  []
-    .concat(...toArr(first).map(s => s.split('.')), rest)
+  (isArr(input) ? input : String(input).split('.'))
     .reduce((a, c) => Object(a)[c], obj)
 
 /**
