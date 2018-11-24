@@ -96,6 +96,7 @@ test('path', t => {
   t.is(path('e.1')(target), undefined)
   t.is(path(null)(target), undefined)
   t.is(path({})(target), undefined)
+  t.is(path(0, null)(target), null)
 
   t.is(path()(target), target)
   t.is(path([])(target), target)

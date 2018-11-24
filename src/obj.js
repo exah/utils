@@ -141,6 +141,26 @@ export function flattenObj (
 }
 
 /**
+ * Return last value if some of arguments is `null` or `undefined`
+ *
+ * @example
+ * import { fallbackTo } from '@exah/utils'
+ *
+ * @example
+ * const target = { a: { b: { c: 1 } }, d: 2, e: 3 }
+ *
+ * fallbackTo(target.a.b.c, 2) // → 1
+ * fallbackTo(target.a.b.c.d, 2) // → 2
+ * fallbackTo(target.nothing, null) // → null
+ * fallbackTo(target.nothing, target.d, target.e) // → 2
+ * fallbackTo(target.nothing, target.f, target.e) // → 3
+ * fallbackTo(target.nothing) // → undefined
+ */
+
+export const fallbackTo = (...args: *) =>
+  args.reduce((prev, val) => prev == null ? val : prev, null)
+
+/**
  * Get object value by path (string or as argument list)
  *
  * @example
@@ -160,27 +180,9 @@ export function flattenObj (
  */
 
 export const path = (
-  input: string | Array<string> = []
-): Function => (obj: Object) =>
-  (isArr(input) ? input : String(input).split('.'))
-    .reduce((a, c) => Object(a)[c], obj)
-
-/**
- * Return last value if some of arguments is `null` or `undefined`
- *
- * @example
- * import { fallbackTo } from '@exah/utils'
- *
- * @example
- * const target = { a: { b: { c: 1 } }, d: 2, e: 3 }
- *
- * fallbackTo(target.a.b.c, 2) // → 1
- * fallbackTo(target.a.b.c.d, 2) // → 2
- * fallbackTo(target.nothing, null) // → null
- * fallbackTo(target.nothing, target.d, target.e) // → 2
- * fallbackTo(target.nothing, target.f, target.e) // → 3
- * fallbackTo(target.nothing) // → undefined
- */
-
-export const fallbackTo = (...args: *) =>
-  args.reduce((prev, val) => prev == null ? val : prev, null)
+  input: string | Array<string> = [],
+  defaultValue: *
+): Function => (obj: Object) => fallbackTo(
+  (isArr(input) ? input : String(input).split('.')).reduce((a, c) => Object(a)[c], obj),
+  defaultValue
+)

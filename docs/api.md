@@ -150,8 +150,8 @@ Get object value by path (string or as argument list)
 
 #### Parameters
 
--   `first` **([string][137] \| [Array][138]&lt;[string][137]>)**  (optional, default `[]`)
--   `rest` **...[Array][138]&lt;[string][137]>** 
+-   `input` **([string][137] \| [Array][138]&lt;[string][137]>)**  (optional, default `[]`)
+-   `defaultValue` **any** 
 
 #### Examples
 
@@ -165,13 +165,11 @@ const target = {
   e: [ 2 ]
 }
 
-path('a', 'b', 'c', 'd')(target) // → 1
 path([ 'a', 'b', 'c', 'd' ])(target) // → 1
 path('a.b.c.d')(target) // → 1
-path('e', 0)(target) // → 2
 path('e.0')(target) // → 2
-path('a', 'b', 'c', 'd', 'e')(target) // → undefined
 path('e.1')(target) // → undefined
+path([ 'e', '0' ])(target) // → 2
 ```
 
 Returns **[Function][139]** 
