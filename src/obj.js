@@ -182,7 +182,7 @@ export const fallbackTo = (...args: *) =>
 export const path = (
   input: string | Array<string> = [],
   defaultValue: *
-): Function => (obj: Object) => fallbackTo(
+): Function => (obj: *) => fallbackTo(
   (isArr(input) ? input : String(input).split('.')).reduce((a, c) => Object(a)[c], obj),
   defaultValue
 )
