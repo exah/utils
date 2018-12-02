@@ -158,7 +158,7 @@ export function flattenObj (
  */
 
 export const fallbackTo = (...args: *) =>
-  args.reduce((prev, val) => prev == null ? val : prev, null)
+  args.reduce((prev, val) => prev == null ? val : prev, undefined)
 
 /**
  * Get object value by path (string or as argument list)

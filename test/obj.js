@@ -111,4 +111,5 @@ test('fallbackTo', t => {
   t.is(fallbackTo(target.nothing, target.d, target.e), 2)
   t.is(fallbackTo(target.nothing, target.f, target.e), 3)
   t.is(fallbackTo(target.nothing), undefined)
+  t.is(fallbackTo(), undefined)
 })
