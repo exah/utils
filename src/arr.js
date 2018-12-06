@@ -51,5 +51,5 @@ export function flattenArr (arr: *): * {
 export const initArr = (
   length: number = 0,
   val: * = (_, index) => index
-): * =>
+): Array<*> =>
   [ ...Array(length) ].map(isFn(val) ? val : always(val))

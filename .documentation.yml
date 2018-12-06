@@ -13,6 +13,7 @@ toc:
     children:
       - toArr
       - flattenArr
+      - initArr
 
   - name: Functions
     children:
