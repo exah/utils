@@ -76,6 +76,22 @@ export const noop = always()
 export const identity = (...args: *): * => args[0]
 
 /**
+ * Reverse order of first two arguments
+ *
+ * @return {Function}
+ *
+ * @example
+ * import { flip } from '@exah/utils'
+ *
+ * @example
+ * const fn = (val, index) => val
+ *
+ * ;[ 'foo', 'bar', 'baz' ].map(flip(fn)) // → [ 1, 2, 3 ]
+ */
+
+export const flip = (fn: Function) => (a: *, b: *, ...rest: *) => fn(b, a, ...rest)
+
+/**
  * @private used for `compose` and `pipe`
  */
 

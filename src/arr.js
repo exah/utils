@@ -1,6 +1,6 @@
 // @flow
 import { isArr, isFn } from './checks'
-import { always } from './fns'
+import { always, flip, identity } from './fns'
 
 /**
  * Wrap anything into array. <br />
@@ -46,10 +46,11 @@ export function flattenArr (arr: *): * {
  * @example
  * initArr(3, 'hey') // → [ 'hey', 'hey', 'hey' ]
  * initArr(3) // → [ 0, 1, 2 ]
+ * initArr(3, (index) => index) // → [ 0, 1, 2 ]
  */
 
 export const initArr = (
   length: number = 0,
-  val: * = (_, index) => index
+  val: * = identity
 ): Array<*> =>
-  [ ...Array(length) ].map(isFn(val) ? val : always(val))
+  [ ...Array(length) ].map(isFn(val) ? flip(val) : always(val))

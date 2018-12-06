@@ -141,6 +141,9 @@
     -   [isObj][137]
         -   [Parameters][138]
         -   [Examples][139]
+-   [flip][140]
+    -   [Parameters][141]
+    -   [Examples][142]
 
 ## Objects
 
@@ -153,7 +156,7 @@ Get object value by path (string or as argument list)
 
 #### Parameters
 
--   `input` **([string][140] \| [Array][141]&lt;[string][140]>)**  (optional, default `[]`)
+-   `input` **([string][143] \| [Array][144]&lt;[string][143]>)**  (optional, default `[]`)
 -   `defaultValue` **any** 
 
 #### Examples
@@ -175,7 +178,7 @@ path('e.1')(target) // → undefined
 path([ 'e', '0' ])(target) // → 2
 ```
 
-Returns **[Function][142]** 
+Returns **[Function][145]** 
 
 ### mapObj
 
@@ -184,8 +187,8 @@ Useful for renaming keys or converting values.
 
 #### Parameters
 
--   `fn` **[Function][142]** 
--   `obj` **[Object][143]** 
+-   `fn` **[Function][145]** 
+-   `obj` **[Object][146]** 
 
 #### Examples
 
@@ -206,8 +209,8 @@ Filter object by key or value.
 
 #### Parameters
 
--   `fn` **[Function][142]** 
--   `obj` **[Object][143]** 
+-   `fn` **[Function][145]** 
+-   `obj` **[Object][146]** 
 
 #### Examples
 
@@ -228,8 +231,8 @@ Like `Array#reduce`, but for objects.
 
 #### Parameters
 
--   `fn` **[Function][142]** 
--   `obj` **[Object][143]** 
+-   `fn` **[Function][145]** 
+-   `obj` **[Object][146]** 
 -   `target` **any**  (optional, default `{}`)
 
 #### Examples
@@ -252,7 +255,7 @@ Convert an array to object, by default works like "merge".
 #### Parameters
 
 -   `input` **any** 
--   `fn` **[Function][142]**  (optional, default `identity`)
+-   `fn` **[Function][145]**  (optional, default `identity`)
 
 #### Examples
 
@@ -269,17 +272,17 @@ const objFromEntries = toObj(([ key, value ]) => ({ [key]: value }))
 objFromEntries([ [ 'a', 'b' ] ]) // → { a: 'b' }
 ```
 
-Returns **[Object][143]** 
+Returns **[Object][146]** 
 
 ### flattenObj
 
-Flatten an object by traveling deep inside [Object][144] or [Array][145] values.
+Flatten an object by traveling deep inside [Object][147] or [Array][148] values.
 
 #### Parameters
 
--   `obj` **[Object][143]** 
--   `joiner` **[string][140]**  (optional, default `'.'`)
--   `travelInside` **function (any): [boolean][146]**  (optional, default `isPlainObjectOrArray`)
+-   `obj` **[Object][146]** 
+-   `joiner` **[string][143]**  (optional, default `'.'`)
+-   `travelInside` **function (any): [boolean][149]**  (optional, default `isPlainObjectOrArray`)
 
 #### Examples
 
@@ -292,7 +295,7 @@ flattenObj({ a: { b: { c: { d: 1, e: [ 1, 2 ] } }, f: 0 })
 // → { 'a.b.c.d': 1, 'a.b.c.e.0': 1, 'a.b.c.e.1': 2, f: 0 }
 ```
 
-Returns **[Object][143]** 
+Returns **[Object][146]** 
 
 ### fallbackTo
 
@@ -376,8 +379,8 @@ Creates array of specified length and fills it with default value.
 
 #### Parameters
 
--   `length` **[number][147]**  (optional, default `0`)
--   `val` **any**  (optional, default `(_,index)=>index`)
+-   `length` **[number][150]**  (optional, default `0`)
+-   `val` **any**  (optional, default `identity`)
 
 #### Examples
 
@@ -388,9 +391,10 @@ import { initArr } from '@exah/utils'
 ```javascript
 initArr(3, 'hey') // → [ 'hey', 'hey', 'hey' ]
 initArr(3) // → [ 0, 1, 2 ]
+initArr(3, (index) => index) // → [ 0, 1, 2 ]
 ```
 
-Returns **[Array][141]&lt;any>** 
+Returns **[Array][144]&lt;any>** 
 
 ## Functions
 
@@ -419,7 +423,7 @@ const noop = always()
 noop() // → undefined
 ```
 
-Returns **[function][142]** `() => value`
+Returns **[function][145]** `() => value`
 
 ### T
 
@@ -467,7 +471,7 @@ import { noop } from '@exah/utils'
 noop() // → undefined
 ```
 
-Returns **[undefined][148]** 
+Returns **[undefined][151]** 
 
 ### identity
 
@@ -496,7 +500,7 @@ Right-to-left function composition
 
 #### Parameters
 
--   `fns` **...[Array][141]&lt;[Function][142]>** 
+-   `fns` **...[Array][144]&lt;[Function][145]>** 
 
 #### Examples
 
@@ -512,7 +516,7 @@ const c = (val) => val * 10
 compose(a, b, c)(1) // → a(b(c(1))) → (((1 * 10) / 2) + 1) → 6
 ```
 
-Returns **[Function][142]** 
+Returns **[Function][145]** 
 
 ### pipe
 
@@ -520,7 +524,7 @@ Left-to-right function composition
 
 #### Parameters
 
--   `fns` **...[Array][141]&lt;[Function][142]>** 
+-   `fns` **...[Array][144]&lt;[Function][145]>** 
 
 #### Examples
 
@@ -536,7 +540,7 @@ const c = (val) => val * 10
 pipe(a, b, c)(1) // → c(b(a(1))) → (((1 + 1) / 2) * 10) → 10
 ```
 
-Returns **[Function][142]** 
+Returns **[Function][145]** 
 
 ### curry
 
@@ -544,7 +548,7 @@ Return curried equivalent of provided function.
 
 #### Parameters
 
--   `fn` **[Function][142]** 
+-   `fn` **[Function][145]** 
 -   `args` **...any** 
 
 #### Examples
@@ -566,7 +570,7 @@ fn(1)(2, 3) // → 6
 fn(1)(2)(3) // → 6
 ```
 
-Returns **[Function][142]** 
+Returns **[Function][145]** 
 
 ### curryN
 
@@ -574,8 +578,8 @@ Return curried function with specified number of arguments.
 
 #### Parameters
 
--   `numOfArgs` **[number][147]** 
--   `fn` **[Function][142]** 
+-   `numOfArgs` **[number][150]** 
+-   `fn` **[Function][145]** 
 -   `args` **...any** 
 
 #### Examples
@@ -597,7 +601,7 @@ fn(1)(2, 3) // → 6
 fn(1)(2)(3) // → 6
 ```
 
-Returns **[Function][142]** 
+Returns **[Function][145]** 
 
 ### once
 
@@ -605,7 +609,7 @@ Return function that always return result of first invocation, so function only 
 
 #### Parameters
 
--   `fn` **[Function][142]** 
+-   `fn` **[Function][145]** 
 
 #### Examples
 
@@ -620,7 +624,7 @@ fn(1, 2, 3) // → 1 + 2 + 3
 fn(10, 20, 30) // → 1 + 2 + 3
 ```
 
-Returns **[Function][142]** 
+Returns **[Function][145]** 
 
 ### debounce
 
@@ -628,16 +632,16 @@ Return debounced function, that delays call until `timeout` is elapsed. <br />
 If `isImmediate` is `true`, call function first, than delays next call. <br />
 Useful for preventing "double clicks" or updating metrics after scroll / resize.
 
--   🔗 [The Difference Between Throttling and Debouncing][149].
--   🔗 [Debouncing and Throttling Explained Through Examples][150].
+-   🔗 [The Difference Between Throttling and Debouncing][152].
+-   🔗 [Debouncing and Throttling Explained Through Examples][153].
 
 See [throttle][64], [debouncePromise][97].
 
 #### Parameters
 
--   `fn` **[Function][142]** 
--   `time` **[number][147]**  (optional, default `0`)
--   `isImmediate` **[boolean][146]** 
+-   `fn` **[Function][145]** 
+-   `time` **[number][150]**  (optional, default `0`)
+-   `isImmediate` **[boolean][149]** 
 
 #### Examples
 
@@ -657,16 +661,16 @@ Return throttled function, that ensures that function runs once in specific time
 If `isImmediate` is `true`, call function first, than wait next call. <br />
 Useful for optimizing for constant event watching (like `change`, `scroll`, etc.).
 
--   🔗 [The Difference Between Throttling and Debouncing][149].
--   🔗 [Debouncing and Throttling Explained Through Examples][150].
+-   🔗 [The Difference Between Throttling and Debouncing][152].
+-   🔗 [Debouncing and Throttling Explained Through Examples][153].
 
 See [debounce][61], [debouncePromise][97].
 
 #### Parameters
 
--   `fn` **[Function][142]** 
--   `time` **[number][147]**  (optional, default `0`)
--   `isImmediate` **[boolean][146]** 
+-   `fn` **[Function][145]** 
+-   `time` **[number][150]**  (optional, default `0`)
+-   `isImmediate` **[boolean][149]** 
 
 #### Examples
 
@@ -686,9 +690,9 @@ Simple memoize function
 
 #### Parameters
 
--   `fn` **[Function][142]** 
--   `toString` **function (any): [string][140]**  (optional, default `String`)
--   `keyJoiner` **[string][140]**  (optional, default `'-'`)
+-   `fn` **[Function][145]** 
+-   `toString` **function (any): [string][143]**  (optional, default `String`)
+-   `keyJoiner` **[string][143]**  (optional, default `'-'`)
 
 #### Examples
 
@@ -713,8 +717,8 @@ Waites for `duration` than resolves promise.
 
 #### Parameters
 
--   `duration` **[number][147]** 
--   `handler` **[Function][142]**  (optional, default `noop`)
+-   `duration` **[number][150]** 
+-   `handler` **[Function][145]**  (optional, default `noop`)
 
 #### Examples
 
@@ -726,7 +730,7 @@ import { wait } from '@exah/utils'
 wait(2000).then(() => console.log('After 2s'))
 ```
 
-Returns **[Promise][151]&lt;void>** 
+Returns **[Promise][154]&lt;void>** 
 
 ### reflect
 
@@ -737,7 +741,7 @@ and need to get results even if some promises are rejected.
 
 #### Parameters
 
--   `promise` **[Promise][151]&lt;any>** 
+-   `promise` **[Promise][154]&lt;any>** 
 
 #### Examples
 
@@ -775,7 +779,7 @@ import { alwaysResolve } from '@exah/utils'
 })()
 ```
 
-Returns **function (): [Promise][151]&lt;any>** 
+Returns **function (): [Promise][154]&lt;any>** 
 
 ### neverResolve
 
@@ -793,7 +797,7 @@ wait(2000)
  .then(() => console.log('never happens'))
 ```
 
-Returns **[Promise][151]&lt;void>** 
+Returns **[Promise][154]&lt;void>** 
 
 ### queue
 
@@ -801,8 +805,8 @@ Compose multiple promises together.
 
 #### Parameters
 
--   `first` **[Function][142]**  (optional, default `noop`)
--   `rest` **...[Array][141]&lt;[Function][142]>** 
+-   `first` **[Function][145]**  (optional, default `noop`)
+-   `rest` **...[Array][144]&lt;[Function][145]>** 
 
 #### Examples
 
@@ -822,7 +826,7 @@ import { queue } from '@exah/utils'
 })()
 ```
 
-Returns **function (): [Promise][151]&lt;any>** 
+Returns **function (): [Promise][154]&lt;any>** 
 
 ### concurrentN
 
@@ -830,8 +834,8 @@ Run functions concurrently (with concurrency limit).
 
 #### Parameters
 
--   `concurrency` **[number][147]** 
--   `fns` **...[Array][141]&lt;[Function][142]>** 
+-   `concurrency` **[number][150]** 
+-   `fns` **...[Array][144]&lt;[Function][145]>** 
 
 #### Examples
 
@@ -853,7 +857,7 @@ import { concurrentN } from '@exah/utils'
 })()
 ```
 
-Returns **function (): [Promise][151]&lt;[Array][141]&lt;any>>** 
+Returns **function (): [Promise][154]&lt;[Array][144]&lt;any>>** 
 
 ### timeout
 
@@ -861,9 +865,9 @@ Rejects promise if timeout is elapsed before it fulfilled.
 
 #### Parameters
 
--   `promise` **[Promise][151]&lt;any>** 
--   `time` **[number][147]**  (optional, default `0`)
--   `errorMessage` **[string][140]**  (optional, default `'Timeout error'`)
+-   `promise` **[Promise][154]&lt;any>** 
+-   `time` **[number][150]**  (optional, default `0`)
+-   `errorMessage` **[string][143]**  (optional, default `'Timeout error'`)
 
 #### Examples
 
@@ -884,7 +888,7 @@ Promisify callback-style async function
 
 #### Parameters
 
--   `fn` **[Function][142]** 
+-   `fn` **[Function][145]** 
 
 #### Examples
 
@@ -902,16 +906,16 @@ import { promisify } from '@exah/utils'
 })()
 ```
 
-Returns **[Function][142]** 
+Returns **[Function][145]** 
 
 ### deferredPromise
 
 Create "deferred" promise.
-It like regular [Promise][152], but with exposed `resolve`, `reject` methods.
+It like regular [Promise][155], but with exposed `resolve`, `reject` methods.
 
 #### Parameters
 
--   `fn` **[Function][142]**  (optional, default `noop`)
+-   `fn` **[Function][145]**  (optional, default `noop`)
 
 #### Examples
 
@@ -927,7 +931,7 @@ import { deferredPromise } from '@exah/utils'
 })()
 ```
 
-Returns **[Promise][151]&lt;any>** 
+Returns **[Promise][154]&lt;any>** 
 
 ### debouncePromise
 
@@ -938,9 +942,9 @@ See [debounce][61].
 
 #### Parameters
 
--   `fn` **function (): [Promise][151]&lt;any>** 
--   `time` **[number][147]**  (optional, default `0`)
--   `isImmediate` **[boolean][146]** 
+-   `fn` **function (): [Promise][154]&lt;any>** 
+-   `time` **[number][150]**  (optional, default `0`)
+-   `isImmediate` **[boolean][149]** 
 
 #### Examples
 
@@ -965,7 +969,7 @@ import { debouncePromise } from '@exah/utils'
 
 ### toPromise
 
-Convert value to trustable [Promise][152] (basically `Promise.resolve(val)`)
+Convert value to trustable [Promise][155] (basically `Promise.resolve(val)`)
 
 #### Parameters
 
@@ -988,7 +992,7 @@ toPromise({ then(fn) { fn(1) } })
   .then((val) => console.log(val)) // → 1
 ```
 
-Returns **[Promise][151]&lt;any>** 
+Returns **[Promise][154]&lt;any>** 
 
 ## Checks
 
@@ -1001,7 +1005,7 @@ Checks if `val` has prototype of an `Object`. (Alternative to `instanceof`)
 
 #### Parameters
 
--   `obj` **[Object][143]** — Base `Object`
+-   `obj` **[Object][146]** — Base `Object`
 -   `val` **any** — Value to test
 
 #### Examples
@@ -1036,7 +1040,7 @@ const isNum = is(Number)
 isNum(1) // → true
 ```
 
-Returns **[boolean][146]** 
+Returns **[boolean][149]** 
 
 ### isEmpty
 
@@ -1070,7 +1074,7 @@ Check if `val` is empty object. Tests `Array`, `Objects`, `Map`, `Set`
 
 #### Parameters
 
--   `val` **[Object][143]** 
+-   `val` **[Object][146]** 
 
 #### Examples
 
@@ -1115,7 +1119,7 @@ function Fn () {}
 isPlainObj(new Fn()) // → false
 ```
 
-Returns **[boolean][146]** 
+Returns **[boolean][149]** 
 
 ### isNil
 
@@ -1137,7 +1141,7 @@ isNil(undefined) // → true
 isNil(0) // → false
 ```
 
-Returns **[boolean][146]** 
+Returns **[boolean][149]** 
 
 ### isNum
 
@@ -1159,7 +1163,7 @@ isNum(10) // → true
 isNum(NaN) // → false
 ```
 
-Returns **[boolean][146]** 
+Returns **[boolean][149]** 
 
 ### isStr
 
@@ -1180,7 +1184,7 @@ isStr('') // → true
 isStr([]) // → false
 ```
 
-Returns **[boolean][146]** 
+Returns **[boolean][149]** 
 
 ### isBool
 
@@ -1202,7 +1206,7 @@ isBool(false) // → true
 isBool(0) // → false
 ```
 
-Returns **[boolean][146]** 
+Returns **[boolean][149]** 
 
 ### isFn
 
@@ -1223,7 +1227,7 @@ isFn(() => ()) // → true
 isFn(1) // → false
 ```
 
-Returns **[boolean][146]** 
+Returns **[boolean][149]** 
 
 ### isThenable
 
@@ -1245,7 +1249,7 @@ isThenable({ then () {} }) // → true
 isThenable({}) // → false
 ```
 
-Returns **[boolean][146]** 
+Returns **[boolean][149]** 
 
 ### isArr
 
@@ -1266,7 +1270,7 @@ isArr([]) // → true
 isArr({ length: 3 }) // → false
 ```
 
-Returns **[boolean][146]** 
+Returns **[boolean][149]** 
 
 ### isObj
 
@@ -1289,7 +1293,29 @@ isObj(new Map()) // → true
 isObj(null) // → false
 ```
 
-Returns **[boolean][146]** 
+Returns **[boolean][149]** 
+
+## flip
+
+Reverse order of first two arguments
+
+### Parameters
+
+-   `fn` **[Function][145]** 
+
+### Examples
+
+```javascript
+import { flip } from '@exah/utils'
+```
+
+```javascript
+const fn = (val, index) => val
+
+;[ 'foo', 'bar', 'baz' ].map(flip(fn)) // → [ 1, 2, 3 ]
+```
+
+Returns **[Function][145]** 
 
 [1]: #objects
 
@@ -1569,28 +1595,34 @@ Returns **[boolean][146]**
 
 [139]: #examples-45
 
-[140]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[140]: #flip
 
-[141]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[141]: #parameters-42
 
-[142]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[142]: #examples-46
 
-[143]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[143]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[144]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[144]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[145]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[145]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
-[146]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[146]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[147]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[147]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[148]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
+[148]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[149]: https://css-tricks.com/the-difference-between-throttling-and-debouncing
+[149]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[150]: https://css-tricks.com/debouncing-throttling-explained-examples
+[150]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[151]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[151]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
 
-[152]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[152]: https://css-tricks.com/the-difference-between-throttling-and-debouncing
+
+[153]: https://css-tricks.com/debouncing-throttling-explained-examples
+
+[154]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+
+[155]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
