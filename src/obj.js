@@ -4,6 +4,8 @@ import { toArr } from './arr'
 import { isPlainObj, isArr, isFn } from './checks'
 
 /**
+ * @private DEPRECATED
+ *
  * Convert an array to object, by default works like "merge".
  *
  * @example

@@ -5,7 +5,6 @@ toc:
       - mapObj
       - filterObj
       - reduceObj
-      - toObj
       - flattenObj
       - fallbackTo
 
@@ -18,8 +17,6 @@ toc:
   - name: Functions
     children:
       - always
-      - T
-      - F
       - noop
       - identity
       - flip
@@ -37,7 +34,6 @@ toc:
       - wait
       - reflect
       - alwaysResolve
-      - neverResolve
       - queue
       - concurrentN
       - timeout

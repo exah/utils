@@ -19,6 +19,8 @@
 export const always = (...args: *): Function => () => args[0]
 
 /**
+ * @private DEPRECATED
+ *
  * Function that always returns `true`
  *
  * @return {true}
@@ -33,6 +35,8 @@ export const always = (...args: *): Function => () => args[0]
 export const T = always(true)
 
 /**
+ * @private DEPRECATED
+ *
  * Function that always returns `false`
  *
  * @return {false}
@@ -84,9 +88,9 @@ export const identity = (...args: *): * => args[0]
  * import { flip } from '@exah/utils'
  *
  * @example
- * const fn = (val, index) => val
+ * const fn = (val) => val;
  *
- * ;[ 'foo', 'bar', 'baz' ].map(flip(fn)) // → [ 1, 2, 3 ]
+ * [ 'foo', 'bar', 'baz' ].map(flip(fn)) // → [ 1, 2, 3 ]
  */
 
 export const flip = (fn: Function) => (a: *, b: *, ...rest: *) => fn(b, a, ...rest)

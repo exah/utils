@@ -15,135 +15,126 @@
     -   [reduceObj][11]
         -   [Parameters][12]
         -   [Examples][13]
-    -   [toObj][14]
+    -   [flattenObj][14]
         -   [Parameters][15]
         -   [Examples][16]
-    -   [flattenObj][17]
+    -   [fallbackTo][17]
         -   [Parameters][18]
         -   [Examples][19]
-    -   [fallbackTo][20]
-        -   [Parameters][21]
-        -   [Examples][22]
--   [Arrays][23]
-    -   [toArr][24]
+-   [Arrays][20]
+    -   [toArr][21]
+        -   [Parameters][22]
+        -   [Examples][23]
+    -   [flattenArr][24]
         -   [Parameters][25]
         -   [Examples][26]
-    -   [flattenArr][27]
+    -   [initArr][27]
         -   [Parameters][28]
         -   [Examples][29]
-    -   [initArr][30]
-        -   [Parameters][31]
-        -   [Examples][32]
--   [Functions][33]
-    -   [always][34]
-        -   [Parameters][35]
-        -   [Examples][36]
-    -   [T][37]
+-   [Functions][30]
+    -   [always][31]
+        -   [Parameters][32]
+        -   [Examples][33]
+    -   [noop][34]
+        -   [Examples][35]
+    -   [identity][36]
+        -   [Parameters][37]
         -   [Examples][38]
-    -   [F][39]
-        -   [Examples][40]
-    -   [noop][41]
-        -   [Examples][42]
-    -   [identity][43]
-        -   [Parameters][44]
-        -   [Examples][45]
-    -   [compose][46]
-        -   [Parameters][47]
-        -   [Examples][48]
-    -   [pipe][49]
-        -   [Parameters][50]
-        -   [Examples][51]
-    -   [curry][52]
-        -   [Parameters][53]
-        -   [Examples][54]
-    -   [curryN][55]
-        -   [Parameters][56]
-        -   [Examples][57]
-    -   [once][58]
-        -   [Parameters][59]
-        -   [Examples][60]
-    -   [debounce][61]
-        -   [Parameters][62]
-        -   [Examples][63]
-    -   [throttle][64]
-        -   [Parameters][65]
-        -   [Examples][66]
-    -   [memoize][67]
+    -   [flip][39]
+        -   [Parameters][40]
+        -   [Examples][41]
+    -   [compose][42]
+        -   [Parameters][43]
+        -   [Examples][44]
+    -   [pipe][45]
+        -   [Parameters][46]
+        -   [Examples][47]
+    -   [curry][48]
+        -   [Parameters][49]
+        -   [Examples][50]
+    -   [curryN][51]
+        -   [Parameters][52]
+        -   [Examples][53]
+    -   [once][54]
+        -   [Parameters][55]
+        -   [Examples][56]
+    -   [debounce][57]
+        -   [Parameters][58]
+        -   [Examples][59]
+    -   [throttle][60]
+        -   [Parameters][61]
+        -   [Examples][62]
+    -   [memoize][63]
+        -   [Parameters][64]
+        -   [Examples][65]
+-   [Promises][66]
+    -   [wait][67]
         -   [Parameters][68]
         -   [Examples][69]
--   [Promises][70]
-    -   [wait][71]
-        -   [Parameters][72]
-        -   [Examples][73]
-    -   [reflect][74]
-        -   [Parameters][75]
-        -   [Examples][76]
-    -   [alwaysResolve][77]
-        -   [Parameters][78]
-        -   [Examples][79]
-    -   [neverResolve][80]
+    -   [reflect][70]
+        -   [Parameters][71]
+        -   [Examples][72]
+    -   [alwaysResolve][73]
+        -   [Parameters][74]
+        -   [Examples][75]
+    -   [queue][76]
+        -   [Parameters][77]
+        -   [Examples][78]
+    -   [concurrentN][79]
+        -   [Parameters][80]
         -   [Examples][81]
-    -   [queue][82]
+    -   [timeout][82]
         -   [Parameters][83]
         -   [Examples][84]
-    -   [concurrentN][85]
+    -   [promisify][85]
         -   [Parameters][86]
         -   [Examples][87]
-    -   [timeout][88]
+    -   [deferredPromise][88]
         -   [Parameters][89]
         -   [Examples][90]
-    -   [promisify][91]
+    -   [debouncePromise][91]
         -   [Parameters][92]
         -   [Examples][93]
-    -   [deferredPromise][94]
+    -   [toPromise][94]
         -   [Parameters][95]
         -   [Examples][96]
-    -   [debouncePromise][97]
-        -   [Parameters][98]
-        -   [Examples][99]
-    -   [toPromise][100]
-        -   [Parameters][101]
-        -   [Examples][102]
--   [Checks][103]
-    -   [is][104]
+-   [Checks][97]
+    -   [is][98]
+        -   [Parameters][99]
+        -   [Examples][100]
+    -   [isEmpty][101]
+        -   [Parameters][102]
+        -   [Examples][103]
+    -   [isEmptyObj][104]
         -   [Parameters][105]
         -   [Examples][106]
-    -   [isEmpty][107]
+    -   [isPlainObj][107]
         -   [Parameters][108]
         -   [Examples][109]
-    -   [isEmptyObj][110]
+    -   [isNil][110]
         -   [Parameters][111]
         -   [Examples][112]
-    -   [isPlainObj][113]
+    -   [isNum][113]
         -   [Parameters][114]
         -   [Examples][115]
-    -   [isNil][116]
+    -   [isStr][116]
         -   [Parameters][117]
         -   [Examples][118]
-    -   [isNum][119]
+    -   [isBool][119]
         -   [Parameters][120]
         -   [Examples][121]
-    -   [isStr][122]
+    -   [isFn][122]
         -   [Parameters][123]
         -   [Examples][124]
-    -   [isBool][125]
+    -   [isThenable][125]
         -   [Parameters][126]
         -   [Examples][127]
-    -   [isFn][128]
+    -   [isArr][128]
         -   [Parameters][129]
         -   [Examples][130]
-    -   [isThenable][131]
+    -   [isObj][131]
         -   [Parameters][132]
         -   [Examples][133]
-    -   [isArr][134]
-        -   [Parameters][135]
-        -   [Examples][136]
-    -   [isObj][137]
-        -   [Parameters][138]
-        -   [Examples][139]
--   [flip][140]
-    -   [Parameters][141]
-    -   [Examples][142]
 
 ## Objects
 
@@ -156,7 +147,7 @@ Get object value by path (string or as argument list)
 
 #### Parameters
 
--   `input` **([string][143] \| [Array][144]&lt;[string][143]>)**  (optional, default `[]`)
+-   `input` **([string][134] \| [Array][135]&lt;[string][134]>)**  (optional, default `[]`)
 -   `defaultValue` **any** 
 
 #### Examples
@@ -178,7 +169,7 @@ path('e.1')(target) // → undefined
 path([ 'e', '0' ])(target) // → 2
 ```
 
-Returns **[Function][145]** 
+Returns **[Function][136]** 
 
 ### mapObj
 
@@ -187,8 +178,8 @@ Useful for renaming keys or converting values.
 
 #### Parameters
 
--   `fn` **[Function][145]** 
--   `obj` **[Object][146]** 
+-   `fn` **[Function][136]** 
+-   `obj` **[Object][137]** 
 
 #### Examples
 
@@ -209,8 +200,8 @@ Filter object by key or value.
 
 #### Parameters
 
--   `fn` **[Function][145]** 
--   `obj` **[Object][146]** 
+-   `fn` **[Function][136]** 
+-   `obj` **[Object][137]** 
 
 #### Examples
 
@@ -231,8 +222,8 @@ Like `Array#reduce`, but for objects.
 
 #### Parameters
 
--   `fn` **[Function][145]** 
--   `obj` **[Object][146]** 
+-   `fn` **[Function][136]** 
+-   `obj` **[Object][137]** 
 -   `target` **any**  (optional, default `{}`)
 
 #### Examples
@@ -248,41 +239,15 @@ const countValues = (acc, key, value) => acc + value
 reduceObj(countValues, target, 0) // → 420
 ```
 
-### toObj
-
-Convert an array to object, by default works like "merge".
-
-#### Parameters
-
--   `input` **any** 
--   `fn` **[Function][145]**  (optional, default `identity`)
-
-#### Examples
-
-```javascript
-import { toObj } from '@exah/utils'
-```
-
-```javascript
-toObj({ a: 'b' }) // → { a: 'b' }
-toObj([ { color: 'red' }, { size: 'big' } ]) // → { color: 'red', size: 'big' }
-toObj(([ key, value ]) => ({ [key]: value }), [ [ 'a', 'b' ] ]) // → { a: 'b' }
-
-const objFromEntries = toObj(([ key, value ]) => ({ [key]: value }))
-objFromEntries([ [ 'a', 'b' ] ]) // → { a: 'b' }
-```
-
-Returns **[Object][146]** 
-
 ### flattenObj
 
-Flatten an object by traveling deep inside [Object][147] or [Array][148] values.
+Flatten an object by traveling deep inside [Object][138] or [Array][139] values.
 
 #### Parameters
 
--   `obj` **[Object][146]** 
--   `joiner` **[string][143]**  (optional, default `'.'`)
--   `travelInside` **function (any): [boolean][149]**  (optional, default `isPlainObjectOrArray`)
+-   `obj` **[Object][137]** 
+-   `joiner` **[string][134]**  (optional, default `'.'`)
+-   `travelInside` **function (any): [boolean][140]**  (optional, default `isPlainObjectOrArray`)
 
 #### Examples
 
@@ -295,7 +260,7 @@ flattenObj({ a: { b: { c: { d: 1, e: [ 1, 2 ] } }, f: 0 })
 // → { 'a.b.c.d': 1, 'a.b.c.e.0': 1, 'a.b.c.e.1': 2, f: 0 }
 ```
 
-Returns **[Object][146]** 
+Returns **[Object][137]** 
 
 ### fallbackTo
 
@@ -379,7 +344,7 @@ Creates array of specified length and fills it with default value.
 
 #### Parameters
 
--   `length` **[number][150]**  (optional, default `0`)
+-   `length` **[number][141]**  (optional, default `0`)
 -   `val` **any**  (optional, default `identity`)
 
 #### Examples
@@ -394,7 +359,7 @@ initArr(3) // → [ 0, 1, 2 ]
 initArr(3, (index) => index) // → [ 0, 1, 2 ]
 ```
 
-Returns **[Array][144]&lt;any>** 
+Returns **[Array][135]&lt;any>** 
 
 ## Functions
 
@@ -423,39 +388,7 @@ const noop = always()
 noop() // → undefined
 ```
 
-Returns **[function][145]** `() => value`
-
-### T
-
-Function that always returns `true`
-
-#### Examples
-
-```javascript
-import { T } from '@exah/utils'
-```
-
-```javascript
-T() // → true
-```
-
-Returns **`true`** 
-
-### F
-
-Function that always returns `false`
-
-#### Examples
-
-```javascript
-import { F } from '@exah/utils'
-```
-
-```javascript
-F() // → false
-```
-
-Returns **`false`** 
+Returns **[function][136]** `() => value`
 
 ### noop
 
@@ -471,7 +404,7 @@ import { noop } from '@exah/utils'
 noop() // → undefined
 ```
 
-Returns **[undefined][151]** 
+Returns **[undefined][142]** 
 
 ### identity
 
@@ -494,13 +427,35 @@ identity(state) // → state
 
 Returns **any** `value`
 
+### flip
+
+Reverse order of first two arguments
+
+#### Parameters
+
+-   `fn` **[Function][136]** 
+
+#### Examples
+
+```javascript
+import { flip } from '@exah/utils'
+```
+
+```javascript
+const fn = (val) => val;
+
+[ 'foo', 'bar', 'baz' ].map(flip(fn)) // → [ 1, 2, 3 ]
+```
+
+Returns **[Function][136]** 
+
 ### compose
 
 Right-to-left function composition
 
 #### Parameters
 
--   `fns` **...[Array][144]&lt;[Function][145]>** 
+-   `fns` **...[Array][135]&lt;[Function][136]>** 
 
 #### Examples
 
@@ -516,7 +471,7 @@ const c = (val) => val * 10
 compose(a, b, c)(1) // → a(b(c(1))) → (((1 * 10) / 2) + 1) → 6
 ```
 
-Returns **[Function][145]** 
+Returns **[Function][136]** 
 
 ### pipe
 
@@ -524,7 +479,7 @@ Left-to-right function composition
 
 #### Parameters
 
--   `fns` **...[Array][144]&lt;[Function][145]>** 
+-   `fns` **...[Array][135]&lt;[Function][136]>** 
 
 #### Examples
 
@@ -540,7 +495,7 @@ const c = (val) => val * 10
 pipe(a, b, c)(1) // → c(b(a(1))) → (((1 + 1) / 2) * 10) → 10
 ```
 
-Returns **[Function][145]** 
+Returns **[Function][136]** 
 
 ### curry
 
@@ -548,7 +503,7 @@ Return curried equivalent of provided function.
 
 #### Parameters
 
--   `fn` **[Function][145]** 
+-   `fn` **[Function][136]** 
 -   `args` **...any** 
 
 #### Examples
@@ -570,7 +525,7 @@ fn(1)(2, 3) // → 6
 fn(1)(2)(3) // → 6
 ```
 
-Returns **[Function][145]** 
+Returns **[Function][136]** 
 
 ### curryN
 
@@ -578,8 +533,8 @@ Return curried function with specified number of arguments.
 
 #### Parameters
 
--   `numOfArgs` **[number][150]** 
--   `fn` **[Function][145]** 
+-   `numOfArgs` **[number][141]** 
+-   `fn` **[Function][136]** 
 -   `args` **...any** 
 
 #### Examples
@@ -601,7 +556,7 @@ fn(1)(2, 3) // → 6
 fn(1)(2)(3) // → 6
 ```
 
-Returns **[Function][145]** 
+Returns **[Function][136]** 
 
 ### once
 
@@ -609,7 +564,7 @@ Return function that always return result of first invocation, so function only 
 
 #### Parameters
 
--   `fn` **[Function][145]** 
+-   `fn` **[Function][136]** 
 
 #### Examples
 
@@ -624,7 +579,7 @@ fn(1, 2, 3) // → 1 + 2 + 3
 fn(10, 20, 30) // → 1 + 2 + 3
 ```
 
-Returns **[Function][145]** 
+Returns **[Function][136]** 
 
 ### debounce
 
@@ -632,16 +587,16 @@ Return debounced function, that delays call until `timeout` is elapsed. <br />
 If `isImmediate` is `true`, call function first, than delays next call. <br />
 Useful for preventing "double clicks" or updating metrics after scroll / resize.
 
--   🔗 [The Difference Between Throttling and Debouncing][152].
--   🔗 [Debouncing and Throttling Explained Through Examples][153].
+-   🔗 [The Difference Between Throttling and Debouncing][143].
+-   🔗 [Debouncing and Throttling Explained Through Examples][144].
 
-See [throttle][64], [debouncePromise][97].
+See [throttle][60], [debouncePromise][91].
 
 #### Parameters
 
--   `fn` **[Function][145]** 
--   `time` **[number][150]**  (optional, default `0`)
--   `isImmediate` **[boolean][149]** 
+-   `fn` **[Function][136]** 
+-   `time` **[number][141]**  (optional, default `0`)
+-   `isImmediate` **[boolean][140]** 
 
 #### Examples
 
@@ -661,16 +616,16 @@ Return throttled function, that ensures that function runs once in specific time
 If `isImmediate` is `true`, call function first, than wait next call. <br />
 Useful for optimizing for constant event watching (like `change`, `scroll`, etc.).
 
--   🔗 [The Difference Between Throttling and Debouncing][152].
--   🔗 [Debouncing and Throttling Explained Through Examples][153].
+-   🔗 [The Difference Between Throttling and Debouncing][143].
+-   🔗 [Debouncing and Throttling Explained Through Examples][144].
 
-See [debounce][61], [debouncePromise][97].
+See [debounce][57], [debouncePromise][91].
 
 #### Parameters
 
--   `fn` **[Function][145]** 
--   `time` **[number][150]**  (optional, default `0`)
--   `isImmediate` **[boolean][149]** 
+-   `fn` **[Function][136]** 
+-   `time` **[number][141]**  (optional, default `0`)
+-   `isImmediate` **[boolean][140]** 
 
 #### Examples
 
@@ -690,9 +645,9 @@ Simple memoize function
 
 #### Parameters
 
--   `fn` **[Function][145]** 
--   `toString` **function (any): [string][143]**  (optional, default `String`)
--   `keyJoiner` **[string][143]**  (optional, default `'-'`)
+-   `fn` **[Function][136]** 
+-   `toString` **function (any): [string][134]**  (optional, default `String`)
+-   `keyJoiner` **[string][134]**  (optional, default `'-'`)
 
 #### Examples
 
@@ -717,8 +672,8 @@ Waites for `duration` than resolves promise.
 
 #### Parameters
 
--   `duration` **[number][150]** 
--   `handler` **[Function][145]**  (optional, default `noop`)
+-   `duration` **[number][141]** 
+-   `handler` **[Function][136]**  (optional, default `noop`)
 
 #### Examples
 
@@ -730,7 +685,7 @@ import { wait } from '@exah/utils'
 wait(2000).then(() => console.log('After 2s'))
 ```
 
-Returns **[Promise][154]&lt;void>** 
+Returns **[Promise][145]&lt;void>** 
 
 ### reflect
 
@@ -741,7 +696,7 @@ and need to get results even if some promises are rejected.
 
 #### Parameters
 
--   `promise` **[Promise][154]&lt;any>** 
+-   `promise` **[Promise][145]&lt;any>** 
 
 #### Examples
 
@@ -779,25 +734,7 @@ import { alwaysResolve } from '@exah/utils'
 })()
 ```
 
-Returns **function (): [Promise][154]&lt;any>** 
-
-### neverResolve
-
-Return promise that never fulfilled. Probably no one should use this.
-
-#### Examples
-
-```javascript
-import { neverResolve } from '@exah/utils'
-```
-
-```javascript
-wait(2000)
- .then(() => neverResolve())
- .then(() => console.log('never happens'))
-```
-
-Returns **[Promise][154]&lt;void>** 
+Returns **function (): [Promise][145]&lt;any>** 
 
 ### queue
 
@@ -805,8 +742,8 @@ Compose multiple promises together.
 
 #### Parameters
 
--   `first` **[Function][145]**  (optional, default `noop`)
--   `rest` **...[Array][144]&lt;[Function][145]>** 
+-   `first` **[Function][136]**  (optional, default `noop`)
+-   `rest` **...[Array][135]&lt;[Function][136]>** 
 
 #### Examples
 
@@ -826,7 +763,7 @@ import { queue } from '@exah/utils'
 })()
 ```
 
-Returns **function (): [Promise][154]&lt;any>** 
+Returns **function (): [Promise][145]&lt;any>** 
 
 ### concurrentN
 
@@ -834,8 +771,8 @@ Run functions concurrently (with concurrency limit).
 
 #### Parameters
 
--   `concurrency` **[number][150]** 
--   `fns` **...[Array][144]&lt;[Function][145]>** 
+-   `concurrency` **[number][141]** 
+-   `fns` **...[Array][135]&lt;[Function][136]>** 
 
 #### Examples
 
@@ -857,7 +794,7 @@ import { concurrentN } from '@exah/utils'
 })()
 ```
 
-Returns **function (): [Promise][154]&lt;[Array][144]&lt;any>>** 
+Returns **function (): [Promise][145]&lt;[Array][135]&lt;any>>** 
 
 ### timeout
 
@@ -865,9 +802,9 @@ Rejects promise if timeout is elapsed before it fulfilled.
 
 #### Parameters
 
--   `promise` **[Promise][154]&lt;any>** 
--   `time` **[number][150]**  (optional, default `0`)
--   `errorMessage` **[string][143]**  (optional, default `'Timeout error'`)
+-   `promise` **[Promise][145]&lt;any>** 
+-   `time` **[number][141]**  (optional, default `0`)
+-   `errorMessage` **[string][134]**  (optional, default `'Timeout error'`)
 
 #### Examples
 
@@ -888,7 +825,7 @@ Promisify callback-style async function
 
 #### Parameters
 
--   `fn` **[Function][145]** 
+-   `fn` **[Function][136]** 
 
 #### Examples
 
@@ -906,16 +843,16 @@ import { promisify } from '@exah/utils'
 })()
 ```
 
-Returns **[Function][145]** 
+Returns **[Function][136]** 
 
 ### deferredPromise
 
 Create "deferred" promise.
-It like regular [Promise][155], but with exposed `resolve`, `reject` methods.
+It like regular [Promise][146], but with exposed `resolve`, `reject` methods.
 
 #### Parameters
 
--   `fn` **[Function][145]**  (optional, default `noop`)
+-   `fn` **[Function][136]**  (optional, default `noop`)
 
 #### Examples
 
@@ -931,20 +868,20 @@ import { deferredPromise } from '@exah/utils'
 })()
 ```
 
-Returns **[Promise][154]&lt;any>** 
+Returns **[Promise][145]&lt;any>** 
 
 ### debouncePromise
 
 Return debounced function, that delays call until `timeout` is elapsed. <br />
 Function returns promise that fulfils after `fn` promise is complete.
 
-See [debounce][61].
+See [debounce][57].
 
 #### Parameters
 
--   `fn` **function (): [Promise][154]&lt;any>** 
--   `time` **[number][150]**  (optional, default `0`)
--   `isImmediate` **[boolean][149]** 
+-   `fn` **function (): [Promise][145]&lt;any>** 
+-   `time` **[number][141]**  (optional, default `0`)
+-   `isImmediate` **[boolean][140]** 
 
 #### Examples
 
@@ -969,7 +906,7 @@ import { debouncePromise } from '@exah/utils'
 
 ### toPromise
 
-Convert value to trustable [Promise][155] (basically `Promise.resolve(val)`)
+Convert value to trustable [Promise][146] (basically `Promise.resolve(val)`)
 
 #### Parameters
 
@@ -992,7 +929,7 @@ toPromise({ then(fn) { fn(1) } })
   .then((val) => console.log(val)) // → 1
 ```
 
-Returns **[Promise][154]&lt;any>** 
+Returns **[Promise][145]&lt;any>** 
 
 ## Checks
 
@@ -1005,7 +942,7 @@ Checks if `val` has prototype of an `Object`. (Alternative to `instanceof`)
 
 #### Parameters
 
--   `obj` **[Object][146]** — Base `Object`
+-   `obj` **[Object][137]** — Base `Object`
 -   `val` **any** — Value to test
 
 #### Examples
@@ -1040,7 +977,7 @@ const isNum = is(Number)
 isNum(1) // → true
 ```
 
-Returns **[boolean][149]** 
+Returns **[boolean][140]** 
 
 ### isEmpty
 
@@ -1074,7 +1011,7 @@ Check if `val` is empty object. Tests `Array`, `Objects`, `Map`, `Set`
 
 #### Parameters
 
--   `val` **[Object][146]** 
+-   `val` **[Object][137]** 
 
 #### Examples
 
@@ -1119,7 +1056,7 @@ function Fn () {}
 isPlainObj(new Fn()) // → false
 ```
 
-Returns **[boolean][149]** 
+Returns **[boolean][140]** 
 
 ### isNil
 
@@ -1141,7 +1078,7 @@ isNil(undefined) // → true
 isNil(0) // → false
 ```
 
-Returns **[boolean][149]** 
+Returns **[boolean][140]** 
 
 ### isNum
 
@@ -1163,7 +1100,7 @@ isNum(10) // → true
 isNum(NaN) // → false
 ```
 
-Returns **[boolean][149]** 
+Returns **[boolean][140]** 
 
 ### isStr
 
@@ -1184,7 +1121,7 @@ isStr('') // → true
 isStr([]) // → false
 ```
 
-Returns **[boolean][149]** 
+Returns **[boolean][140]** 
 
 ### isBool
 
@@ -1206,7 +1143,7 @@ isBool(false) // → true
 isBool(0) // → false
 ```
 
-Returns **[boolean][149]** 
+Returns **[boolean][140]** 
 
 ### isFn
 
@@ -1227,7 +1164,7 @@ isFn(() => ()) // → true
 isFn(1) // → false
 ```
 
-Returns **[boolean][149]** 
+Returns **[boolean][140]** 
 
 ### isThenable
 
@@ -1249,7 +1186,7 @@ isThenable({ then () {} }) // → true
 isThenable({}) // → false
 ```
 
-Returns **[boolean][149]** 
+Returns **[boolean][140]** 
 
 ### isArr
 
@@ -1270,7 +1207,7 @@ isArr([]) // → true
 isArr({ length: 3 }) // → false
 ```
 
-Returns **[boolean][149]** 
+Returns **[boolean][140]** 
 
 ### isObj
 
@@ -1293,29 +1230,7 @@ isObj(new Map()) // → true
 isObj(null) // → false
 ```
 
-Returns **[boolean][149]** 
-
-## flip
-
-Reverse order of first two arguments
-
-### Parameters
-
--   `fn` **[Function][145]** 
-
-### Examples
-
-```javascript
-import { flip } from '@exah/utils'
-```
-
-```javascript
-const fn = (val, index) => val
-
-;[ 'foo', 'bar', 'baz' ].map(flip(fn)) // → [ 1, 2, 3 ]
-```
-
-Returns **[Function][145]** 
+Returns **[boolean][140]** 
 
 [1]: #objects
 
@@ -1343,286 +1258,268 @@ Returns **[Function][145]**
 
 [13]: #examples-3
 
-[14]: #toobj
+[14]: #flattenobj
 
 [15]: #parameters-4
 
 [16]: #examples-4
 
-[17]: #flattenobj
+[17]: #fallbackto
 
 [18]: #parameters-5
 
 [19]: #examples-5
 
-[20]: #fallbackto
+[20]: #arrays
 
-[21]: #parameters-6
+[21]: #toarr
 
-[22]: #examples-6
+[22]: #parameters-6
 
-[23]: #arrays
+[23]: #examples-6
 
-[24]: #toarr
+[24]: #flattenarr
 
 [25]: #parameters-7
 
 [26]: #examples-7
 
-[27]: #flattenarr
+[27]: #initarr
 
 [28]: #parameters-8
 
 [29]: #examples-8
 
-[30]: #initarr
+[30]: #functions
 
-[31]: #parameters-9
+[31]: #always
 
-[32]: #examples-9
+[32]: #parameters-9
 
-[33]: #functions
+[33]: #examples-9
 
-[34]: #always
+[34]: #noop
 
-[35]: #parameters-10
+[35]: #examples-10
 
-[36]: #examples-10
+[36]: #identity
 
-[37]: #t
+[37]: #parameters-10
 
 [38]: #examples-11
 
-[39]: #f
+[39]: #flip
 
-[40]: #examples-12
+[40]: #parameters-11
 
-[41]: #noop
+[41]: #examples-12
 
-[42]: #examples-13
+[42]: #compose
 
-[43]: #identity
+[43]: #parameters-12
 
-[44]: #parameters-11
+[44]: #examples-13
 
-[45]: #examples-14
+[45]: #pipe
 
-[46]: #compose
+[46]: #parameters-13
 
-[47]: #parameters-12
+[47]: #examples-14
 
-[48]: #examples-15
+[48]: #curry
 
-[49]: #pipe
+[49]: #parameters-14
 
-[50]: #parameters-13
+[50]: #examples-15
 
-[51]: #examples-16
+[51]: #curryn
 
-[52]: #curry
+[52]: #parameters-15
 
-[53]: #parameters-14
+[53]: #examples-16
 
-[54]: #examples-17
+[54]: #once
 
-[55]: #curryn
+[55]: #parameters-16
 
-[56]: #parameters-15
+[56]: #examples-17
 
-[57]: #examples-18
+[57]: #debounce
 
-[58]: #once
+[58]: #parameters-17
 
-[59]: #parameters-16
+[59]: #examples-18
 
-[60]: #examples-19
+[60]: #throttle
 
-[61]: #debounce
+[61]: #parameters-18
 
-[62]: #parameters-17
+[62]: #examples-19
 
-[63]: #examples-20
+[63]: #memoize
 
-[64]: #throttle
+[64]: #parameters-19
 
-[65]: #parameters-18
+[65]: #examples-20
 
-[66]: #examples-21
+[66]: #promises
 
-[67]: #memoize
+[67]: #wait
 
-[68]: #parameters-19
+[68]: #parameters-20
 
-[69]: #examples-22
+[69]: #examples-21
 
-[70]: #promises
+[70]: #reflect
 
-[71]: #wait
+[71]: #parameters-21
 
-[72]: #parameters-20
+[72]: #examples-22
 
-[73]: #examples-23
+[73]: #alwaysresolve
 
-[74]: #reflect
+[74]: #parameters-22
 
-[75]: #parameters-21
+[75]: #examples-23
 
-[76]: #examples-24
+[76]: #queue
 
-[77]: #alwaysresolve
+[77]: #parameters-23
 
-[78]: #parameters-22
+[78]: #examples-24
 
-[79]: #examples-25
+[79]: #concurrentn
 
-[80]: #neverresolve
+[80]: #parameters-24
 
-[81]: #examples-26
+[81]: #examples-25
 
-[82]: #queue
+[82]: #timeout
 
-[83]: #parameters-23
+[83]: #parameters-25
 
-[84]: #examples-27
+[84]: #examples-26
 
-[85]: #concurrentn
+[85]: #promisify
 
-[86]: #parameters-24
+[86]: #parameters-26
 
-[87]: #examples-28
+[87]: #examples-27
 
-[88]: #timeout
+[88]: #deferredpromise
 
-[89]: #parameters-25
+[89]: #parameters-27
 
-[90]: #examples-29
+[90]: #examples-28
 
-[91]: #promisify
+[91]: #debouncepromise
 
-[92]: #parameters-26
+[92]: #parameters-28
 
-[93]: #examples-30
+[93]: #examples-29
 
-[94]: #deferredpromise
+[94]: #topromise
 
-[95]: #parameters-27
+[95]: #parameters-29
 
-[96]: #examples-31
+[96]: #examples-30
 
-[97]: #debouncepromise
+[97]: #checks
 
-[98]: #parameters-28
+[98]: #is
 
-[99]: #examples-32
+[99]: #parameters-30
 
-[100]: #topromise
+[100]: #examples-31
 
-[101]: #parameters-29
+[101]: #isempty
 
-[102]: #examples-33
+[102]: #parameters-31
 
-[103]: #checks
+[103]: #examples-32
 
-[104]: #is
+[104]: #isemptyobj
 
-[105]: #parameters-30
+[105]: #parameters-32
 
-[106]: #examples-34
+[106]: #examples-33
 
-[107]: #isempty
+[107]: #isplainobj
 
-[108]: #parameters-31
+[108]: #parameters-33
 
-[109]: #examples-35
+[109]: #examples-34
 
-[110]: #isemptyobj
+[110]: #isnil
 
-[111]: #parameters-32
+[111]: #parameters-34
 
-[112]: #examples-36
+[112]: #examples-35
 
-[113]: #isplainobj
+[113]: #isnum
 
-[114]: #parameters-33
+[114]: #parameters-35
 
-[115]: #examples-37
+[115]: #examples-36
 
-[116]: #isnil
+[116]: #isstr
 
-[117]: #parameters-34
+[117]: #parameters-36
 
-[118]: #examples-38
+[118]: #examples-37
 
-[119]: #isnum
+[119]: #isbool
 
-[120]: #parameters-35
+[120]: #parameters-37
 
-[121]: #examples-39
+[121]: #examples-38
 
-[122]: #isstr
+[122]: #isfn
 
-[123]: #parameters-36
+[123]: #parameters-38
 
-[124]: #examples-40
+[124]: #examples-39
 
-[125]: #isbool
+[125]: #isthenable
 
-[126]: #parameters-37
+[126]: #parameters-39
 
-[127]: #examples-41
+[127]: #examples-40
 
-[128]: #isfn
+[128]: #isarr
 
-[129]: #parameters-38
+[129]: #parameters-40
 
-[130]: #examples-42
+[130]: #examples-41
 
-[131]: #isthenable
+[131]: #isobj
 
-[132]: #parameters-39
+[132]: #parameters-41
 
-[133]: #examples-43
+[133]: #examples-42
 
-[134]: #isarr
+[134]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[135]: #parameters-40
+[135]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[136]: #examples-44
+[136]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
-[137]: #isobj
+[137]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[138]: #parameters-41
+[138]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[139]: #examples-45
+[139]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[140]: #flip
+[140]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[141]: #parameters-42
+[141]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[142]: #examples-46
+[142]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
 
-[143]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[143]: https://css-tricks.com/the-difference-between-throttling-and-debouncing
 
-[144]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[144]: https://css-tricks.com/debouncing-throttling-explained-examples
 
-[145]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[145]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[146]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
-
-[147]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
-
-[148]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
-
-[149]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
-
-[150]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
-
-[151]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
-
-[152]: https://css-tricks.com/the-difference-between-throttling-and-debouncing
-
-[153]: https://css-tricks.com/debouncing-throttling-explained-examples
-
-[154]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
-
-[155]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[146]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
