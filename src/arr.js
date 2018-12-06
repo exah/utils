@@ -35,3 +35,15 @@ export function flattenArr (arr: *): * {
     []
   )
 }
+
+/**
+ * Creates array of specified length and fills it with default value.
+ *
+ * @example
+ * import { initArr } from '@exah/utils'
+ *
+ * @example
+ * initArr(3, 'hey') // → [ 'hey', 'hey', 'hey' ]
+ */
+
+export const initArr = (length: number = 0, val: *): * => [ ...Array(length) ].map(_ => val)

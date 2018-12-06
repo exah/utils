@@ -3,7 +3,8 @@
 export {
   toArr,
   flattenArr as flatten,
-  flattenArr
+  flattenArr,
+  initArr
 } from './arr'
 
 export {
