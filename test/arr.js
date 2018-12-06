@@ -2,7 +2,8 @@ import test from 'ava'
 
 import {
   toArr,
-  flattenArr
+  flattenArr,
+  initArr
 } from '../src'
 
 test('flattenArr', t => {
@@ -18,4 +19,15 @@ test('toArr', t => {
   t.deepEqual(toArr(null), [])
   t.deepEqual(toArr(1), [ 1 ])
   t.deepEqual(toArr({}), [ {} ])
+})
+
+test('initArr', t => {
+  const length = 3
+  const val = 'val'
+  const valFn = () => val
+  t.deepEqual(initArr(length, val), [ val, val, val ])
+  t.deepEqual(initArr(length, valFn), [ val, val, val ])
+  t.deepEqual(initArr(length), [ 0, 1, 2 ])
+  t.deepEqual(initArr(0, val), [])
+  t.deepEqual(initArr(), [])
 })

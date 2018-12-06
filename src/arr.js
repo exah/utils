@@ -1,5 +1,6 @@
 // @flow
-import { isArr } from './checks'
+import { isArr, isFn } from './checks'
+import { always } from './fns'
 
 /**
  * Wrap anything into array. <br />
@@ -35,3 +36,20 @@ export function flattenArr (arr: *): * {
     []
   )
 }
+
+/**
+ * Creates array of specified length and fills it with default value.
+ *
+ * @example
+ * import { initArr } from '@exah/utils'
+ *
+ * @example
+ * initArr(3, 'hey') // → [ 'hey', 'hey', 'hey' ]
+ * initArr(3) // → [ 0, 1, 2 ]
+ */
+
+export const initArr = (
+  length: number = 0,
+  val: * = (_, index) => index
+): Array<*> =>
+  [ ...Array(length) ].map(isFn(val) ? val : always(val))
