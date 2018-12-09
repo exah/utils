@@ -14,7 +14,9 @@ export {
   flattenObj,
   filterObj,
   path,
-  fallbackTo
+  fallbackTo,
+  queryObj,
+  queryObj as query
 } from './obj'
 
 export {

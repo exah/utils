@@ -7,7 +7,8 @@ import {
   flattenObj,
   filterObj,
   path,
-  fallbackTo
+  fallbackTo,
+  queryObj
 } from '../src'
 
 test('toObj', t => {
@@ -112,4 +113,10 @@ test('fallbackTo', t => {
   t.is(fallbackTo(target.nothing, target.f, target.e), 3)
   t.is(fallbackTo(target.nothing), undefined)
   t.is(fallbackTo(), undefined)
+})
+
+test('queryObj', t => {
+  const input = { foo: 'bar', baz: [ 'foo', 'bar', 'baz' ], null: null, false: false, true: true }
+
+  t.is(queryObj(input), 'foo=bar&baz[]=foo&baz[]=bar&baz[]=baz&false=false&true=true')
 })

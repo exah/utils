@@ -103,46 +103,6 @@ const curriedFilterObj = curryN(2, filterObj)
 export { curriedFilterObj as filterObj }
 
 /**
- * @private For `flattenObj`
- */
-
-const isPlainObjectOrArray = (val: *): boolean => isPlainObj(val) || isArr(val)
-
-/**
- * Flatten an object by traveling deep inside {@link Object} or {@link Array} values.
- *
- * @example
- * import { flattenObj } from '@exah/utils'
- *
- * @example
- * flattenObj({ a: { b: { c: { d: 1, e: [ 1, 2 ] } }, f: 0 })
- * // → { 'a.b.c.d': 1, 'a.b.c.e.0': 1, 'a.b.c.e.1': 2, f: 0 }
- */
-
-export function flattenObj (
-  obj: Object,
-  joiner: string = '.',
-  travelInside: (*) => boolean = isPlainObjectOrArray
-): Object {
-  return reduceObj((acc, key, value) => {
-    if (travelInside(value)) {
-      return {
-        ...acc,
-        ...mapObj(
-          (subKey, subValue) => [ [ key, subKey ].join(joiner), subValue ],
-          flattenObj(value, joiner)
-        )
-      }
-    }
-
-    return {
-      ...acc,
-      [key]: value
-    }
-  }, obj)
-}
-
-/**
  * Return last value if some of arguments is `null` or `undefined`
  *
  * @example
@@ -188,3 +148,98 @@ export const path = (
   (isArr(input) ? input : String(input).split('.')).reduce((a, c) => Object(a)[c], obj),
   defaultValue
 )
+
+/**
+ * @private Options for `flattenObj`
+ */
+
+type OptionsFlattenObj = {
+  joiner: string,
+  shouldFlattenValue: (value: *) => boolean
+}
+
+/**
+ * Flatten an object by traveling deep inside {@link Object} or {@link Array} values.
+ *
+ * @param {Object} input
+ * @param {Object} [options]
+ *
+ * @example
+ * import { flattenObj } from '@exah/utils'
+ *
+ * @example
+ * flattenObj({ a: { b: { c: { d: 1, e: [ 1, 2 ] } }, f: 0 })
+ * // → { 'a.b.c.d': 1, 'a.b.c.e.0': 1, 'a.b.c.e.1': 2, f: 0 }
+ */
+
+export function flattenObj (input: Object, {
+  joiner = '.',
+  shouldFlattenValue = (val) => isPlainObj(val) || isArr(val)
+}: OptionsFlattenObj = {}): Object {
+  // $FlowFixMe
+  return reduceObj((acc, key, value) => {
+    if (shouldFlattenValue(value)) {
+      return {
+        ...acc,
+        ...mapObj(
+          (subKey, subValue) => [ [ key, subKey ].join(joiner), subValue ],
+          flattenObj(value, { joiner, shouldFlattenValue })
+        )
+      }
+    }
+
+    return {
+      ...acc,
+      [key]: value
+    }
+  }, input, {})
+}
+
+/**
+ * @private Options for `query`
+ */
+
+type OptionsQueryObj = {
+  joiner: string,
+  encodeKey: (key: string, parent: ? Object, parentKey: string) => string,
+  encodeValue: (value: *) => string,
+  shouldSerializeValue: (value: *) => boolean
+}
+
+/**
+ * Convert object to query string
+ *
+ * @param {Object} input
+ * @param {Object} [options]
+ *
+ * @example
+ * import { query } from '@exah/utils'
+ *
+ * @example
+ * const src = { foo: 'bar', baz: [ 'foo', 'bar' ] }
+ *
+ * query(src) // → 'foo=bar&baz[]=foo&baz[]=bar'
+ */
+
+export function queryObj (input: Object, {
+  joiner = '&',
+  encodeKey = (key, parent, parentKey) => parentKey + (isArr(parent) ? '[]' : key),
+  encodeValue = encodeURIComponent,
+  shouldSerializeValue = isArr
+}: OptionsQueryObj = {}): string {
+  function serialize (data, parentKey = '') {
+    return reduceObj((acc, key, value) => {
+      if (value == null) {
+        return acc
+      }
+
+      if (shouldSerializeValue(value)) {
+        return acc.concat(serialize(value, key))
+      }
+
+      return acc.concat(`${encodeKey(key, data, parentKey)}=${encodeValue(value)}`)
+    }, data, []).join(joiner)
+  }
+
+  return serialize(Object(input))
+}

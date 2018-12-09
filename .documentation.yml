@@ -5,8 +5,9 @@ toc:
       - mapObj
       - filterObj
       - reduceObj
-      - flattenObj
       - fallbackTo
+      - flattenObj
+      - queryObj
 
   - name: Arrays
     children:
