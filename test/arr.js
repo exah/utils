@@ -25,10 +25,12 @@ test('initArr', t => {
   const length = 3
   const val = 'val'
   const valFn = () => val
+
   t.deepEqual(initArr(length, val), [ val, val, val ])
   t.deepEqual(initArr(length, valFn), [ val, val, val ])
   t.deepEqual(initArr(length), [ 0, 1, 2 ])
   t.deepEqual(initArr(length, (i) => i), [ 0, 1, 2 ])
   t.deepEqual(initArr(0, val), [])
   t.deepEqual(initArr(), [])
+  t.deepEqual(initArr(3, []), [ [], [], [] ])
 })
