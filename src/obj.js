@@ -176,23 +176,27 @@ export function flattenObj (input: Object, {
   joiner = '.',
   shouldFlattenValue = (val) => isPlainObj(val) || isArr(val)
 }: OptionsFlattenObj = {}): Object {
-  // $FlowFixMe
-  return reduceObj((acc, key, value) => {
-    if (shouldFlattenValue(value)) {
+  function serialize (data: Object): Object {
+    // $FlowFixMe
+    return reduceObj((acc, key, value) => {
+      if (shouldFlattenValue(value)) {
+        return {
+          ...acc,
+          ...mapObj(
+            (subKey, subValue) => [ [ key, subKey ].join(joiner), subValue ],
+            serialize(value)
+          )
+        }
+      }
+
       return {
         ...acc,
-        ...mapObj(
-          (subKey, subValue) => [ [ key, subKey ].join(joiner), subValue ],
-          flattenObj(value, { joiner, shouldFlattenValue })
-        )
+        [key]: value
       }
-    }
+    }, data, {})
+  }
 
-    return {
-      ...acc,
-      [key]: value
-    }
-  }, input, {})
+  return serialize(input)
 }
 
 /**
@@ -227,19 +231,19 @@ export function queryObj (input: Object, {
   encodeValue = encodeURIComponent,
   shouldSerializeValue = isArr
 }: OptionsQueryObj = {}): string {
-  function serialize (data, parentKey = '') {
+  function serialize (data, parentKey = '', target = []) {
     return reduceObj((acc, key, value) => {
       if (value == null) {
         return acc
       }
 
-      if (shouldSerializeValue(value)) {
-        return acc.concat(serialize(value, key))
+      if (!shouldSerializeValue(value)) {
+        return acc.concat(`${encodeKey(key, data, parentKey)}=${encodeValue(value)}`)
       }
 
-      return acc.concat(`${encodeKey(key, data, parentKey)}=${encodeValue(value)}`)
-    }, data, []).join(joiner)
+      return serialize(value, key, acc)
+    }, data, target)
   }
 
-  return serialize(Object(input))
+  return serialize(Object(input)).join(joiner)
 }
