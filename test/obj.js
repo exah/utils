@@ -41,7 +41,7 @@ test('reduceObj', t => {
 
 test('mapObj', t => {
   t.deepEqual(
-    mapObj((key, value) => [ value, key ], { a: 'b' }),
+    mapObj((key, value) => ({ [value]: key }), { a: 'b' }),
     { b: 'a' }
   )
 })

@@ -191,9 +191,9 @@ import { mapObj } from '@exah/utils'
 ```
 
 ```javascript
-mapObj((key, value, index, obj) => [ value, key ], { a: 'b' }) // → { b: 'a' }
+mapObj((key, value, index, obj) => ({ [value]: key }), { a: 'b' }) // → { b: 'a' }
 
-const swap = mapObj((key, value) => [ value, key ])
+const swap = mapObj((key, value) => ({ [value]: key }))
 swap({ a: 'b' }) // → { b: 'a' }
 ```
 

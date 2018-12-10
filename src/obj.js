@@ -66,17 +66,17 @@ export { curriedReduceObj as reduceObj }
  * import { mapObj } from '@exah/utils'
  *
  * @example
- * mapObj((key, value, index, obj) => [ value, key ], { a: 'b' }) // → { b: 'a' }
+ * mapObj((key, value, index, obj) => ({ [value]: key }), { a: 'b' }) // → { b: 'a' }
  *
- * const swap = mapObj((key, value) => [ value, key ])
+ * const swap = mapObj((key, value) => ({ [value]: key }))
  * swap({ a: 'b' }) // → { b: 'a' }
  */
 
 const mapObj = (fn: Function, obj: Object) =>
-  reduceObj((acc, key, value, index, src) => {
-    const [ nextKey, nextVal ] = fn(key, value, index, obj)
-    return { ...acc, [nextKey]: nextVal }
-  }, obj)
+  reduceObj((acc, key, value, index, src) => ({
+    ...acc,
+    ...fn(key, value, index, obj)
+  }), obj)
 
 const curriedMapObj = curryN(2, mapObj)
 export { curriedMapObj as mapObj }
@@ -183,7 +183,7 @@ export function flattenObj (input: Object, {
         return {
           ...acc,
           ...mapObj(
-            (subKey, subValue) => [ [ key, subKey ].join(joiner), subValue ],
+            (subKey, subValue) => ({ [[ key, subKey ].join(joiner)]: subValue }),
             serialize(value)
           )
         }
