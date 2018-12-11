@@ -1,7 +1,7 @@
 // @flow
 import { curryN, identity } from './fns'
 import { toArr } from './arr'
-import { isPlainObj, isArr, isFn } from './checks'
+import { isPlainObj, isObj, isArr, isFn } from './checks'
 
 /**
  * @private DEPRECATED
@@ -146,6 +146,7 @@ export const path = (
   input: string | Array<string> = [],
   defaultValue: *
 ): Function => (obj: *) => fallbackTo(
+  // $FlowFixMe
   (isArr(input) ? input : String(input).split('.')).reduce((a, c) => Object(a)[c], obj),
   defaultValue
 )
@@ -178,7 +179,6 @@ export function flattenObj (input: Object, {
   shouldFlattenValue = (val) => isPlainObj(val) || isArr(val)
 }: OptionsFlattenObj = {}): Object {
   function serialize (data: Object): Object {
-    // $FlowFixMe
     return reduceObj((acc, key, value) => {
       if (shouldFlattenValue(value)) {
         return {
@@ -232,6 +232,7 @@ export function queryObj (input: Object, {
   encodeValue = encodeURIComponent,
   shouldSerializeValue = isArr
 }: OptionsQueryObj = {}): string {
+  // $FlowFixMe
   function serialize (data, parentKey = '', target = []) {
     return reduceObj((acc, key, value) => {
       if (value == null) {
@@ -247,4 +248,40 @@ export function queryObj (input: Object, {
   }
 
   return serialize(Object(input)).join(joiner)
+}
+
+/**
+ * Perform deep merge on multiple Objects
+ *
+ * @example
+ * import { deepMerge } from '@exah/utils'
+ *
+ * @example
+ * deepMerge(
+ *   { a: 1, b: { c: 1 }, e: 1, h: [ 0, 1 ] },
+ *   { a: 2, b: { d: 2 }, f: 2, h: [ 2, 3 ] },
+ *   { a: 3, b: { c: 3 }, g: 3 }
+ * )
+ *
+ * // → { a: 3, b: { c: 3, d: 2 }, e: 1, f: 2, g: 3, h: [ 0, 1, 2, 3 ] })
+ */
+
+export function deepMerge (...input: Object[]) {
+  return input.reduce((acc, source) => {
+    if (isArr(source)) {
+      return [ ...(isArr(acc) ? acc : []), ...source ]
+    }
+
+    if (isObj(source)) {
+      return {
+        ...acc,
+        ...mapObj((key, value) => ((isObj(value) && acc.hasOwnProperty(key))
+          ? { [key]: deepMerge(acc[key], value) }
+          : { [key]: value }
+        ), source)
+      }
+    }
+
+    return acc
+  }, {})
 }

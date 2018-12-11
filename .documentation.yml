@@ -5,6 +5,7 @@ toc:
       - mapObj
       - filterObj
       - reduceObj
+      - deepMerge
       - fallbackTo
       - flattenObj
       - queryObj

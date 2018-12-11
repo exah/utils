@@ -7,6 +7,7 @@ import {
   flattenObj,
   filterObj,
   path,
+  deepMerge,
   fallbackTo,
   queryObj
 } from '../src'
@@ -119,4 +120,28 @@ test('queryObj', t => {
   const input = { foo: 'bar', baz: [ 'foo', 'bar', 'baz' ], null: null, false: false, true: true }
 
   t.is(queryObj(input), 'foo=bar&baz[]=foo&baz[]=bar&baz[]=baz&false=false&true=true')
+})
+
+test('deepMerge', t => {
+  const src1 = { a: 1, b: { c: 1, a: { b: { c: { d: null } } } }, e: 1, h: [ 0, 1, 2 ] }
+  const src2 = { a: 2, b: { d: 2 }, f: 2, h: [ 3, 4, 5 ] }
+  const src3 = { a: 3, b: { c: 3, a: { b: { c: null } } }, g: 3 }
+
+  t.deepEqual(deepMerge(src1, src2, src3), {
+    a: 3,
+    b: { c: 3, d: 2, a: { b: { c: null } } },
+    e: 1,
+    f: 2,
+    g: 3,
+    h: [ 0, 1, 2, 3, 4, 5 ]
+  })
+
+  t.deepEqual(deepMerge(src3, src2, src1), {
+    a: 1,
+    b: { c: 1, d: 2, a: { b: { c: { d: null } } } },
+    e: 1,
+    f: 2,
+    g: 3,
+    h: [ 3, 4, 5, 0, 1, 2 ]
+  })
 })

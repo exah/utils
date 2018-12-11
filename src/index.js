@@ -16,7 +16,8 @@ export {
   path,
   fallbackTo,
   queryObj,
-  queryObj as query
+  queryObj as query,
+  deepMerge
 } from './obj'
 
 export {
