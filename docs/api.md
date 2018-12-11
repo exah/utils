@@ -226,8 +226,8 @@ Like `Array#reduce`, but for objects.
 #### Parameters
 
 -   `fn` **[Function][139]** 
+-   `target` **any** 
 -   `obj` **[Object][140]** 
--   `target` **any**  (optional, default `{}`)
 
 #### Examples
 

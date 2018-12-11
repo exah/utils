@@ -50,12 +50,12 @@ export { curriedToObj as toObj }
  * reduceObj(countValues, target, 0) // → 420
  */
 
-const reduceObj = (fn: Function, obj: Object, target: * = {}) =>
+const reduceObj = (fn: Function, target: *, obj: Object) =>
   Object
     .keys(obj)
     .reduce((acc, key, index) => fn(acc, key, obj[key], index, obj), target)
 
-const curriedReduceObj = curryN(2, reduceObj)
+const curriedReduceObj = curryN(3, reduceObj)
 export { curriedReduceObj as reduceObj }
 
 /**
@@ -76,7 +76,7 @@ const mapObj = (fn: Function, obj: Object) =>
   reduceObj((acc, key, value, index, src) => ({
     ...acc,
     ...fn(key, value, index, obj)
-  }), obj)
+  }), {}, obj)
 
 const curriedMapObj = curryN(2, mapObj)
 export { curriedMapObj as mapObj }
@@ -96,6 +96,7 @@ export { curriedMapObj as mapObj }
 
 const filterObj = (fn: Function, obj: Object) => reduceObj(
   (acc, key, value) => fn(key, value) ? { ...acc, [key]: value } : acc,
+  {},
   obj
 )
 
@@ -193,7 +194,7 @@ export function flattenObj (input: Object, {
         ...acc,
         [key]: value
       }
-    }, data, {})
+    }, {}, data)
   }
 
   return serialize(input)
@@ -242,7 +243,7 @@ export function queryObj (input: Object, {
       }
 
       return serialize(value, key, acc)
-    }, data, target)
+    }, target, data)
   }
 
   return serialize(Object(input)).join(joiner)

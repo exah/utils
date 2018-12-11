@@ -36,7 +36,7 @@ test('toObj', t => {
 })
 
 test('reduceObj', t => {
-  t.is(reduceObj((acc, key, value) => acc + value, { a: 1, b: 2, c: 3 }, 0), 6)
+  t.is(reduceObj((acc, key, value) => acc + value, 0, { a: 1, b: 2, c: 3 }), 6)
 })
 
 test('mapObj', t => {
