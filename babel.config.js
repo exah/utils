@@ -6,7 +6,8 @@ module.exports = {
     [
       '@babel/preset-env', {
         modules: IS_ESM ? false : 'commonjs',
-        targets: IS_TEST ? { node: true } : {}
+        targets: IS_TEST ? { node: true } : {},
+        loose: true
       }
     ]
   ],

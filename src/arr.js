@@ -53,4 +53,4 @@ export const initArr = (
   length: number = 0,
   val: * = identity
 ): Array<*> =>
-  [ ...Array(length) ].map(isFn(val) ? flip(val) : always(val))
+  Array.from({ length }, isFn(val) ? flip(val) : always(val))
