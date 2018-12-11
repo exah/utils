@@ -1,41 +1,6 @@
 // @flow
-import { curryN, identity } from './fns'
-import { toArr } from './arr'
-import { isPlainObj, isObj, isArr, isFn } from './checks'
-
-/**
- * @private DEPRECATED
- *
- * Convert an array to object, by default works like "merge".
- *
- * @example
- * import { toObj } from '@exah/utils'
- *
- * @example
- * toObj({ a: 'b' }) // → { a: 'b' }
- * toObj([ { color: 'red' }, { size: 'big' } ]) // → { color: 'red', size: 'big' }
- * toObj(([ key, value ]) => ({ [key]: value }), [ [ 'a', 'b' ] ]) // → { a: 'b' }
- *
- * const objFromEntries = toObj(([ key, value ]) => ({ [key]: value }))
- * objFromEntries([ [ 'a', 'b' ] ]) // → { a: 'b' }
- */
-
-const toObj = (input: *, fn: Function = identity): Object =>
-  toArr(input)
-    .reduce((acc, ...rest) => ({ ...acc, ...fn(...rest) }), {})
-
-const curriedToObj = (first: *, second: *) => {
-  const fn = isFn(first) ? first : isFn(second) ? second : undefined
-
-  if (isFn(first)) {
-    if (second === undefined) return (input: *) => toObj(input, fn)
-    return toObj(second, fn)
-  }
-
-  return toObj(first, fn)
-}
-
-export { curriedToObj as toObj }
+import { curryN } from './fns'
+import { isPlainObj, isObj, isArr } from './checks'
 
 /**
  * Like `Array#reduce`, but for objects.

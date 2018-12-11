@@ -1,7 +1,6 @@
 import test from 'ava'
 
 import {
-  toObj,
   reduceObj,
   mapObj,
   flattenObj,
@@ -11,30 +10,6 @@ import {
   fallbackTo,
   queryObj
 } from '../src'
-
-test('toObj', t => {
-  t.deepEqual(
-    toObj([ { color: 'red' }, { size: 'big' } ]),
-    { color: 'red', size: 'big' }
-  )
-
-  t.deepEqual(
-    toObj({ a: 'b' }),
-    { a: 'b' }
-  )
-
-  const objFromEntries = ([ key, value ]) => ({ [key]: value })
-
-  t.deepEqual(
-    toObj([ [ 'a', 'b' ] ], objFromEntries),
-    { a: 'b' }
-  )
-
-  t.deepEqual(
-    toObj(objFromEntries)([ [ 'a', 'b' ] ]),
-    { a: 'b' }
-  )
-})
 
 test('reduceObj', t => {
   t.is(reduceObj((acc, key, value) => acc + value, 0, { a: 1, b: 2, c: 3 }), 6)

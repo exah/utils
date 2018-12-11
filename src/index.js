@@ -8,7 +8,6 @@ export {
 } from './arr'
 
 export {
-  toObj,
   reduceObj,
   mapObj,
   flattenObj,
@@ -22,8 +21,6 @@ export {
 
 export {
   always,
-  T,
-  F,
   noop,
   identity,
   compose,
@@ -60,7 +57,6 @@ export {
   toPromise,
   concurrentN,
   alwaysResolve,
-  neverResolve,
   deferredPromise,
   debouncePromise
 } from './promises'

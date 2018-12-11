@@ -2,8 +2,6 @@ import test from 'ava'
 
 import {
   always,
-  T,
-  F,
   noop,
   identity,
   compose,
@@ -19,14 +17,6 @@ import {
 
 test('always', t => {
   t.is(always(1)(), 1)
-})
-
-test('T', t => {
-  t.is(T(), true)
-})
-
-test('F', t => {
-  t.is(F(), false)
 })
 
 test('noop', t => {

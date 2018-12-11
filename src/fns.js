@@ -19,38 +19,6 @@
 export const always = (...args: *): Function => () => args[0]
 
 /**
- * @private DEPRECATED
- *
- * Function that always returns `true`
- *
- * @return {true}
- *
- * @example
- * import { T } from '@exah/utils'
- *
- * @example
- * T() // → true
- */
-
-export const T = always(true)
-
-/**
- * @private DEPRECATED
- *
- * Function that always returns `false`
- *
- * @return {false}
- *
- * @example
- * import { F } from '@exah/utils'
- *
- * @example
- * F() // → false
- */
-
-export const F = always(false)
-
-/**
  * Function that do nothing
  *
  * @return {undefined}

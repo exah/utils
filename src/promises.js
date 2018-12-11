@@ -30,22 +30,6 @@ export const wait = (duration: number, handler: Function = noop): Promise<void> 
 export const alwaysResolve = (val: *): () => Promise<*> => () => Promise.resolve(val)
 
 /**
- * @private DEPRECATED
- *
- * Return promise that never fulfilled. Probably no one should use this.
- *
- * @example
- * import { neverResolve } from '@exah/utils'
- *
- * @example
- * wait(2000)
- *  .then(() => neverResolve())
- *  .then(() => console.log('never happens'))
- */
-
-export const neverResolve = (): Promise<void> => new Promise(() => null)
-
-/**
  * Compose multiple promises together.
  *
  * @example
