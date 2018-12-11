@@ -12,13 +12,13 @@ import { isPlainObj, isObj, isArr } from './checks'
  * const target = { john: 100, jack: 150, joseph: 170 }
  * const countValues = (acc, key, value) => acc + value
  *
- * reduceObj(countValues, target, 0) // → 420
+ * reduceObj(countValues, 0, target) // → 420
  */
 
-const reduceObj = (fn: Function, target: *, obj: Object) =>
+const reduceObj = (fn: Function, target: *, input: Object) =>
   Object
-    .keys(obj)
-    .reduce((acc, key, index) => fn(acc, key, obj[key], index, obj), target)
+    .keys(input)
+    .reduce((acc, key, index) => fn(acc, key, input[key], index, input), target)
 
 const curriedReduceObj = curryN(3, reduceObj)
 export { curriedReduceObj as reduceObj }

@@ -230,7 +230,7 @@ Like `Array#reduce`, but for objects.
 
 -   `fn` **[Function][142]** 
 -   `target` **any** 
--   `obj` **[Object][143]** 
+-   `input` **[Object][143]** 
 
 #### Examples
 
@@ -242,7 +242,7 @@ import { reduceObj } from '@exah/utils'
 const target = { john: 100, jack: 150, joseph: 170 }
 const countValues = (acc, key, value) => acc + value
 
-reduceObj(countValues, target, 0) // → 420
+reduceObj(countValues, 0, target) // → 420
 ```
 
 ### deepMerge
