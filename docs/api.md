@@ -247,7 +247,7 @@ reduceObj(countValues, 0, target) // → 420
 
 ### deepMerge
 
-Perform deep merge on multiple Objects
+Deep merge multiple Objects
 
 #### Parameters
 

@@ -216,7 +216,7 @@ export function queryObj (input: Object, {
 }
 
 /**
- * Perform deep merge on multiple Objects
+ * Deep merge multiple Objects
  *
  * @example
  * import { deepMerge } from '@exah/utils'
