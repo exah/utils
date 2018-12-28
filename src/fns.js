@@ -179,6 +179,34 @@ export const once = (fn: Function): Function => {
 }
 
 /**
+ * Create Timer
+ */
+
+export function createTimer () {
+  let id = null
+
+  const isRunning = () => id !== null
+
+  const clear = () => {
+    if (id !== null) {
+      clearTimeout(id)
+      id = null
+    }
+  }
+
+  function start (fn: Function, time: number = 0, ...args: *) {
+    clear()
+
+    id = setTimeout(() => {
+      fn.call(this, ...args)
+      id = null
+    }, 600)
+  }
+
+  return Object.assign(start, { clear, isRunning })
+}
+
+/**
  * Return debounced function, that delays call until `timeout` is elapsed. <br />
  * If `isImmediate` is `true`, call function first, than delays next call. <br />
  * Useful for preventing "double clicks" or updating metrics after scroll / resize.
